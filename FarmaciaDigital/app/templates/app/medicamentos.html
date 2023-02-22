@@ -15,29 +15,40 @@
 
 <h2> MEDICAMENTOS </h2>
 
+<div class="medicamento" >
+    {% for m in medicamentos %}
+    <div class="medicamentos">
+        <div class="contenedor_medicamentos">
+            <table border="1" class="table">
+                <tr>
+                  <th>Laboratorio</th>
+                  <th>Pincipio</th>
+                  <th>Nombre Comercial</th>
+                  <th>Dosis</th>
+                  <th>Cantidad</th>
+                  <th>Presentacion</th>
+                  <th>Lote</th>
+                  <th>Ingesta</th>
+                  <th>Fecha Vencimiento</th>
+                </tr>
+                <tr>
+                  <td>{{ m.laboratorio | capfirst  }}</td>
+                  <td>{{ m.principio | capfirst  }}</td>
+                  <td>{{ m.nombre  | capfirst }}</td>
+                  <td>{{ m.dosis  | capfirst }}</td>
+                  <td>{{ m.cantidad }}</td>
+                  <td>{{ m.presentacion  | capfirst }}</td>
+                  <td>{{ m.lote  }}</td>
+                  <td>{{ m.ingesta  | capfirst }}</td>
+                  <td>{{ m.fecha_vencimento  }}</td>
+                </tr>
+                
+              </table>
+        </div>
+    </div>
+    {% endfor %}
+</div>
 <br>
 
-<table class="default">
-  <tr>
-    <th>Hoy</th>
-    <th>Mañana</th>
-    <th>Sábado</th>
-  </tr>
-  <tr>
-    <td>Soleado</td>
-    <td>Mayormente soleado</td>
-    <td>Parcialmente nublado</td>
-  </tr>
-  <tr>
-    <td>19°C</td>
-    <td>17°C</td>
-    <td>12°C</td>
-  </tr>
-  <tr>
-    <td>E 13 km/h</td>
-    <td>E 11 km/h</td>
-    <td>S 16 km/h</td>
-  </tr>
-</table>
 
 {% endblock %}

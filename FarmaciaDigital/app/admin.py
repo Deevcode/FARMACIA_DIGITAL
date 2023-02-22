@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Laboratorio, Principio, ViaAdminstracion, Medicamentos
+from .models import Laboratorio, Principio, ViaAdminstracion, Medicamentos, Contacto
 # Register your models here.
 
 #class MedicamentosAdmin(admin.ModelAdmin):
@@ -12,3 +12,4 @@ admin.site.register(Laboratorio)
 admin.site.register(Principio)
 admin.site.register(ViaAdminstracion)
 admin.site.register(Medicamentos)
+admin.site.register(Contacto)

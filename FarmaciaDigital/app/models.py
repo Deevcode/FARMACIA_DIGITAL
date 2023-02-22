@@ -43,3 +43,21 @@ class Medicamentos(models.Model):
 
     def __str__(self):
         return self.nombre
+
+#OPCIONES DE CONSULTA EN CONTACTO
+opciones_consulta = [
+    [0,"Consulta"],
+    [1,"Cotizacion"],
+    [2,"Sugerencia"],
+    [3,"Felicitaciones"],
+    [4,"Reclamo"]
+]
+
+#CLASE DE CONTACTO
+class Contacto(models.Model):
+    nombre = models.CharField(max_length=100)
+    email = models.EmailField()
+    tipo_consulta = models.IntegerField(choices=opciones_consulta)
+    mensaje = models.TextField()
+    def __str__(self):
+        return self.nombre
