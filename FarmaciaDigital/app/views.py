@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Medicamentos
-from .forms import ContactoForm
+from .forms import ContactoForm, MedicamentoForm
 
 
 #VISTA DEL HOME
@@ -16,7 +16,7 @@ def contacto(request):
         formulario = ContactoForm(data=request.POST)
         if formulario.is_valid():
             formulario.save()
-            data["mensaje"] = "contacto guardado"
+            data["mensaje"] = "Contacto Guardado"
         else:
             data["form"] = formulario
     return render(request, 'app/contacto.html', data)   
@@ -40,6 +40,25 @@ def reportes(request):
 
 #VISTA DE AGREGAR MEDICAMENTO
 def agregar_medicamento(request):
-    return render(request, 'app/medicamentos/agregar.html') 
+    data = {
+        'form' : MedicamentoForm()
+    }
+    if request.method == 'POST':
+        formulario = MedicamentoForm(data=request.POST, files=request.FILES)
+        if formulario.is_valid():
+            formulario.save()
+            data["mensaje"] = "Guardado Correctamente"
+        else:
+            data["form"] = formulario    
+    return render(request, 'app/medicamentos/agregar.html', data) 
 
+#VISTA DE LISTAR
+def listar_medicamentos(request):
+    medicamentos = Medicamentos.objects.all()
+    data = {
+        'medicamentos' :  medicamentos
+    }
+    return render(request, 'app/medicamentos/listar.html', data) 
+
+#VISTA DE MODIFICAR
  

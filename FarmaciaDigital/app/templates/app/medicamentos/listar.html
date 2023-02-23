@@ -13,13 +13,10 @@
 
 {% block contenido %}
 
-<h2> MEDICAMENTOS </h2>
-
-<div class="medicamento" >
-    
-    <div class="medicamentos">
-        <div class="table table-striped table-hover table-responsive-sm">
-            <table border="1" class="table">
+<div class="card">
+    <div class="card-body">
+        <h2>Listado de Medicamentos</h2>
+        <table border="1" class="table">
                 <tr>
                   <th>Laboratorio</th>
                   <th>Pincipio</th>
@@ -45,11 +42,11 @@
                 </tr>
                 {% endfor %}
               </table>
-        </div>
     </div>
     
 </div>
-<br>
+
+
 
 
 {% endblock %}
