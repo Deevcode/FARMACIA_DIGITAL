@@ -23,8 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-&&5xw3cy!6t$(jfx+*pp1jaq37v6y3b3i#fv)-h(_$tm8!o*4d'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-#preguntar sobre esto ??? sobre el cambio
-DEBUG = False
+DEBUG = True
 
 #ALLOWED_HOSTS = []
 ALLOWED_HOSTS = ['devcode02.pythonanywhere.com']
@@ -42,9 +41,12 @@ INSTALLED_APPS = [
     'app',
     'colorfield',
     'crispy_forms',
+    'crispy_bootstrap4',
 ]
 
-CRYSPI_TEMPLATE_PACK = 'bootstrap5'
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
+
+CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
