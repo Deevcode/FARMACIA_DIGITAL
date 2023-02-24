@@ -61,4 +61,6 @@ def listar_medicamentos(request):
     return render(request, 'app/medicamentos/listar.html', data) 
 
 #VISTA DE MODIFICAR
+def modificar_medicamento(request, id):
+    return render(request, 'app/medicamentos/modificar.html') 
  
