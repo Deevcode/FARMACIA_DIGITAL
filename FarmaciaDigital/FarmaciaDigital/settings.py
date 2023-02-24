@@ -82,6 +82,15 @@ WSGI_APPLICATION = 'FarmaciaDigital.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+#ESTA CONFIGURACION ES PARA UTILIZAR LA BASE DE DATOS DE SQLITE3
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': BASE_DIR / 'db.sqlite3',
+#    }
+#}
+
+#ESTA CONFIGURACION ES PARA UTILIZAR LA BASE DE DATOS DE MYSQL
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
