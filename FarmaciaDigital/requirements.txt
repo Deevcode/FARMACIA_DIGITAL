@@ -5,3 +5,4 @@ django-crispy-forms
 pymysql
 python-dotenv
 python-decouple
+mysqlclient
