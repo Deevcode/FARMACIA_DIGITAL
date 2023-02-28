@@ -22,7 +22,7 @@
             <table border="1" class="table">
                 <tr>
                   <th>Laboratorio</th>
-                  <th>Pincipio</th>
+                  <th>Pincipio Activo</th>
                   <th>Nombre Comercial</th>
                   <th>Dosis</th>
                   <th>Cantidad</th>
@@ -34,8 +34,8 @@
                 {% for m in medicamentos %}
                 <tr>
                   <td>{{ m.laboratorio | capfirst  }}</td>
-                  <td>{{ m.principio | capfirst  }}</td>
-                  <td>{{ m.nombre  | capfirst }}</td>
+                  <td>{{ m.nombre_princio_activo | capfirst  }}</td>
+                  <td>{{ m.nombre_comercial  | capfirst }}</td>
                   <td>{{ m.dosis  | capfirst }}</td>
                   <td>{{ m.cantidad }}</td>
                   <td>{{ m.presentacion  | capfirst }}</td>

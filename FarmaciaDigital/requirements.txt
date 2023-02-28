@@ -6,3 +6,5 @@ pymysql
 python-dotenv
 python-decouple
 mysqlclient
+django-bootstrap4
+django-environ
