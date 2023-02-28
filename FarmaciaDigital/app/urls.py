@@ -9,5 +9,5 @@ urlpatterns = [
     path('reportes/', reportes, name="reportes"),
     path('agregar-medicamento/', agregar_medicamento, name="agregar_medicamento"),
     path('listar-medicamento/', listar_medicamentos, name="listar_medicamento"),
-    path('modificar-medicamento/', modificar_medicamento, name="modificar_medicamento"),
+    path('modificar-medicamento/<id>/', modificar_medicamento, name="modificar_medicamento"),
 ]

@@ -42,22 +42,21 @@ class ViaAdministracionAdmin(admin.ModelAdmin):
 class MedicamentosAdmin(admin.ModelAdmin):
     list_display = ["laboratorio","nombre_princio_activo","nombre_comercial", "dosis", "cantidad", "presentacion","lote", "ingesta", "fecha_vencimento"]
     search_fields = ["nombre_via_administracion"]
-    list_editable = ["laboratorio","nombre_princio_activo","nombre_comercial", "dosis", "cantidad", "presentacion","lote", "ingesta", "fecha_vencimento"]
 
 #ADMIN DE CONTACTO
 class ContactoAdmin(admin.ModelAdmin):
     list_display = ["nombre", "email", "tipo_consulta", "mensaje"]
     search_fields = ["email"]
 
-admin.site.register(Region)
-admin.site.register(Provincia)
-admin.site.register(Comuna)
-admin.site.register(Tipo_usuario)
-admin.site.register(Laboratorio)
-admin.site.register(Principio)
-admin.site.register(ViaAdminstracion)
-admin.site.register(Medicamentos)
-admin.site.register(Contacto)
+admin.site.register(Region, RegionAdmin)
+admin.site.register(Provincia, ProvinciaAdmin)
+admin.site.register(Comuna, ComunaAdmin)
+admin.site.register(Tipo_usuario, Tipo_usuarioAdmin)
+admin.site.register(Laboratorio, LaboratorioAdmin)
+admin.site.register(Principio, PrincipioAdmin)
+admin.site.register(ViaAdminstracion, ViaAdministracionAdmin)
+admin.site.register(Medicamentos, MedicamentosAdmin)
+admin.site.register(Contacto, ContactoAdmin)
 admin.site.register(Receta)
 admin.site.register(Recordatorio)
 admin.site.register(Familiar)

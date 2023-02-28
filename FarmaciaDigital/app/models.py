@@ -63,7 +63,7 @@ class Medicamentos(models.Model):
     #imagen = models.ImageField(upload_to="medicamentos", null=True)
 
     def __str__(self):
-        return self.nombre_princio_activo
+        return self.nombre_comercial
     
 #TABLA DE RECETA
 class Receta(models.Model):
