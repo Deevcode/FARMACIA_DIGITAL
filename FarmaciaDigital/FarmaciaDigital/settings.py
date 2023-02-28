@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
-
+#from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -32,6 +32,8 @@ ALLOWED_HOSTS = ['devcode02.pythonanywhere.com']
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
+ADMIN_REDIRECT_URL = '/'
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -45,7 +47,7 @@ INSTALLED_APPS = [
     'app',
     'colorfield',
     'crispy_forms',
-    'crispy_bootstrap4',
+    #'crispy_bootstrap4',
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
@@ -97,29 +99,29 @@ WSGI_APPLICATION = 'FarmaciaDigital.wsgi.application'
 #}
 
 #ESTA CONFIGURACION ES PARA UTILIZAR LA BASE DE DATOS DE MYSQL
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql', 
-        'NAME': 'farmacia_digital',
-        'USER': 'admin',
-        'PASSWORD': 'MediInfo2023',
-        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
-        'PORT': '3306',
-    }
-}
-
-#ESTA CONFIGURACION ES PARA UTILIZAR LA BASE DE DATOS DE MYSQL
 #DATABASES = {
 #    'default': {
-#        'ENGINE': 'django.db.backends.mysql',
-#        'NAME': 'DevCode02$default',
-#        'USER': 'DevCode02',
-#        'PASSWORD': 'Raveboy999',
-#        'HOST': 'DevCode02.mysql.pythonanywhere-services.com',   # Or an IP Address that your DB is hosted on
+#        'ENGINE': 'django.db.backends.mysql', 
+#        'NAME': 'farmacia_digital',
+#        'USER': 'admin',
+#        'PASSWORD': 'MediInfo2023',
+#        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
 #        'PORT': '3306',
-#        'STORAGE_ENGINE': 'INNODB'
 #    }
 #}
+
+#ESTA CONFIGURACION ES PARA UTILIZAR LA BASE DE DATOS DE MYSQL
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'DevCode02$default',
+        'USER': 'DevCode02',
+        'PASSWORD': 'Raveboy999',
+        'HOST': 'DevCode02.mysql.pythonanywhere-services.com',   # Or an IP Address that your DB is hosted on
+        'PORT': '3306',
+        'STORAGE_ENGINE': 'INNODB'
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -143,7 +145,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es'
 
 TIME_ZONE = 'UTC'
 
