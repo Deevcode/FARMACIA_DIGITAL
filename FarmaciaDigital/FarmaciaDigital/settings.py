@@ -101,11 +101,11 @@ WSGI_APPLICATION = 'FarmaciaDigital.wsgi.application'
 #ESTA CONFIGURACION ES PARA UTILIZAR LA BASE DE DATOS DE MYSQL
 #DATABASES = {
 #    'default': {
-#        'ENGINE': 'django.db.backends.mysql', 
-#        'NAME': 'farmacia_digital',
-#        'USER': 'admin',
-#        'PASSWORD': 'MediInfo2023',
-#        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+#        'ENGINE': 'django.db.backends.mysql',
+#        'NAME': 'DevCode02$default',
+#        'USER': 'DevCode02',
+#        'PASSWORD': 'Raveboy999',
+#        'HOST': 'DevCode02.mysql.pythonanywhere-services.com',   # Or an IP Address that your DB is hosted on
 #        'PORT': '3306',
 #    }
 #}
