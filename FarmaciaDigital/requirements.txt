@@ -3,3 +3,5 @@ pillow
 django-admin-interface
 django-crispy-forms
 pymysql
+python-dotenv
+python-decouple

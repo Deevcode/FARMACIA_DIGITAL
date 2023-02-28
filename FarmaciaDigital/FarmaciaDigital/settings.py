@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,8 +26,8 @@ SECRET_KEY = 'django-insecure-&&5xw3cy!6t$(jfx+*pp1jaq37v6y3b3i#fv)-h(_$tm8!o*4d
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-#ALLOWED_HOSTS = []
-ALLOWED_HOSTS = ['devcode02.pythonanywhere.com']
+ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = ['devcode02.pythonanywhere.com']
 
 # Application definition
 
@@ -91,10 +92,26 @@ WSGI_APPLICATION = 'FarmaciaDigital.wsgi.application'
 #}
 
 #ESTA CONFIGURACION ES PARA UTILIZAR LA BASE DE DATOS DE MYSQL
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.mysql', 
+#        'NAME': '',
+#        'USER': '',
+#        'PASSWORD': '',
+#        'HOST': '',   # Or an IP Address that your DB is hosted on
+#        'PORT': '3306',
+#    }
+#}
+
+#ESTA CONFIGURACION ES PARA UTILIZAR MYSQL DE FORMA LOCAL
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql', 
+        'NAME': 'farmacia_digital',
+        'USER': 'admin',
+        'PASSWORD': 'MediInfo2023',
+        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+        'PORT': '3306',
     }
 }
 
