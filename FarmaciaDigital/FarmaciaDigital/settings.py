@@ -90,12 +90,12 @@ WSGI_APPLICATION = 'FarmaciaDigital.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 #ESTA CONFIGURACION ES PARA UTILIZAR LA BASE DE DATOS DE SQLITE3
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': BASE_DIR / 'db.sqlite3',
-#    }
-#}
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 #ESTA CONFIGURACION ES PARA UTILIZAR LA BASE DE DATOS DE MYSQL PA
 #DATABASES = {
@@ -110,16 +110,16 @@ WSGI_APPLICATION = 'FarmaciaDigital.wsgi.application'
 #}
 
 #ESTA CONFIGURACION ES PARA UTILIZAR LA BASE DE DATOS DE MYSQL
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'farmacia_digital',
-        'USER': 'admin',
-        'PASSWORD': 'MediInfo2023',
-        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
-        'PORT': '3306'
-    }
-}
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.mysql',
+#        'NAME': 'farmacia_digital',
+#        'USER': 'admin',
+#        'PASSWORD': 'MediInfo2023',
+#        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+#        'PORT': '3306'
+#    }
+#}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
