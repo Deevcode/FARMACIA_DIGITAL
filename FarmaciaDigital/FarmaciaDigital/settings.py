@@ -98,16 +98,16 @@ DATABASES = {
 }
 
 #ESTA CONFIGURACION ES PARA UTILIZAR LA BASE DE DATOS DE MYSQL PA
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.mysql',
-#        'NAME': 'DevCode03$default',
-#        'USER': 'DevCode03',
-#        'PASSWORD': 'Raveboy999',
-#        'HOST': 'DevCode02.mysql.pythonanywhere-services.com',   # Or an IP Address that your DB is hosted on
-#        'PORT': '3306',
-#    }
-#}
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'DevCode03$default',
+        'USER': 'DevCode03',
+        'PASSWORD': 'Raveboy999',
+        'HOST': 'DevCode02.mysql.pythonanywhere-services.com',   # Or an IP Address that your DB is hosted on
+        'PORT': '3306',
+    }
+}
 
 #ESTA CONFIGURACION ES PARA UTILIZAR LA BASE DE DATOS DE MYSQL
 #DATABASES = {
