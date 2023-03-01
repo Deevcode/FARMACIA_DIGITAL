@@ -13,13 +13,13 @@
 {% endblock %}
 
 {% block contenido %}
-{% load crispy_forms_tags %}
+
 <h2> CONTACTENOS </h2>
 <form action="" class="formulario_contacto" method="post">
     <!--TOKEN DE SEGURIDAD, DEBE ESTAR PRESENTE PARA RESCATAR LOS DATOS-->
     {% csrf_token %}
 
-    {{ form | crispy }}          
+    {{ form }}          
     <br>
     <div class="d-flex justify-content-end">
         <input type="reset" value="Cancelar" class= "btn btn-secondary">
