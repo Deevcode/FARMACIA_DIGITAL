@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Medicamentos
 from .forms import ContactoForm, MedicamentoForm
 
@@ -62,5 +62,19 @@ def listar_medicamentos(request):
 
 #VISTA DE MODIFICAR
 def modificar_medicamento(request, id):
-    return render(request, 'app/medicamentos/modificar.html') 
+    
+    medicamentos = get_object_or_404(Medicamentos, id=id)
+    
+    data = {
+        'form' : MedicamentoForm(instance=medicamentos)
+    }
+
+    if request.method == 'POST':
+        formulario = MedicamentoForm(data=request.POST, instance=medicamentos, files=request.FILES)
+        if  formulario.is_valid():
+            formulario.save()
+            return redirect(to='listar-medicamento')
+        data["form"] = formulario 
+
+    return render(request, 'app/medicamentos/modificar.html', data) 
  

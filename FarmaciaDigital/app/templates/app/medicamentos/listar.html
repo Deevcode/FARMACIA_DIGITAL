@@ -28,6 +28,7 @@
                   <th>Lote</th>
                   <th>Ingesta</th>
                   <th>Fecha Vencimiento</th>
+                  <th>OPCIONES</th>
                 </tr>
                 {% for m in medicamentos %}
                 <tr>
@@ -40,6 +41,7 @@
                   <td>{{ m.lote  }}</td>
                   <td>{{ m.ingesta  | capfirst }}</td>
                   <td>{{ m.fecha_vencimento  }}</td>
+                  <td><a href="{% url 'modificar_medicamento' m.id  %}" class="btn btn-info"></a></td>
                 </tr>
                 {% endfor %}
               </table>
