@@ -77,4 +77,10 @@ def modificar_medicamento(request, id):
         data["form"] = formulario 
 
     return render(request, 'app/medicamentos/modificar.html', data) 
+
+#VISTA DE ELIMINAR
+def eliminar_medicamento(request, id):
+    medicamentos = get_object_or_404(Medicamentos, id=id)
+    medicamentos.delete()
+    return redirect(to='listar-medicamento')
  
