@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Medicamentos
-from .forms import ContactoForm, MedicamentoForm
+from .forms import ContactoForm, MedicamentoForm, CustomUserCreationForm
 from django.contrib import messages
 
+
+from django.contrib.auth import authenticate, login
 
 #VISTA DEL HOME
 def home(request):
@@ -86,4 +88,22 @@ def eliminar_medicamento(request, id):
     medicamentos = get_object_or_404(Medicamentos, id=id)
     medicamentos.delete()
     return redirect(to="eliminar_medicamento")
- 
+
+#VISTA DE REGISTRO
+def registro(request):
+    data = {
+        'form': CustomUserCreationForm()
+    }
+
+    if request.method == 'POST':
+        formulario = CustomUserCreationForm(data=request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            user = authenticate(username=formulario.cleaned_data["password1"])
+            login(request, user)
+            messages.success(request, "Te has registrado correctamente")
+            #redirigir al home
+            return redirect(to="home")
+        data["form"] = formulario
+
+    return render(request, 'registration/registro.html',data)

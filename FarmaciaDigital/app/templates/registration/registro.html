@@ -20,7 +20,7 @@
 
                     <div class="card-body">
                         <br>
-                        <h2>Login</h2>
+                        <h2>Registro de Usuario</h2>
                         <hr>
                         <form action="" method="post">
                             {% csrf_token %}
@@ -28,8 +28,8 @@
 
                             <br>
                             <a href="{% url 'home'%}">ir al Home</a> |
-                            <a href="{% url 'registro'%}">Registrate</a>
-                            <input type="submit" value="Ingresar" class="btn btn-succes float-right" >
+                            <a href="{% url 'login'%}">Iniciar sesión</a>
+                            <input type="submit" value="registrar" class="btn btn-succes float-right" >
                         </form>
 
                     </div>
