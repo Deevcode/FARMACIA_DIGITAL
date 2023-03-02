@@ -85,5 +85,5 @@ def eliminar_medicamento(request, id):
     messages.success(request, "Eliminado Correctamente")
     medicamentos = get_object_or_404(Medicamentos, id=id)
     medicamentos.delete()
-    return redirect(to="listar_medicamento")
+    return redirect(to="eliminar_medicamento")
  
