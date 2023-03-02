@@ -75,7 +75,7 @@ def modificar_medicamento(request, id):
         if  formulario.is_valid():
             formulario.save()
             messages.success(request, "Modificado Correctamente")
-            return redirect(to="listar-medicamento")
+            return redirect(to="listar_medicamento")
         data["form"] = formulario 
 
     return render(request, 'app/medicamentos/modificar.html', data) 
@@ -85,5 +85,5 @@ def eliminar_medicamento(request, id):
     messages.success(request, "Eliminado Correctamente")
     medicamentos = get_object_or_404(Medicamentos, id=id)
     medicamentos.delete()
-    return redirect(to="listar-medicamento")
+    return redirect(to="listar_medicamento")
  
