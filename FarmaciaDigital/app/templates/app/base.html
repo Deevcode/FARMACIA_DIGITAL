@@ -30,6 +30,11 @@
 			<div id="content">
 
 			{% block contenido  %}
+			{% if messages %}
+				{% for me in messages %}
+					{{ me }}
+				{% endfor %}
+			{% endif %}
 
             {% endblock %}
 
@@ -173,7 +178,18 @@
 			</div>
 
 		<!-- Scripts -->
-			
+			<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+			{% if messages %}
+				{% for me in messages %}
+					<script>
+						Swal.fire({
+							"title": "Felicitaciones",
+							"text": "{{me}}",
+							"icon": "succes"
+						})
+					</script>
+				{% endfor %}
+			{% endif %}
 			
             {% block js %}
             <script src="{% static 'app/js/jquery.min.js'%}"></script>

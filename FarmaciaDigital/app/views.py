@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Medicamentos
 from .forms import ContactoForm, MedicamentoForm
+from django.contrib import messages
 
 
 #VISTA DEL HOME
@@ -47,7 +48,7 @@ def agregar_medicamento(request):
         formulario = MedicamentoForm(data=request.POST, files=request.FILES)
         if formulario.is_valid():
             formulario.save()
-            data["mensaje"] = "Guardado Correctamente"
+            messages.success(request, "Medicamento Registrado")
         else:
             data["form"] = formulario    
     return render(request, 'app/medicamentos/agregar.html', data) 
@@ -73,6 +74,7 @@ def modificar_medicamento(request, id):
         formulario = MedicamentoForm(data=request.POST, instance=medicamentos, files=request.FILES)
         if  formulario.is_valid():
             formulario.save()
+            messages.success(request, "Modificado Correctamente")
             return redirect(to="listar-medicamento")
         data["form"] = formulario 
 
@@ -80,6 +82,7 @@ def modificar_medicamento(request, id):
 
 #VISTA DE ELIMINAR
 def eliminar_medicamento(request, id):
+    messages.success(request, "Eliminado Correctamente")
     medicamentos = get_object_or_404(Medicamentos, id=id)
     medicamentos.delete()
     return redirect(to="listar-medicamento")

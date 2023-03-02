@@ -3,7 +3,25 @@
 {% load static %}
 
 {% block js %}
-
+<script>
+  function eliminar_medicamento(id) {
+    Swal.fire({
+			"title": "¿Estas seguro?",
+			"text": "Esta accion no se puede deshacer",
+			"icon": "question",
+      "showCancelButton": true,
+      "cancelButtonText": "No, Cancelar",
+      "confirmButtonText": "Si, Eliminar",
+      "reverseButtons": true,
+      "confirmButtonColor":"dc3545"
+		})
+    .then(function(result){
+      if (result.isConfirmed) {
+        window.location.href = "/eliminar_medicamento/" + id + "/"
+      }
+    })
+  }
+</script>
 {% endblock %}
 
 
@@ -42,7 +60,7 @@
                   <td>{{ m.ingesta  | capfirst }}</td>
                   <td>{{ m.fecha_vencimento  }}</td>
                   <td><a href="{% url 'modificar_medicamento' m.id  %}" class="btn btn-info">MODIFICAR</a></td>
-                  <td><a href="{% url 'eliminar_medicamento' m.id  %}" class="btn btn-danger">ELIMINAR</a></td>
+                  <td><a href="#" onclick="eliminar_medicamento({{ m.id }})"  class="btn btn-danger">ELIMINAR</a></td>
                 </tr>
                 {% endfor %}
               </table>
