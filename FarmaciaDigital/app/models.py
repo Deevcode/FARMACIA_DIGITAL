@@ -71,22 +71,6 @@ class Farmacia(models.Model):
 
     def __str__(self):
         return self.marca_farmacia
-
-#-----------------------------------------------------------------------------------------------------------------#
-
-#TABLA DE SUCURSAL FARMACIA
-class FarmaciaSucursal(models.Model):
-    id_sucursal = models.AutoField(primary_key=True)
-    id_farmacia = models.ForeignKey(Farmacia, on_delete=models.PROTECT)
-    id_comuna = models.ForeignKey(Comuna, on_delete=models.PROTECT)
-    id_region = models.ForeignKey(Region, on_delete=models.PROTECT)
-    id_provincia = models.ForeignKey(Provincia, on_delete=models.PROTECT)
-    direccion_sucursal = models.CharField(max_length=200)
-    telefono_sucursal = models.IntegerField()
-    email = models.EmailField()
-
-    def __str__(self):
-        return self.direccion_sucursal
     
 #-----------------------------------------------------------------------------------------------------------------#
 
@@ -227,30 +211,88 @@ class FichaUsuario(models.Model):
     def __str__ (self):
         return self.enfermades_cronicas
 
-
-
-
 #-----------------------------------------------------------------------------------------------------------------#
 
 #TABLA DE FAMILIAR
-#class Familiar(models.Model):
-#    id_familiar = models.AutoField(primary_key=True)
-#    num_run_familiar = models.CharField(max_length=12)
-#    nombre_familiar = models.CharField(max_length=100)
-#    apellido_familiar = models.CharField(max_length=100)
-#    email_familiar = models.EmailField()
-#    telefono_familiar = models.IntegerField()
-#    whatsapp_familiar = models.IntegerField()
-#    celular_familiar = models.IntegerField()
-#    telegram_familiar = models.IntegerField()
-#    direccion_familiar = models.CharField(max_length=100)
-#    id_comuna = models.ForeignKey(Comuna, on_delete=models.PROTECT)
-#    id_region = models.ForeignKey(Region, on_delete=models.PROTECT)
-#    id_provincia = models.ForeignKey(Provincia, on_delete=models.PROTECT)
-#    def __str__ (self):
-#        return self.nombre_familiar
+class UsuarioFamiliar(models.Model):
+    id_usuario_familiar = models.AutoField(primary_key=True)
+    num_run_familiar = models.CharField(max_length=12)
+    nombre_familiar = models.CharField(max_length=100)
+    apellido_familiar = models.CharField(max_length=100)
+    email_familiar = models.EmailField()
+    telefono_familiar = models.IntegerField()
+    whatsapp_familiar = models.IntegerField()
+    celular_familiar = models.IntegerField()
+    telegram_familiar = models.IntegerField()
+    parentesco = models.CharField(max_length=100)
+    direccion_familiar = models.CharField(max_length=100)
+    id_comuna = models.ForeignKey(Comuna, on_delete=models.PROTECT)
+    id_region = models.ForeignKey(Region, on_delete=models.PROTECT)
+    id_provincia = models.ForeignKey(Provincia, on_delete=models.PROTECT)
+    def __str__ (self):
+        return self.nombre_familiar
 
-#-----------------------------------------------------------------------------------------------------------------#  
+#-----------------------------------------------------------------------------------------------------------------#
+
+#TABLA DE CESFAM
+class CESFAM(models.Model):
+    id_cesfam = models.AutoField(primary_key=True)
+    nombre_CESFAM = models.CharField(max_length=200)
+    direccion_CESFAM = models.CharField(max_length=200)
+    email_CESFAM = models.CharField(max_length=200)
+    telefono_CESFAM = models.CharField(max_length=200)
+    id_comuna = models.ForeignKey(Comuna, on_delete=models.PROTECT)
+    id_region = models.ForeignKey(Region, on_delete=models.PROTECT)
+    id_provincia = models.ForeignKey(Provincia, on_delete=models.PROTECT)
+    def __str__ (self):
+        return self.nombre_CESFAM
+
+#-----------------------------------------------------------------------------------------------------------------#
+
+#TABLA DE QUIMICO FARMACEUTICO
+class EncargadoQuimicoFarmaceutico(models.Model):
+    id_quimico_farmaceutio = models.AutoField(primary_key=True)
+    id_tipo_usuario = models.ForeignKey(Tipo_usuario, on_delete=models.PROTECT)
+    registro_sanitario_QF = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.id_quimico_farmaceutio
+
+#-----------------------------------------------------------------------------------------------------------------#
+
+#TABLA DE SUCURSAL FARMACIA
+class FarmaciaSucursal(models.Model):
+    id_sucursal = models.AutoField(primary_key=True)
+    id_farmacia = models.ForeignKey(Farmacia, on_delete=models.PROTECT)
+    id_quimico_farmaceutio = models.ForeignKey(EncargadoQuimicoFarmaceutico ,on_delete= models.PROTECT)
+    id_comuna = models.ForeignKey(Comuna, on_delete=models.PROTECT)
+    id_region = models.ForeignKey(Region, on_delete=models.PROTECT)
+    id_provincia = models.ForeignKey(Provincia, on_delete=models.PROTECT)
+    direccion_sucursal = models.CharField(max_length=200)
+    telefono_sucursal = models.IntegerField()
+    email = models.EmailField()
+
+    def __str__(self):
+        return self.direccion_sucursal
+
+#-----------------------------------------------------------------------------------------------------------------#
+
+#TABLA DE FARMACIA CESFAM
+class FarmaciaCESFAM(models.Model):
+    id_farmacia_CESFAM = models.AutoField(primary_key=True)
+    id_cesfam = models.ForeignKey(CESFAM, on_delete= models.PROTECT)
+    nombre_farmacia_CESFAM = models.CharField(max_length=200)
+    direccion_farmacia_CESFAM = models.CharField(max_length=200)
+    email_farmacia_CESFAM = models.CharField(max_length=200)
+    telefono_farmacia_CESFAM = models.CharField(max_length=200)
+    id_comuna = models.ForeignKey(Comuna, on_delete=models.PROTECT)
+    id_region = models.ForeignKey(Region, on_delete=models.PROTECT)
+    id_provincia = models.ForeignKey(Provincia, on_delete=models.PROTECT)
+
+    def __str__(self):
+        return self.nombre_farmacia_CESFAM
+
+#-----------------------------------------------------------------------------------------------------------------#
 
 #OPCIONES DE CONSULTA EN CONTACTO
 opciones_consulta = [
@@ -261,7 +303,7 @@ opciones_consulta = [
     [4,"Reclamo"]
 ]
 
-#CLASE DE CONTACTO
+#TABLA DE CONTACTO
 class Contacto(models.Model):
     nombre = models.CharField(max_length=100)
     email = models.EmailField()

@@ -116,7 +116,7 @@ DATABASES = {
 #    'default': {
 #        'ENGINE': 'django.db.backends.mysql',
 #        'NAME': 'farmacia_digital_1',
-#        'USER': 'admin1',
+#        'USER': 'admin',
 #        'PASSWORD': 'MediInfo2023',
 #        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
 #        'PORT': '3306'

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Region, Provincia, Comuna, Laboratorio, Principio, ViaAdminstracion, Farmacia, FarmaciaSucursal, Medicamentos, MedicamentosDescuento, MedicamentoFichaTecnica, Tipo_usuario, Usuario, UsuarioReceta, UsuarioFarmacoVigilancia, Contacto, FichaUsuario
+from .models import Region, Provincia, Comuna, Laboratorio, Principio, ViaAdminstracion, Farmacia, Medicamentos, MedicamentosDescuento, MedicamentoFichaTecnica, Tipo_usuario, Usuario, UsuarioReceta, UsuarioFarmacoVigilancia, Contacto, FichaUsuario, UsuarioFamiliar, CESFAM, EncargadoQuimicoFarmaceutico, FarmaciaSucursal, FarmaciaCESFAM
 
 #ADMIN DE REGION
 class RegionAdmin(admin.ModelAdmin):
@@ -36,10 +36,6 @@ class FarmaciaAdmin(admin.ModelAdmin):
     list_display = ("id_farmacia", "marca_farmacia")
     search_fields = ["marca_farmacia"]
 
-#ADMIN DE TIPO FARMACIA SUCURSAL
-class FarmaciaSucursalAdmin(admin.ModelAdmin):
-    list_display = ("id_sucursal", "id_farmacia", "id_comuna", "id_region", "id_provincia", "direccion_sucursal", "telefono_sucursal", "email")
-    search_fields = ["direccion_sucursal", "id_farmacia", "id_sucursal", "telefono_sucursal", "email"]
 
 #ADMIN DE TIPO MEDICAMENTOS
 class MedicamentosAdmin(admin.ModelAdmin):
@@ -85,6 +81,35 @@ class ContactoAdmin(admin.ModelAdmin):
     list_display = ('nombre', 'email', 'tipo_consulta', 'mensaje')
     search_fields = ['nombre', 'email', 'tipo_consulta', 'mensaje']
 
+
+#TABLA DE USUARIO FAMILIAR
+class UsuarioFamiliarAdmin(admin.ModelAdmin):
+    list_display  = ('id_usuario_familiar','num_run_familiar', 'nombre_familiar', 'apellido_familiar', 'email_familiar', 'telefono_familiar', 'whatsapp_familiar', 'celular_familiar', 'telegram_familiar', 'parentesco', 'direccion_familiar','id_comuna', 'id_region', 'id_provincia')
+    search_fields = ['id_usuario_familiar', 'nombre_familiar', 'apellido_familiar', 'email_familiar', 'parentesco']
+
+
+#ADMIN DE CESFAM
+class CESFAMAdmin(admin.ModelAdmin):
+    list_display = ('id_cesfam', 'nombre_CESFAM', 'direccion_CESFAM', 'email_CESFAM', 'telefono_CESFAM', 'id_comuna', 'id_region', 'id_provincia')
+    search_fields = ['id_cesfam', 'nombre_CESFAM', 'direccion_CESFAM', 'email_CESFAM', 'telefono_CESFAM', 'id_comuna', 'id_region', 'id_provincia']
+
+#ADMIN DE ENCARGADO QUIMICO FARMACEUTICO
+class EncargadoQuimicoFarmaceuticoAdmin(admin.ModelAdmin):
+    list_display = ('id_quimico_farmaceutio', 'id_tipo_usuario', 'registro_sanitario_QF')
+    search_fields = ['id_quimico_farmaceutio', 'id_tipo_usuario', 'registro_sanitario_QF']
+
+#ADMIN DE TIPO FARMACIA SUCURSAL
+class FarmaciaSucursalAdmin(admin.ModelAdmin):
+    list_display = ("id_sucursal", "id_farmacia", "id_comuna", "id_region", "id_provincia", "direccion_sucursal", "telefono_sucursal", "email")
+    search_fields = ["direccion_sucursal", "id_farmacia", "id_sucursal", "telefono_sucursal", "email"]
+
+
+
+#ADMIN DE ENCARGADO QUIMICO FARMACEUTICO
+class FarmaciaCESFAMAdmin(admin.ModelAdmin):
+    list_display = ('id_farmacia_CESFAM', 'id_cesfam', 'nombre_farmacia_CESFAM', 'direccion_farmacia_CESFAM', 'email_farmacia_CESFAM', 'telefono_farmacia_CESFAM', 'id_comuna', 'id_region',  'id_provincia')
+    search_fields = ['id_farmacia_CESFAM', 'id_cesfam', 'nombre_farmacia_CESFAM', 'direccion_farmacia_CESFAM', 'email_farmacia_CESFAM', 'telefono_farmacia_CESFAM', 'id_comuna', 'id_region',  'id_provincia']
+
 admin.site.register(Region, RegionAdmin)
 admin.site.register(Provincia, ProvinciaAdmin)
 admin.site.register(Comuna, ComunaAdmin)
@@ -92,7 +117,6 @@ admin.site.register(Laboratorio, LaboratorioAdmin)
 admin.site.register(Principio, PrincipioAdmin)
 admin.site.register(ViaAdminstracion, ViaAdministracionAdmin)
 admin.site.register(Farmacia, FarmaciaAdmin)
-admin.site.register(FarmaciaSucursal, FarmaciaSucursalAdmin)
 admin.site.register(Medicamentos, MedicamentosAdmin)
 admin.site.register(MedicamentosDescuento, MedicamentosDescuentoAdmin)
 admin.site.register(MedicamentoFichaTecnica, MedicamentoFichaTecnicaAdmin)
@@ -102,3 +126,8 @@ admin.site.register(UsuarioReceta, UsuarioRecetaAdmin)
 admin.site.register(UsuarioFarmacoVigilancia, UsuarioFarmacoVigilanciaAdmin)
 admin.site.register(FichaUsuario, FichaUsuarioAdmin)
 admin.site.register(Contacto, ContactoAdmin)
+admin.site.register(UsuarioFamiliar, UsuarioFamiliarAdmin)
+admin.site.register(CESFAM, CESFAMAdmin)
+admin.site.register(EncargadoQuimicoFarmaceutico, EncargadoQuimicoFarmaceuticoAdmin)
+admin.site.register(FarmaciaSucursal, FarmaciaSucursalAdmin)
+admin.site.register(FarmaciaCESFAM, FarmaciaCESFAMAdmin)
