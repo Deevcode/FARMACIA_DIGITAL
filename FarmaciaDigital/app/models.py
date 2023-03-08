@@ -172,6 +172,7 @@ class UsuarioFarmacoVigilancia(models.Model):
     id_usuario = models.ForeignKey(Usuario, on_delete=models.PROTECT)
     id_receta_usuario = models.ForeignKey(UsuarioReceta, on_delete=models.PROTECT)
     nombre_comercial = models.ForeignKey(Medicamentos, on_delete=models.PROTECT)
+    #inicio_tratamiento = models.DateTimeField(auto_now_add=True) # timestamp
     horario_receta_1 = models.CharField(max_length=200)
     horario_receta_2 = models.CharField(max_length=200)
 
@@ -216,6 +217,7 @@ class FichaUsuario(models.Model):
 #TABLA DE FAMILIAR
 class UsuarioFamiliar(models.Model):
     id_usuario_familiar = models.AutoField(primary_key=True)
+    nombre_tipo_usuario = models.ForeignKey(Tipo_usuario, on_delete=models.PROTECT)
     num_run_familiar = models.CharField(max_length=12)
     nombre_familiar = models.CharField(max_length=100)
     apellido_familiar = models.CharField(max_length=100)
@@ -231,6 +233,19 @@ class UsuarioFamiliar(models.Model):
     id_provincia = models.ForeignKey(Provincia, on_delete=models.PROTECT)
     def __str__ (self):
         return self.nombre_familiar
+
+#-----------------------------------------------------------------------------------------------------------------#
+
+#TABLA DE USARIO FAMILAR PACIENTE
+class UsuarioFamiliarPaciente(models.Model):
+    id_familiar_paciente = models.AutoField(primary_key=True)
+    nombre_tipo_usuario = models.ForeignKey(Tipo_usuario, on_delete=models.PROTECT)
+    parentesco = models.ForeignKey(UsuarioFamiliar, on_delete=models.PROTECT)
+    nombres_usuario = models.ForeignKey(Usuario, on_delete=models.PROTECT)
+
+    def __str__(self):
+        return self.nombre_tipo_usuario
+
 
 #-----------------------------------------------------------------------------------------------------------------#
 
@@ -309,6 +324,8 @@ class Contacto(models.Model):
     email = models.EmailField()
     tipo_consulta = models.IntegerField(choices=opciones_consulta)
     mensaje = models.TextField()
+    #registro_mensaje = models.DateTimeField(auto_now=True)
+
     def __str__(self):
         return self.nombre
 #-----------------------------------------------------------------------------------------------------------------#

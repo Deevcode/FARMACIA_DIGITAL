@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Region, Provincia, Comuna, Laboratorio, Principio, ViaAdminstracion, Farmacia, Medicamentos, MedicamentosDescuento, MedicamentoFichaTecnica, Tipo_usuario, Usuario, UsuarioReceta, UsuarioFarmacoVigilancia, Contacto, FichaUsuario, UsuarioFamiliar, CESFAM, EncargadoQuimicoFarmaceutico, FarmaciaSucursal, FarmaciaCESFAM
+from .models import Region, Provincia, Comuna, Laboratorio, Principio, ViaAdminstracion, Farmacia, Medicamentos, MedicamentosDescuento, MedicamentoFichaTecnica, Tipo_usuario, Usuario, UsuarioReceta, UsuarioFarmacoVigilancia, Contacto, FichaUsuario, UsuarioFamiliar, CESFAM, EncargadoQuimicoFarmaceutico, FarmaciaSucursal, FarmaciaCESFAM, UsuarioFamiliarPaciente
 
 #ADMIN DE REGION
 class RegionAdmin(admin.ModelAdmin):
@@ -93,6 +93,12 @@ class CESFAMAdmin(admin.ModelAdmin):
     list_display = ('id_cesfam', 'nombre_CESFAM', 'direccion_CESFAM', 'email_CESFAM', 'telefono_CESFAM', 'id_comuna', 'id_region', 'id_provincia')
     search_fields = ['id_cesfam', 'nombre_CESFAM', 'direccion_CESFAM', 'email_CESFAM', 'telefono_CESFAM', 'id_comuna', 'id_region', 'id_provincia']
 
+
+#ADMIN DE USARIO FAMILIAR PACIENTE
+class UsuarioFamiliarPacienteAdmin(admin.ModelAdmin):
+    list_display = ('id_familiar_paciente', 'nombre_tipo_usuario', 'parentesco','nombres_usuario')
+    search_fields = ['id_familiar_paciente', 'nombre_tipo_usuario', 'parentesco','nombres_usuario']
+
 #ADMIN DE ENCARGADO QUIMICO FARMACEUTICO
 class EncargadoQuimicoFarmaceuticoAdmin(admin.ModelAdmin):
     list_display = ('id_quimico_farmaceutio', 'id_tipo_usuario', 'registro_sanitario_QF')
@@ -128,6 +134,7 @@ admin.site.register(FichaUsuario, FichaUsuarioAdmin)
 admin.site.register(Contacto, ContactoAdmin)
 admin.site.register(UsuarioFamiliar, UsuarioFamiliarAdmin)
 admin.site.register(CESFAM, CESFAMAdmin)
+admin.site.register(UsuarioFamiliarPaciente, UsuarioFamiliarPacienteAdmin)
 admin.site.register(EncargadoQuimicoFarmaceutico, EncargadoQuimicoFarmaceuticoAdmin)
 admin.site.register(FarmaciaSucursal, FarmaciaSucursalAdmin)
 admin.site.register(FarmaciaCESFAM, FarmaciaCESFAMAdmin)
