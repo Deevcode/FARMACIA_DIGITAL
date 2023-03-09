@@ -103,7 +103,7 @@ WSGI_APPLICATION = 'FarmaciaDigital.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'DevCode03$users',
+        'NAME': 'DevCode03$farmacia',
         'USER': 'DevCode03',
         'PASSWORD': 'Raveboy999',
         'HOST': 'DevCode03.mysql.pythonanywhere-services.com',   # Or an IP Address that your DB is hosted on

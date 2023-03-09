@@ -62,8 +62,8 @@ class UsuarioAdmin(admin.ModelAdmin):
 #-----------------------------------------------------------------------------------------------------------------#
 #ADMIN DE USUARIO RECETA
 class PacienteRecetaAdmin(admin.ModelAdmin):
-    list_display = ('id_receta_usuario', 'fecha_registro', 'id_usuario', 'id_medicamento','tiempo_tratamiento', 'frecuencia_dosis', 'descripcion')
-    search_fields = ['id_receta_usuario', 'fecha_registro', 'id_usuario', 'id_medicamento','tiempo_tratamiento', 'frecuencia_dosis', 'descripcion']
+    list_display = ('id_receta_usuario', 'timestamp', 'id_usuario', 'id_medicamento','tiempo_tratamiento', 'frecuencia_dosis', 'descripcion')
+    search_fields = ['id_receta_usuario', 'timestamp', 'id_usuario', 'id_medicamento','tiempo_tratamiento', 'frecuencia_dosis', 'descripcion']
 #-----------------------------------------------------------------------------------------------------------------#
 #TABLA DE USUARIO FAMILIAR
 class PacienteFamiliarAdmin(admin.ModelAdmin):
@@ -112,8 +112,8 @@ class PacienteFichaClinicaAdmin(admin.ModelAdmin):
 #-----------------------------------------------------------------------------------------------------------------#
 #ADMIN DE CONTACTO
 class ContactoAdmin(admin.ModelAdmin):
-    list_display = ('nombre', 'email', 'tipo_consulta', 'mensaje')
-    search_fields = ['nombre', 'email', 'tipo_consulta', 'mensaje']
+    list_display = ('nombre', 'email', 'tipo_consulta', 'timestamp', 'mensaje')
+    search_fields = ['nombre', 'email', 'tipo_consulta', 'timestamp', 'mensaje']
 #-----------------------------------------------------------------------------------------------------------------#
 admin.site.register(Region, RegionAdmin)
 admin.site.register(Provincia, ProvinciaAdmin)

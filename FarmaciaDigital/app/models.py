@@ -118,7 +118,6 @@ class MedicamentoFichaTecnica(models.Model):
     
 #-----------------------------------------------------------------------------------------------------------------#
 
-
 #TABLA TIPO DE USURIO
 class Tipo_usuario(models.Model):
     id_tipo_usuario = models.AutoField(primary_key=True)
@@ -154,7 +153,7 @@ class Usuario (models.Model):
 #TABLA DE USUARIO RECETA
 class PacienteReceta(models.Model):
     id_receta_usuario = models.AutoField(primary_key=True)
-    fecha_registro = models.DateField()
+    timestamp = models.DateField()
     id_usuario = models.ForeignKey(Usuario, on_delete=models.PROTECT)
     id_medicamento = models.ForeignKey(Medicamentos, on_delete=models.PROTECT)
     tiempo_tratamiento = models.CharField(max_length=100)
@@ -162,7 +161,7 @@ class PacienteReceta(models.Model):
     descripcion = models.TextField()
 
     def __date__ (self):
-        return self.fecha_registro
+        return self.id_receta_usuario
 
 
 #-----------------------------------------------------------------------------------------------------------------#
@@ -292,7 +291,7 @@ class PacienteFichaClinica(models.Model):
     fecha_nacimiento = models.DateField()
 
     def __str__ (self):
-        return self.fecha_nacimiento    #ARREGLAR ESTO ESTA MAL
+        return self.nombre_tipo_usuario  
 
 #-----------------------------------------------------------------------------------------------------------------#
 
@@ -310,6 +309,7 @@ class Contacto(models.Model):
     nombre = models.CharField(max_length=100)
     email = models.EmailField()
     tipo_consulta = models.IntegerField(choices=opciones_consulta)
+    timestamp = models.CharField(max_length=100)
     mensaje = models.TextField()
     #registro_mensaje = models.DateTimeField(auto_now=True)
 
