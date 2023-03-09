@@ -45,7 +45,7 @@ class Laboratorio(models.Model):
 #-----------------------------------------------------------------------------------------------------------------#
 
 #TABLA DE PRINCIPIO ACTIVO
-class Principio(models.Model):
+class PrincipioActivo(models.Model):
     id_principio_activo= models.AutoField(primary_key=True)
     nombre_princio_activo = models.CharField(max_length=100)
 
@@ -78,7 +78,7 @@ class Farmacia(models.Model):
 class Medicamentos(models.Model):
     id_medicamento = models.AutoField(primary_key=True)
     id_laboratorio = models.ForeignKey(Laboratorio, on_delete=models.PROTECT)
-    id_principio_activo = models.ForeignKey(Principio, on_delete=models.PROTECT)
+    id_principio_activo = models.ForeignKey(PrincipioActivo, on_delete=models.PROTECT)
     nombre_comercial = models.CharField(max_length=100)
     gramaje = models.CharField(max_length=50)
     cantidad =models.IntegerField()
@@ -152,7 +152,7 @@ class Usuario (models.Model):
 #-----------------------------------------------------------------------------------------------------------------#
     
 #TABLA DE USUARIO RECETA
-class UsuarioReceta(models.Model):
+class PacienteReceta(models.Model):
     id_receta_usuario = models.AutoField(primary_key=True)
     fecha_registro = models.DateField()
     id_usuario = models.ForeignKey(Usuario, on_delete=models.PROTECT)
@@ -164,58 +164,11 @@ class UsuarioReceta(models.Model):
     def __date__ (self):
         return self.fecha_registro
 
-#-----------------------------------------------------------------------------------------------------------------#
-
-#TABLA DE FARMACO VIGILANCIA
-class UsuarioFarmacoVigilancia(models.Model):
-    id_farmaco = models.AutoField(primary_key=True)
-    id_usuario = models.ForeignKey(Usuario, on_delete=models.PROTECT)
-    id_receta_usuario = models.ForeignKey(UsuarioReceta, on_delete=models.PROTECT)
-    nombre_comercial = models.ForeignKey(Medicamentos, on_delete=models.PROTECT)
-    #inicio_tratamiento = models.DateTimeField(auto_now_add=True) # timestamp
-    horario_receta_1 = models.CharField(max_length=200)
-    horario_receta_2 = models.CharField(max_length=200)
-
-    def __str__ (self):
-        return self.id_farmaco
-
-#-----------------------------------------------------------------------------------------------------------------#
-
-#LISTADO DE ENFERMEDADES CRONICAS
-enfermades_cronicas = [
-    [0,"Ninguna."],
-    [1,"VIH/SIDA."],
-    [2,"Insuficiencia Renal Crónica."],
-    [3,"Hipertensión Arterial Primaria o Esencial en personas de 15 años y más."],
-    [4,"Epilepsia no Refractaria en personas de 1 año y menores de 15 años."],
-    [5,"Hemofilia."],
-    [6,"Tratamiento médico en personas de 55 años y más con Artrosis de cadera y/o rodilla leve o moderada."],
-    [7,"Fibrosis quística."],
-    [8,"Artritis reumatoidea."],
-    [9,"Diabetes Mellitus tipo 1."],
-    [10,"Epilepsia en el adulto."],
-    [11,"GPC Enfermedad de Parkinson."],
-    [12,"Artritis idiopática juvenil/Artritis reumatoidea juvenil."],
-    [13,"Esclerosis Multiple."],
-    [14,"Diabetes Mellitus tipo 2."],
-    [15,"Hipotiroidismo en personas de 15 años y más."],
-    [16,"Hipertensión"],
-    [17,"Glaoucoma"],
-]
-
-class FichaUsuario(models.Model):
-    id_usuario = models.ForeignKey(Usuario, on_delete=models.PROTECT)
-    nombre_tipo_usuario = models.ForeignKey(Tipo_usuario, on_delete=models.PROTECT)
-    fecha_nacimiento = models.DateField()
-    enfermades_cronicas = models.IntegerField(choices=enfermades_cronicas)
-
-    def __str__ (self):
-        return self.enfermades_cronicas
 
 #-----------------------------------------------------------------------------------------------------------------#
 
 #TABLA DE FAMILIAR
-class UsuarioFamiliar(models.Model):
+class PacienteFamiliar(models.Model):
     id_usuario_familiar = models.AutoField(primary_key=True)
     nombre_tipo_usuario = models.ForeignKey(Tipo_usuario, on_delete=models.PROTECT)
     num_run_familiar = models.CharField(max_length=12)
@@ -231,16 +184,17 @@ class UsuarioFamiliar(models.Model):
     id_comuna = models.ForeignKey(Comuna, on_delete=models.PROTECT)
     id_region = models.ForeignKey(Region, on_delete=models.PROTECT)
     id_provincia = models.ForeignKey(Provincia, on_delete=models.PROTECT)
+
     def __str__ (self):
         return self.nombre_familiar
 
 #-----------------------------------------------------------------------------------------------------------------#
 
 #TABLA DE USARIO FAMILAR PACIENTE
-class UsuarioFamiliarPaciente(models.Model):
+class FamiliarPacienteUsuario(models.Model):
     id_familiar_paciente = models.AutoField(primary_key=True)
     nombre_tipo_usuario = models.ForeignKey(Tipo_usuario, on_delete=models.PROTECT)
-    parentesco = models.ForeignKey(UsuarioFamiliar, on_delete=models.PROTECT)
+    parentesco = models.ForeignKey(PacienteFamiliar, on_delete=models.PROTECT)
     nombres_usuario = models.ForeignKey(Usuario, on_delete=models.PROTECT)
 
     def __str__(self):
@@ -265,7 +219,7 @@ class CESFAM(models.Model):
 #-----------------------------------------------------------------------------------------------------------------#
 
 #TABLA DE QUIMICO FARMACEUTICO
-class EncargadoQuimicoFarmaceutico(models.Model):
+class QuimicoFarmaceuticoEncargado(models.Model):
     id_quimico_farmaceutio = models.AutoField(primary_key=True)
     id_tipo_usuario = models.ForeignKey(Tipo_usuario, on_delete=models.PROTECT)
     registro_sanitario_QF = models.CharField(max_length=200)
@@ -279,7 +233,7 @@ class EncargadoQuimicoFarmaceutico(models.Model):
 class FarmaciaSucursal(models.Model):
     id_sucursal = models.AutoField(primary_key=True)
     id_farmacia = models.ForeignKey(Farmacia, on_delete=models.PROTECT)
-    id_quimico_farmaceutio = models.ForeignKey(EncargadoQuimicoFarmaceutico ,on_delete= models.PROTECT)
+    id_quimico_farmaceutio = models.ForeignKey(QuimicoFarmaceuticoEncargado ,on_delete= models.PROTECT)
     id_comuna = models.ForeignKey(Comuna, on_delete=models.PROTECT)
     id_region = models.ForeignKey(Region, on_delete=models.PROTECT)
     id_provincia = models.ForeignKey(Provincia, on_delete=models.PROTECT)
@@ -306,6 +260,39 @@ class FarmaciaCESFAM(models.Model):
 
     def __str__(self):
         return self.nombre_farmacia_CESFAM
+
+#-----------------------------------------------------------------------------------------------------------------#
+
+#TABLA DE DIABETES
+class Diabetes(models.Model):
+    id_diabetes = models.AutoField(primary_key=True)
+    tipo_diabetes = models.CharField(max_length=100)
+    
+    def __str__(self):
+        return self.tipo_diabetes
+
+#-----------------------------------------------------------------------------------------------------------------#
+
+#TABLA DE HIPERTENSION
+class Hipertension(models.Model):
+    id_hipertension = models.AutoField(primary_key=True)
+    tipo_hipertension = models.CharField(max_length=100)
+    
+    def __str__(self):
+        return self.tipo_hipertension
+
+#-----------------------------------------------------------------------------------------------------------------#
+
+#TABLA DEL PACIENTE FICHA CLINICA
+class PacienteFichaClinica(models.Model):
+    id_usuario = models.ForeignKey(Usuario, on_delete=models.PROTECT)
+    nombre_tipo_usuario = models.ForeignKey(Tipo_usuario, on_delete=models.PROTECT)
+    tipo_diabetes = models.ForeignKey(Diabetes, on_delete=models.PROTECT)
+    tipo_hipertension = models.ForeignKey(Hipertension, on_delete=models.PROTECT)
+    fecha_nacimiento = models.DateField()
+
+    def __str__ (self):
+        return self.fecha_nacimiento    #ARREGLAR ESTO ESTA MAL
 
 #-----------------------------------------------------------------------------------------------------------------#
 
