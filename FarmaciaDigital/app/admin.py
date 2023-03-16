@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Region, Provincia, Comuna, Laboratorio, PrincipioActivo, ViaAdminstracion, Farmacia, Medicamentos, MedicamentosDescuento, MedicamentoFichaTecnica, Tipo_usuario, Usuario, PacienteReceta, PacienteFamiliar, FamiliarPacienteUsuario, CESFAM, QuimicoFarmaceuticoEncargado, FarmaciaSucursal, FarmaciaCESFAM, Diabetes, Hipertension, PacienteFichaClinica, Contacto
+from .models import Region, Provincia, Comuna, Laboratorio, PrincipioActivo, ViaAdminstracion, Farmacia, Medicamentos, MedicamentosDescuento, MedicamentoFichaTecnica, Tipo_usuario, Usuario, UsuarioFicha, PacienteReceta, PacienteFamiliar, FamiliarPacienteUsuario, CESFAM, QuimicoFarmaceuticoEncargado, FarmaciaSucursal, FarmaciaCESFAM, Diabetes, Hipertension, PacienteFichaClinica, Contacto
 
 #ADMIN DE REGION
 class RegionAdmin(admin.ModelAdmin):
@@ -52,13 +52,13 @@ class MedicamentoFichaTecnicaAdmin(admin.ModelAdmin):
 #-----------------------------------------------------------------------------------------------------------------#
 #ADMIN DE TIPO USUARIO
 class Tipo_usuarioAdmin(admin.ModelAdmin):
-    list_display = ("id_tipo_usuario", "nombre_tipo_usuario")
+    list_display = ("id_TipoUsuario", "nombre_tipo_usuario")
     search_fields = ["nombre_tipo_usuario"]
 #-----------------------------------------------------------------------------------------------------------------#
 #ADMIN DE USUARIO
-class UsuarioAdmin(admin.ModelAdmin):
-    list_display = ('id_usuario', 'id_tipo_usuario', 'num_run_usuario', 'nombres_usuario','apellido_paterno_usuario', 'appelido_materno_usuario', 'dirreccion_usuario', 'email_usuario', 'telefono_usuario')
-    search_fields = ['id_usuario', 'id_tipo_usuario', 'num_run_usuario', 'nombres_usuario','apellido_paterno_usuario', 'appelido_materno_usuario', 'dirreccion_usuario', 'email_usuario', 'telefono_usuario']
+class UsuarioFichaAdmin(admin.ModelAdmin):
+    list_display = ('id_usuario', 'rut_usuario', 'nombres_usuario','apellido_paterno_usuario', 'appelido_materno_usuario', 'dirreccion_usuario', 'email_usuario', 'telefono_usuario')
+    search_fields = ['id_usuario', 'rut_usuario', 'nombres_usuario','apellido_paterno_usuario', 'appelido_materno_usuario', 'dirreccion_usuario', 'email_usuario', 'telefono_usuario']
 #-----------------------------------------------------------------------------------------------------------------#
 #ADMIN DE USUARIO RECETA
 class PacienteRecetaAdmin(admin.ModelAdmin):
@@ -67,7 +67,7 @@ class PacienteRecetaAdmin(admin.ModelAdmin):
 #-----------------------------------------------------------------------------------------------------------------#
 #TABLA DE USUARIO FAMILIAR
 class PacienteFamiliarAdmin(admin.ModelAdmin):
-    list_display  = ('id_usuario_familiar','num_run_familiar', 'nombre_familiar', 'apellido_familiar', 'email_familiar', 'telefono_familiar', 'whatsapp_familiar', 'celular_familiar', 'telegram_familiar', 'parentesco', 'direccion_familiar','id_comuna', 'id_region', 'id_provincia')
+    list_display  = ('id_usuario_familiar','num_run_familiar', 'nombre_familiar', 'apellido_familiar', 'email_familiar', 'telefono_familiar', 'whatsapp_familiar', 'celular_familiar', 'telegram_familiar', 'parentesco', 'direccion_familiar','id_comuna')
     search_fields = ['id_usuario_familiar', 'nombre_familiar', 'apellido_familiar', 'email_familiar', 'parentesco']
 #-----------------------------------------------------------------------------------------------------------------#
 #ADMIN DE USUARIO FARMACO VIGILANGIA
@@ -77,8 +77,8 @@ class FamiliarPacienteUsuarioAdmin(admin.ModelAdmin):
 #-----------------------------------------------------------------------------------------------------------------#
 #ADMIN DE CESFAM
 class CESFAMAdmin(admin.ModelAdmin):
-    list_display = ('id_cesfam', 'nombre_CESFAM', 'direccion_CESFAM', 'email_CESFAM', 'telefono_CESFAM', 'id_comuna', 'id_region', 'id_provincia')
-    search_fields = ['id_cesfam', 'nombre_CESFAM', 'direccion_CESFAM', 'email_CESFAM', 'telefono_CESFAM', 'id_comuna', 'id_region', 'id_provincia']
+    list_display = ('id_cesfam', 'nombre_CESFAM', 'direccion_CESFAM', 'email_CESFAM', 'telefono_CESFAM', 'id_comuna')
+    search_fields = ['id_cesfam', 'nombre_CESFAM', 'direccion_CESFAM', 'email_CESFAM', 'telefono_CESFAM', 'id_comuna']
 #-----------------------------------------------------------------------------------------------------------------#
 #ADMIN DE ENCARGADO QUIMICO FARMACEUTICO
 class QuimicoFarmaceuticoEncargadoAdmin(admin.ModelAdmin):
@@ -92,8 +92,8 @@ class FarmaciaSucursalAdmin(admin.ModelAdmin):
 #-----------------------------------------------------------------------------------------------------------------#
 #ADMIN DE TIPO FARMACIA CESFAM
 class FarmaciaCESFAMAdmin(admin.ModelAdmin):
-    list_display = ('id_farmacia_CESFAM', 'id_cesfam', 'nombre_farmacia_CESFAM', 'direccion_farmacia_CESFAM', 'email_farmacia_CESFAM', 'telefono_farmacia_CESFAM', 'id_comuna', 'id_region', 'id_provincia')
-    search_fields = ['id_farmacia_CESFAM', 'id_cesfam', 'nombre_farmacia_CESFAM', 'direccion_farmacia_CESFAM', 'email_farmacia_CESFAM', 'telefono_farmacia_CESFAM', 'id_comuna', 'id_region', 'id_provincia']
+    list_display = ('id_farmacia_CESFAM', 'id_cesfam', 'nombre_farmacia_CESFAM', 'direccion_farmacia_CESFAM', 'email_farmacia_CESFAM', 'telefono_farmacia_CESFAM', 'id_comuna')
+    search_fields = ['id_farmacia_CESFAM', 'id_cesfam', 'nombre_farmacia_CESFAM', 'direccion_farmacia_CESFAM', 'email_farmacia_CESFAM', 'telefono_farmacia_CESFAM', 'id_comuna']
 #-----------------------------------------------------------------------------------------------------------------#
 #ADMIN DE DIABETES
 class DiabetesAdmin(admin.ModelAdmin):
@@ -126,7 +126,8 @@ admin.site.register(Medicamentos, MedicamentosAdmin)
 admin.site.register(MedicamentosDescuento, MedicamentosDescuentoAdmin)
 admin.site.register(MedicamentoFichaTecnica, MedicamentoFichaTecnicaAdmin)
 admin.site.register(Tipo_usuario, Tipo_usuarioAdmin)
-admin.site.register(Usuario, UsuarioAdmin)
+admin.site.register(Usuario)
+admin.site.register(UsuarioFicha, UsuarioFichaAdmin)
 admin.site.register(PacienteReceta, PacienteRecetaAdmin)
 admin.site.register(PacienteFamiliar, PacienteFamiliarAdmin)
 admin.site.register(FamiliarPacienteUsuario, FamiliarPacienteUsuarioAdmin)

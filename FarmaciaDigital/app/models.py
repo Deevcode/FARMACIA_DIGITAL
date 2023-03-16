@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import AbstractUser
 
 #-----------------------------------------------------------------------------------------------------------------#
 #TABLA DE REGION
@@ -120,7 +120,7 @@ class MedicamentoFichaTecnica(models.Model):
 
 #TABLA TIPO DE USURIO
 class Tipo_usuario(models.Model):
-    id_tipo_usuario = models.AutoField(primary_key=True)
+    id_TipoUsuario = models.AutoField(primary_key=True)
     nombre_tipo_usuario =models.CharField(max_length=100)
     def __str__(self):
         return self.nombre_tipo_usuario  
@@ -128,10 +128,20 @@ class Tipo_usuario(models.Model):
 #-----------------------------------------------------------------------------------------------------------------#
 
 #TABLA USUARIO
-class Usuario (models.Model):
+class Usuario(AbstractUser):
+
+    rut_usuario = models.CharField(max_length=12)
+    id_TipoUsuario = models.ForeignKey(Tipo_usuario, on_delete=models.SET_NULL,null=True)
+
+    def __str__(self):
+        return self.rut_usuario
+
+#-----------------------------------------------------------------------------------------------------------------#
+
+#TABLA USUARIO
+class UsuarioFicha (models.Model):
     id_usuario = models.AutoField(primary_key=True)
-    id_tipo_usuario = models.ForeignKey(Tipo_usuario, on_delete=models.PROTECT)
-    num_run_usuario = models.CharField(max_length=12)
+    rut_usuario = models.ForeignKey(Usuario, on_delete=models.SET_NULL,null=True)
     nombres_usuario = models.CharField(max_length=100)
     apellido_paterno_usuario = models.CharField(max_length=100)
     appelido_materno_usuario = models.CharField(max_length=100)
@@ -142,11 +152,11 @@ class Usuario (models.Model):
     whatsapp_usuario = models.IntegerField()
     telegram_usuario = models.IntegerField()
     id_comuna = models.ForeignKey(Comuna, on_delete=models.PROTECT)
-    id_region = models.ForeignKey(Region, on_delete=models.PROTECT)
-    id_provincia = models.ForeignKey(Provincia, on_delete=models.PROTECT)
     #id_familiar = models.ForeignKey(Familiar, on_delete=models.PROTECT)
     def __str__(self):
         return self.nombres_usuario
+    
+
     
 #-----------------------------------------------------------------------------------------------------------------#
     
@@ -154,7 +164,7 @@ class Usuario (models.Model):
 class PacienteReceta(models.Model):
     id_receta_usuario = models.AutoField(primary_key=True)
     timestamp = models.DateField()
-    id_usuario = models.ForeignKey(Usuario, on_delete=models.PROTECT)
+    id_usuario = models.ForeignKey(UsuarioFicha, on_delete=models.PROTECT)
     id_medicamento = models.ForeignKey(Medicamentos, on_delete=models.PROTECT)
     tiempo_tratamiento = models.CharField(max_length=100)
     frecuencia_dosis = models.CharField(max_length=100)
@@ -181,8 +191,6 @@ class PacienteFamiliar(models.Model):
     parentesco = models.CharField(max_length=100)
     direccion_familiar = models.CharField(max_length=100)
     id_comuna = models.ForeignKey(Comuna, on_delete=models.PROTECT)
-    id_region = models.ForeignKey(Region, on_delete=models.PROTECT)
-    id_provincia = models.ForeignKey(Provincia, on_delete=models.PROTECT)
 
     def __str__ (self):
         return self.nombre_familiar
@@ -194,7 +202,7 @@ class FamiliarPacienteUsuario(models.Model):
     id_familiar_paciente = models.AutoField(primary_key=True)
     nombre_tipo_usuario = models.ForeignKey(Tipo_usuario, on_delete=models.PROTECT)
     parentesco = models.ForeignKey(PacienteFamiliar, on_delete=models.PROTECT)
-    nombres_usuario = models.ForeignKey(Usuario, on_delete=models.PROTECT)
+    nombres_usuario = models.ForeignKey(UsuarioFicha, on_delete=models.PROTECT)
 
     def __str__(self):
         return self.nombre_tipo_usuario
@@ -210,8 +218,7 @@ class CESFAM(models.Model):
     email_CESFAM = models.CharField(max_length=200)
     telefono_CESFAM = models.CharField(max_length=200)
     id_comuna = models.ForeignKey(Comuna, on_delete=models.PROTECT)
-    id_region = models.ForeignKey(Region, on_delete=models.PROTECT)
-    id_provincia = models.ForeignKey(Provincia, on_delete=models.PROTECT)
+
     def __str__ (self):
         return self.nombre_CESFAM
 
@@ -254,8 +261,6 @@ class FarmaciaCESFAM(models.Model):
     email_farmacia_CESFAM = models.CharField(max_length=200)
     telefono_farmacia_CESFAM = models.CharField(max_length=200)
     id_comuna = models.ForeignKey(Comuna, on_delete=models.PROTECT)
-    id_region = models.ForeignKey(Region, on_delete=models.PROTECT)
-    id_provincia = models.ForeignKey(Provincia, on_delete=models.PROTECT)
 
     def __str__(self):
         return self.nombre_farmacia_CESFAM
@@ -284,7 +289,7 @@ class Hipertension(models.Model):
 
 #TABLA DEL PACIENTE FICHA CLINICA
 class PacienteFichaClinica(models.Model):
-    id_usuario = models.ForeignKey(Usuario, on_delete=models.PROTECT)
+    id_usuario = models.ForeignKey(UsuarioFicha, on_delete=models.PROTECT)
     nombre_tipo_usuario = models.ForeignKey(Tipo_usuario, on_delete=models.PROTECT)
     tipo_diabetes = models.ForeignKey(Diabetes, on_delete=models.PROTECT)
     tipo_hipertension = models.ForeignKey(Hipertension, on_delete=models.PROTECT)
