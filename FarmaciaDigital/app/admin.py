@@ -8,7 +8,7 @@ class UserAdmin(BaseUserAdmin):
     fieldsets = ( 
         (None,{'fields': ('username','email', 'password')}), 
         ('Informacion personal', {'fields': ( 'first_name', 'last_name', 'id_TipoUsuario','rut_usuario')}), 
-        ('Permisos Django', {'fields': ('is_staff', 'is_active')})  
+        ('Permisos Django', {'fields': ('is_staff', 'is_active', 'is_superuser', 'groups')})  
     ) 
  
     add_fieldsets = (
