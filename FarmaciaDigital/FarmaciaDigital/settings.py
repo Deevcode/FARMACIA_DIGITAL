@@ -26,8 +26,8 @@ SECRET_KEY = 'django-insecure-&&5xw3cy!6t$(jfx+*pp1jaq37v6y3b3i#fv)-h(_$tm8!o*4d
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-#ALLOWED_HOSTS = []
-ALLOWED_HOSTS = ['devcode03.pythonanywhere.com']
+ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = ['devcode03.pythonanywhere.com']
 
 MESSAGE_HOST = "django.contrib.messages.storage.cookie.CookieStorage"
 
@@ -102,28 +102,28 @@ WSGI_APPLICATION = 'FarmaciaDigital.wsgi.application'
 #}
 
 #ESTA CONFIGURACION ES PARA UTILIZAR LA BASE DE DATOS DE MYSQL PA
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'DevCode03$farmacia',
-        'USER': 'DevCode03',
-        'PASSWORD': 'Raveboy999',
-        'HOST': 'DevCode03.mysql.pythonanywhere-services.com',   # Or an IP Address that your DB is hosted on
-        'PORT': '3306',
-    }
-}
-
-#ESTA CONFIGURACION ES PARA UTILIZAR LA BASE DE DATOS DE MYSQL
 #DATABASES = {
 #    'default': {
 #        'ENGINE': 'django.db.backends.mysql',
-#        'NAME': config("NAME"),
-#        'USER': config("USER"),
-#        'PASSWORD': config("PASSWORD"),
-#        'HOST': config("HOST"),
-#        'PORT': config("PORT")
+#        'NAME': 'DevCode03$farmacia',
+#        'USER': 'DevCode03',
+#        'PASSWORD': 'Raveboy999',
+#        'HOST': 'DevCode03.mysql.pythonanywhere-services.com',   # Or an IP Address that your DB is hosted on
+#        'PORT': '3306',
 #    }
 #}
+
+#ESTA CONFIGURACION ES PARA UTILIZAR LA BASE DE DATOS DE MYSQL
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': config("NAME"),
+        'USER': config("USER"),
+        'PASSWORD': config("PASSWORD"),
+        'HOST': config("HOST"),
+        'PORT': config("PORT")
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators

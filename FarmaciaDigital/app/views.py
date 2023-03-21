@@ -90,20 +90,20 @@ def eliminar_medicamento(request, id):
     return redirect(to="eliminar_medicamento")
 
 #VISTA DE REGISTRO
-def registro(request):
-    data = {
-        'form': CustomUserCreationForm()
-    }
-
-    if request.method == 'POST':
-        formulario = CustomUserCreationForm(data=request.POST)
-        if formulario.is_valid():
-            formulario.save()
-            user = authenticate(username=formulario.cleaned_data["password1"])
-            login(request, user)
-            messages.success(request, "Te has registrado correctamente")
-            #redirigir al home
-            return redirect(to="home")
-        data["form"] = formulario
-
-    return render(request, 'registration/registro.html',data)
+#def registro(request):
+#    data = {
+#        'form': CustomUserCreationForm()
+#    }
+#
+#    if request.method == 'POST':
+#        formulario = CustomUserCreationForm(data=request.POST)
+#        if formulario.is_valid():
+#            formulario.save()
+#            user = authenticate(username=formulario.cleaned_data["password1"])
+#            login(request, user)
+#            messages.success(request, "Te has registrado correctamente")
+#            #redirigir al home
+#            return redirect(to="home")
+#        data["form"] = formulario
+#
+#    return render(request, 'registration/registro.html',data)

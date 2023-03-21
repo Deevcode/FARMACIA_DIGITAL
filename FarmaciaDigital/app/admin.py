@@ -1,5 +1,23 @@
 from django.contrib import admin
 from .models import Region, Provincia, Comuna, Laboratorio, PrincipioActivo, ViaAdminstracion, Farmacia, Medicamentos, MedicamentosDescuento, MedicamentoFichaTecnica, Tipo_usuario, Usuario, UsuarioFicha, PacienteReceta, PacienteFamiliar, FamiliarPacienteUsuario, CESFAM, QuimicoFarmaceuticoEncargado, FarmaciaSucursal, FarmaciaCESFAM, Diabetes, Hipertension, PacienteFichaClinica, Contacto
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+
+class UserAdmin(BaseUserAdmin): 
+    list_display = ('id','id_TipoUsuario','username','password', 'email', 'rut_usuario', 'first_name','last_name') 
+    list_filter = ('email',) 
+    fieldsets = ( 
+        (None,{'fields': ('username','email', 'password')}), 
+        ('Informacion personal', {'fields': ( 'first_name', 'last_name', 'id_TipoUsuario','rut_usuario')}), 
+        ('Permisos Django', {'fields': ('is_staff', 'is_active')})  
+    ) 
+ 
+    add_fieldsets = (
+        (None, {
+            'classes':('wide',),
+            'fields':('id_TipoUsuario','rut_usuario'  ,'username', 'email', 'first_name', 'last_name', 'password1', 'password2')
+        }
+    ),  # <-- add this comma!
+    )
 
 #ADMIN DE REGION
 class RegionAdmin(admin.ModelAdmin):
@@ -56,6 +74,11 @@ class Tipo_usuarioAdmin(admin.ModelAdmin):
     search_fields = ["nombre_tipo_usuario"]
 #-----------------------------------------------------------------------------------------------------------------#
 #ADMIN DE USUARIO
+#class UsuarioAdmin(admin.ModelAdmin):
+#    list_display = ('id_TipoUsuario','username','password', 'email', 'rut_usuario', 'first_name','last_name')
+#    search_fields = ['id_TipoUsuario','username','password','first_name','last_name', 'email', 'rut_usuario']
+#-----------------------------------------------------------------------------------------------------------------#
+#ADMIN DE USUARIO FICHA ADMIN
 class UsuarioFichaAdmin(admin.ModelAdmin):
     list_display = ('id_usuario', 'rut_usuario', 'nombres_usuario','apellido_paterno_usuario', 'appelido_materno_usuario', 'dirreccion_usuario', 'email_usuario', 'telefono_usuario')
     search_fields = ['id_usuario', 'rut_usuario', 'nombres_usuario','apellido_paterno_usuario', 'appelido_materno_usuario', 'dirreccion_usuario', 'email_usuario', 'telefono_usuario']
@@ -126,7 +149,7 @@ admin.site.register(Medicamentos, MedicamentosAdmin)
 admin.site.register(MedicamentosDescuento, MedicamentosDescuentoAdmin)
 admin.site.register(MedicamentoFichaTecnica, MedicamentoFichaTecnicaAdmin)
 admin.site.register(Tipo_usuario, Tipo_usuarioAdmin)
-admin.site.register(Usuario)
+admin.site.register(Usuario, UserAdmin)
 admin.site.register(UsuarioFicha, UsuarioFichaAdmin)
 admin.site.register(PacienteReceta, PacienteRecetaAdmin)
 admin.site.register(PacienteFamiliar, PacienteFamiliarAdmin)

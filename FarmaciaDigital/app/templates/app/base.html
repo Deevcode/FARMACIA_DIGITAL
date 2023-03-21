@@ -52,14 +52,15 @@
 							<li class="current"><a href="#">{{user.username}}</a></li>
 							<li><a href="{% url 'contacto'%}">Contacto</a></li>
 							{% if user.is_authenticated %}
+							{% if perms.app.add_producto %}
 							<li><a href="{% url 'agregar_medicamento'%}">Medicamentos</a></li>
+							{% endif %}
                             <li><a href="{% url 'listar_medicamento'%}">Bodega</a></li>
                             <li><a href="{% url 'reportes'%}">Reportes</a></li>
 							<li><a href="http://devcode03.pythonanywhere.com/admin/">Administrador</a></li>
                             <li><a href="{% url 'logout'%}">Cerrar Sección</a></li>
 							{% else %}
 							<li><a href="{% url 'login'%}">Login</a></li>
-							<li><a href="{% url 'registro'%}">Registrar</a></li>
 							{% endif %}
 							
 
