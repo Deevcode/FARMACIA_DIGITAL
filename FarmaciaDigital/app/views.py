@@ -66,7 +66,7 @@ def listar_medicamentos(request):
 #VISTA DE MODIFICAR
 def modificar_medicamento(request, id):
     
-    medicamentos = get_object_or_404(Medicamentos, id=id)
+    medicamentos = get_object_or_404(Medicamentos, id_medicamento=id)
     
     data = {
         'form' : MedicamentoForm(instance=medicamentos)

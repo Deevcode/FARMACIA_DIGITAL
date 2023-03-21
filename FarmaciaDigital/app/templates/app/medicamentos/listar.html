@@ -59,7 +59,7 @@
                   <td>{{ m.lote  }}</td>
                   <td>{{ m.ingesta  | capfirst }}</td>
                   <td>{{ m.fecha_vencimento  }}</td>
-                  <td><a href="{% url 'modificar_medicamento' m.id  %}" class="btn btn-info">MODIFICAR</a></td>
+                  <td><a href="{% url 'modificar_medicamento' m.id_medicamento  %}" class="btn btn-info">MODIFICAR</a></td>
                   <td><a href="#" onclick="eliminar_medicamento({{ m.id }})"  class="btn btn-danger">ELIMINAR</a></td>
                 </tr>
                 {% endfor %}

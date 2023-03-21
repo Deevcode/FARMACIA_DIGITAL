@@ -4,7 +4,8 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 class UserAdmin(BaseUserAdmin): 
     list_display = ('id','id_TipoUsuario','username','password', 'email', 'rut_usuario', 'first_name','last_name') 
-    list_filter = ('email',) 
+    list_filter = ('email',)
+    list_editable = ('password',) 
     fieldsets = ( 
         (None,{'fields': ('username','email', 'password')}), 
         ('Informacion personal', {'fields': ( 'first_name', 'last_name', 'id_TipoUsuario','rut_usuario')}), 
