@@ -41,10 +41,10 @@
                   <th>Pincipio Activo</th>
                   <th>Nombre Comercial</th>
                   <th>Dosis</th>
-                  <th>Cantidad</th>
-                  <th>Presentacion</th>
+                  <th>Cantidad de cajas</th>
+                  <th>Presentacion de la caja</th>
                   <th>Lote</th>
-                  <th>Ingesta</th>
+                  <th>Via Administración</th>
                   <th>Fecha Vencimiento</th>
                   <th>OPCIONES</th>
                 </tr>
@@ -59,8 +59,12 @@
                   <td>{{ m.lote  }}</td>
                   <td>{{ m.ingesta  | capfirst }}</td>
                   <td>{{ m.fecha_vencimento  }}</td>
+                  {% if perms.app.change_producto %}
                   <td><a href="{% url 'modificar_medicamento' m.id_medicamento  %}" class="btn btn-info">MODIFICAR</a></td>
-                  <td><a href="#" onclick="eliminar_medicamento({{ m.id }})"  class="btn btn-danger">ELIMINAR</a></td>
+                  {% endif %}
+                  {% if perms.app.delete_producto %}
+                  <td><a href="#" onclick="eliminar_medicamento({{ m.id_medicamento }})"  class="btn btn-danger">ELIMINAR</a></td>
+                  {% endif %}
                 </tr>
                 {% endfor %}
               </table>
