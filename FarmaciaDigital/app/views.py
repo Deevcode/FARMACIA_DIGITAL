@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Medicamentos
 from .forms import ContactoForm, MedicamentoForm, CustomUserCreationForm
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required, permission_required
 
 
 from django.contrib.auth import authenticate, login
@@ -38,10 +39,13 @@ def bodega(request):
     return render(request, 'app/bodega.html')    
 
 #VISTA DE REPORTE
+@login_required
 def reportes(request):
     return render(request, 'app/reporte.html') 
 
+
 #VISTA DE AGREGAR MEDICAMENTO
+@permission_required('app.add_producto')
 def agregar_medicamento(request):
     data = {
         'form' : MedicamentoForm()
@@ -56,6 +60,7 @@ def agregar_medicamento(request):
     return render(request, 'app/medicamentos/agregar.html', data) 
 
 #VISTA DE LISTAR
+@permission_required('app.view_producto')
 def listar_medicamentos(request):
     medicamentos = Medicamentos.objects.all()
     data = {
@@ -64,6 +69,7 @@ def listar_medicamentos(request):
     return render(request, 'app/medicamentos/listar.html', data) 
 
 #VISTA DE MODIFICAR
+@permission_required('app.change_producto')
 def modificar_medicamento(request, id):
     
     medicamentos = get_object_or_404(Medicamentos, id_medicamento=id)
@@ -83,6 +89,7 @@ def modificar_medicamento(request, id):
     return render(request, 'app/medicamentos/modificar.html', data) 
 
 #VISTA DE ELIMINAR
+@permission_required('app.delete_producto')
 def eliminar_medicamento(request, id):
     messages.success(request, "Eliminado Correctamente")
     medicamentos = get_object_or_404(Medicamentos, id=id)
