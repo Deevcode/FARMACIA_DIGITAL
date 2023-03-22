@@ -50,14 +50,14 @@
                 </tr>
                 {% for m in medicamentos %}
                 <tr>
-                  <td>{{ m.laboratorio | capfirst  }}</td>
-                  <td>{{ m.nombre_princio_activo | capfirst  }}</td>
+                  <td>{{ m.id_laboratorio | capfirst  }}</td>
+                  <td>{{ m.id_principio_activo | capfirst  }}</td>
                   <td>{{ m.nombre_comercial  | capfirst }}</td>
-                  <td>{{ m.dosis  | capfirst }}</td>
+                  <td>{{ m.gramaje  | capfirst }}</td>
                   <td>{{ m.cantidad }}</td>
                   <td>{{ m.presentacion  | capfirst }}</td>
                   <td>{{ m.lote  }}</td>
-                  <td>{{ m.ingesta  | capfirst }}</td>
+                  <td>{{ m.id_via_administracion  | capfirst }}</td>
                   <td>{{ m.fecha_vencimento  }}</td>
                   {% if perms.app.change_producto %}
                   <td><a href="{% url 'modificar_medicamento' m.id_medicamento  %}" class="btn btn-info">MODIFICAR</a></td>
