@@ -81,11 +81,9 @@ class Medicamentos(models.Model):
     id_principio_activo = models.ForeignKey(PrincipioActivo, on_delete=models.PROTECT)
     nombre_comercial = models.CharField(max_length=100)
     gramaje = models.CharField(max_length=50)
-    cantidad =models.IntegerField()
-    presentacion =models.CharField(max_length=100)
-    lote = models.CharField(max_length=200)
+    cantidad_stock =models.IntegerField()
+    presentacion_medicamento =models.CharField(max_length=100)
     id_via_administracion = models.ForeignKey(ViaAdminstracion, on_delete=models.PROTECT)
-    fecha_vencimento = models.DateField()
     #imagen = models.ImageField(upload_to="medicamentos", null=True)
 
     def __str__(self):
@@ -137,7 +135,19 @@ class Usuario(AbstractUser):
         return self.rut_usuario
 
 #-----------------------------------------------------------------------------------------------------------------#
+#TABLA DE ENFERMERA
+class Enfermera(models.Model):
+    id_enfermera = models.AutoField(primary_key=True)
+    id_TipoUsuario = models.ForeignKey(Tipo_usuario, on_delete=models.SET_NULL,null=True)
+    nombres_enfermera = models.CharField(max_length=200)
+    apellidos_enfermera = models.CharField(max_length=200)
+    direccion_enfermera = models.CharField(max_length=200)
+    id_comuna = models.ForeignKey(Comuna, on_delete=models.PROTECT)
+    celular_usuario = models.IntegerField()
 
+    def __str__(self):
+        return self.id_enfermera
+#-----------------------------------------------------------------------------------------------------------------#
 #TABLA USUARIO
 class UsuarioFicha (models.Model):
     id_usuario = models.AutoField(primary_key=True)
@@ -163,11 +173,18 @@ class UsuarioFicha (models.Model):
 #TABLA DE USUARIO RECETA
 class PacienteReceta(models.Model):
     id_receta_usuario = models.AutoField(primary_key=True)
-    timestamp = models.DateField()
-    id_usuario = models.ForeignKey(UsuarioFicha, on_delete=models.PROTECT)
-    id_medicamento = models.ForeignKey(Medicamentos, on_delete=models.PROTECT)
-    tiempo_tratamiento = models.CharField(max_length=100)
-    frecuencia_dosis = models.CharField(max_length=100)
+    fecha_receta = models.DateField()
+    first_name = models.ForeignKey(Usuario, on_delete=models.SET_NULL,null=True)
+    id_enfermera = models.ForeignKey(Enfermera, on_delete=models.SET_NULL,null=True)
+    nombre_comercial = models.ForeignKey(Medicamentos, on_delete=models.SET_NULL,null=True)
+    tiempo_tratamiento_dias = models.CharField(max_length=100)
+    frecuencia_dosis_diaria = models.CharField(max_length=100)
+    horario_1 = models.TimeField()
+    horario_2 = models.TimeField()
+    horario_3 = models.TimeField()
+    horario_4 = models.TimeField()
+    horario_5 = models.TimeField()
+    horario_6 = models.TimeField()
     descripcion = models.TextField()
 
     def __date__ (self):

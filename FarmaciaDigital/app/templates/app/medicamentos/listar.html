@@ -40,12 +40,10 @@
                   <th>Laboratorio</th>
                   <th>Pincipio Activo</th>
                   <th>Nombre Comercial</th>
-                  <th>Dosis</th>
+                  <th>Gramaje</th>
                   <th>Cantidad de cajas</th>
-                  <th>Presentacion de la caja</th>
-                  <th>Lote</th>
+                  <th>Presentacion del medicamento</th>
                   <th>Via Administración</th>
-                  <th>Fecha Vencimiento</th>
                   <th>OPCIONES</th>
                 </tr>
                 {% for m in medicamentos %}
@@ -54,11 +52,9 @@
                   <td>{{ m.id_principio_activo | capfirst  }}</td>
                   <td>{{ m.nombre_comercial  | capfirst }}</td>
                   <td>{{ m.gramaje  | capfirst }}</td>
-                  <td>{{ m.cantidad }}</td>
-                  <td>{{ m.presentacion  | capfirst }}</td>
-                  <td>{{ m.lote  }}</td>
+                  <td>{{ m.cantidad_stock }}</td>
+                  <td>{{ m.presentacion_medicamento  | capfirst }}</td>
                   <td>{{ m.id_via_administracion  | capfirst }}</td>
-                  <td>{{ m.fecha_vencimento  }}</td>
                   {% if perms.app.change_producto %}
                   <td><a href="{% url 'modificar_medicamento' m.id_medicamento  %}" class="btn btn-info">MODIFICAR</a></td>
                   {% endif %}

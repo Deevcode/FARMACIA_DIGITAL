@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Region, Provincia, Comuna, Laboratorio, PrincipioActivo, ViaAdminstracion, Farmacia, Medicamentos, MedicamentosDescuento, MedicamentoFichaTecnica, Tipo_usuario, Usuario, UsuarioFicha, PacienteReceta, PacienteFamiliar, FamiliarPacienteUsuario, CESFAM, QuimicoFarmaceuticoEncargado, FarmaciaSucursal, FarmaciaCESFAM, Diabetes, Hipertension, PacienteFichaClinica, Contacto
+from .models import Region, Provincia, Comuna, Laboratorio, PrincipioActivo, ViaAdminstracion, Farmacia, Medicamentos, MedicamentosDescuento, MedicamentoFichaTecnica, Tipo_usuario, Usuario,Enfermera, UsuarioFicha, PacienteReceta, PacienteFamiliar, FamiliarPacienteUsuario, CESFAM, QuimicoFarmaceuticoEncargado, FarmaciaSucursal, FarmaciaCESFAM, Diabetes, Hipertension, PacienteFichaClinica, Contacto
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 class UserAdmin(BaseUserAdmin): 
@@ -57,7 +57,7 @@ class FarmaciaAdmin(admin.ModelAdmin):
 #-----------------------------------------------------------------------------------------------------------------#
 #ADMIN DE TIPO MEDICAMENTOS
 class MedicamentosAdmin(admin.ModelAdmin):
-    list_display = ("id_medicamento", "id_laboratorio", "id_principio_activo", "nombre_comercial",  "gramaje", "cantidad", "presentacion",  "lote", "id_via_administracion", "fecha_vencimento")
+    list_display = ("id_medicamento", "id_laboratorio", "id_principio_activo", "nombre_comercial",  "gramaje", "cantidad_stock", "presentacion_medicamento", "id_via_administracion")
     search_fields = ["nombre_comercial", "id_medicamento", "id_laboratorio"]
 #-----------------------------------------------------------------------------------------------------------------#
 class MedicamentosDescuentoAdmin(admin.ModelAdmin):
@@ -75,9 +75,9 @@ class Tipo_usuarioAdmin(admin.ModelAdmin):
     search_fields = ["nombre_tipo_usuario"]
 #-----------------------------------------------------------------------------------------------------------------#
 #ADMIN DE USUARIO
-#class UsuarioAdmin(admin.ModelAdmin):
-#    list_display = ('id_TipoUsuario','username','password', 'email', 'rut_usuario', 'first_name','last_name')
-#    search_fields = ['id_TipoUsuario','username','password','first_name','last_name', 'email', 'rut_usuario']
+class EnfermeraAdmin(admin.ModelAdmin):
+    list_display = ('id_enfermera', 'id_TipoUsuario','nombres_enfermera', 'apellidos_enfermera', 'direccion_enfermera', 'id_comuna', 'celular_usuario')
+    search_fields = ['id_enfermera', 'id_TipoUsuario','nombres_enfermera', 'apellidos_enfermera', 'direccion_enfermera', 'id_comuna', 'celular_usuario']
 #-----------------------------------------------------------------------------------------------------------------#
 #ADMIN DE USUARIO FICHA ADMIN
 class UsuarioFichaAdmin(admin.ModelAdmin):
@@ -86,8 +86,8 @@ class UsuarioFichaAdmin(admin.ModelAdmin):
 #-----------------------------------------------------------------------------------------------------------------#
 #ADMIN DE USUARIO RECETA
 class PacienteRecetaAdmin(admin.ModelAdmin):
-    list_display = ('id_receta_usuario', 'timestamp', 'id_usuario', 'id_medicamento','tiempo_tratamiento', 'frecuencia_dosis', 'descripcion')
-    search_fields = ['id_receta_usuario', 'timestamp', 'id_usuario', 'id_medicamento','tiempo_tratamiento', 'frecuencia_dosis', 'descripcion']
+    list_display = ('id_receta_usuario', 'fecha_receta', 'first_name','id_enfermera', 'nombre_comercial','tiempo_tratamiento_dias', 'frecuencia_dosis_diaria', 'horario_1','horario_2','horario_3','horario_4','horario_5','horario_6', 'descripcion')
+    search_fields = ['id_receta_usuario', 'fecha_receta', 'first_name','id_enfermera', 'nombre_comercial', 'tiempo_tratamiento_dias', 'frecuencia_dosis_diaria', 'horario_1','horario_2','horario_3','horario_4','horario_5','horario_6', 'descripcion']
 #-----------------------------------------------------------------------------------------------------------------#
 #TABLA DE USUARIO FAMILIAR
 class PacienteFamiliarAdmin(admin.ModelAdmin):
@@ -151,6 +151,7 @@ admin.site.register(MedicamentosDescuento, MedicamentosDescuentoAdmin)
 admin.site.register(MedicamentoFichaTecnica, MedicamentoFichaTecnicaAdmin)
 admin.site.register(Tipo_usuario, Tipo_usuarioAdmin)
 admin.site.register(Usuario, UserAdmin)
+admin.site.register(Enfermera, EnfermeraAdmin)
 admin.site.register(UsuarioFicha, UsuarioFichaAdmin)
 admin.site.register(PacienteReceta, PacienteRecetaAdmin)
 admin.site.register(PacienteFamiliar, PacienteFamiliarAdmin)
