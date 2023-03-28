@@ -217,7 +217,7 @@ CREATE TABLE `app_enfermera` (
   KEY `app_enfermera_id_comuna_id_b11cc78d_fk_app_comuna_id_comuna` (`id_comuna_id`),
   CONSTRAINT `app_enfermera_id_TipoUsuario_id_37bdc3fd_fk_app_tipo_` FOREIGN KEY (`id_TipoUsuario_id`) REFERENCES `app_tipo_usuario` (`id_TipoUsuario`),
   CONSTRAINT `app_enfermera_id_comuna_id_b11cc78d_fk_app_comuna_id_comuna` FOREIGN KEY (`id_comuna_id`) REFERENCES `app_comuna` (`id_comuna`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -226,7 +226,7 @@ CREATE TABLE `app_enfermera` (
 
 LOCK TABLES `app_enfermera` WRITE;
 /*!40000 ALTER TABLE `app_enfermera` DISABLE KEYS */;
-INSERT INTO `app_enfermera` VALUES (2,'Maria Angela','Dibu Barrientos','maria.db@gmail.com',964446724,7,13);
+INSERT INTO `app_enfermera` VALUES (2,'Maria Angela','Dibu Barrientos','maria.db@gmail.com',964446724,7,118),(3,'Daniela Arido','Garrido Barriento','barrientos.dani@gmail.com',973929364,7,112),(4,'Elsa de las Mercedes','Carmona Arzua','elsa.cormona@gmail.com',973337264,7,124);
 /*!40000 ALTER TABLE `app_enfermera` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -417,7 +417,7 @@ CREATE TABLE `app_medicamentofichatecnica` (
   PRIMARY KEY (`id_ficha_medicamento`),
   KEY `app_medicamentoficha_nombre_comercial_id_23f2a22b_fk_app_medic` (`nombre_comercial_id`),
   CONSTRAINT `app_medicamentoficha_nombre_comercial_id_23f2a22b_fk_app_medic` FOREIGN KEY (`nombre_comercial_id`) REFERENCES `app_medicamentos` (`id_medicamento`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -426,6 +426,7 @@ CREATE TABLE `app_medicamentofichatecnica` (
 
 LOCK TABLES `app_medicamentofichatecnica` WRITE;
 /*!40000 ALTER TABLE `app_medicamentofichatecnica` DISABLE KEYS */;
+INSERT INTO `app_medicamentofichatecnica` VALUES (1,'https://registrosanitario.ispch.gob.cl/Ficha.aspx?RegistroISP=F-11299/21',1),(2,'https://registrosanitario.ispch.gob.cl/Ficha.aspx?RegistroISP=F-17253/18',2);
 /*!40000 ALTER TABLE `app_medicamentofichatecnica` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -626,7 +627,7 @@ CREATE TABLE `app_pacientereceta` (
   CONSTRAINT `app_pacientereceta_id_enfermera_id_3218726e_fk_app_enfer` FOREIGN KEY (`id_enfermera_id`) REFERENCES `app_enfermera` (`id_enfermera`),
   CONSTRAINT `app_pacientereceta_nombre_comercial_id_7806ab36_fk_app_medic` FOREIGN KEY (`nombre_comercial_id`) REFERENCES `app_medicamentos` (`id_medicamento`),
   CONSTRAINT `app_pacientereceta_nombres_paciente_id_70d2bbbc_fk_app_usuar` FOREIGN KEY (`nombres_paciente_id`) REFERENCES `app_usuario` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -635,7 +636,7 @@ CREATE TABLE `app_pacientereceta` (
 
 LOCK TABLES `app_pacientereceta` WRITE;
 /*!40000 ALTER TABLE `app_pacientereceta` DISABLE KEYS */;
-INSERT INTO `app_pacientereceta` VALUES (1,'2023-03-28','15 dias','2 comprimidos','12:05:28.000000',NULL,NULL,NULL,NULL,NULL,'Tomar este medicamento después de la primera comida del día.',2,1,2,2);
+INSERT INTO `app_pacientereceta` VALUES (1,'2023-03-28','15 dias','2 comprimidos','12:05:28.000000',NULL,NULL,NULL,NULL,NULL,'Tomar este medicamento después de la primera comida del día.',3,1,2,2),(2,'2023-03-28','10 Dias','2 comprimidos','06:00:00.000000',NULL,NULL,NULL,NULL,NULL,'Tomar este medicamento con abundante agua para su correcta absorción.',2,3,4,1),(3,'2023-03-28','12 Dias','4 Comprimidos','12:00:00.000000',NULL,NULL,NULL,NULL,NULL,'Tomar este medicamento después del almuerzo, debido a la acidez que provoca este medicamento.',4,6,5,1),(4,'2023-03-28','5 Dias','4 Comprimidos','13:14:28.000000',NULL,NULL,NULL,NULL,NULL,'Consumir este medicamento con abundante agua por la mañana.',2,3,3,3);
 /*!40000 ALTER TABLE `app_pacientereceta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -798,7 +799,7 @@ CREATE TABLE `app_usuario` (
 
 LOCK TABLES `app_usuario` WRITE;
 /*!40000 ALTER TABLE `app_usuario` DISABLE KEYS */;
-INSERT INTO `app_usuario` VALUES (1,'pbkdf2_sha256$390000$omXzft2G7YimBuUU8MDqOc$z0MXB6Kl0kBU1B4f/xeLP8MZ1j5iBQI+GBYhDs2U1/8=','2023-03-27 14:06:06.790643',1,'adminmedi','','','josee.cornejo@gmail.com',1,1,'2023-03-27 12:07:39.588694','',NULL),(2,'pbkdf2_sha256$390000$mEdcslJlx6rVmYHPKPDnLB$gyCGWV7pd8qWz0nq0IcLJzMWi9IVAVe8kjTtQfUQu0I=','2023-03-22 14:33:26.959317',0,'Juan_01','Juan','Perez','juan@gmail.com',0,1,'2023-03-21 00:13:07.691684','18.227.394-7',3),(3,'pbkdf2_sha256$390000$omEZWgCs1gQrxouWi0UfYj$IOPX48w+OTFjWczX2TpBJGT9Fhn8hRZDt7kb0ZQYrDc=','2023-03-21 16:17:19.004479',0,'Matias_02','Matias','Prado','matias@gmail.com',0,1,'2023-03-21 02:10:59.558340','17.238.393-0',3),(4,'pbkdf2_sha256$390000$VILMPlfmb8YkgGXWVrmRzh$r7EU+GGcPW9+Ov4FWhOVtHTKlJOf43XJ7aDS28D/eLM=',NULL,0,'Benjamin_03','Benjamim','Cornejo','benjamin@gmail.com',0,1,'2023-03-21 02:13:05.953829','20.123.456-k',4),(5,'pbkdf2_sha256$390000$hwMWLaRGlSDkVuKMqfPNC1$IvAglpISQH7ykJuX/JHD2pPvByOOiwlmtG7m4QYet+8=',NULL,0,'Tomas_04','Tomas','Gutierrez','tomas@gmail.com',0,1,'2023-03-21 02:17:11.395323','18.234.564-1',4);
+INSERT INTO `app_usuario` VALUES (1,'pbkdf2_sha256$390000$omXzft2G7YimBuUU8MDqOc$z0MXB6Kl0kBU1B4f/xeLP8MZ1j5iBQI+GBYhDs2U1/8=','2023-03-28 16:07:51.070195',1,'adminmedi','','','josee.cornejo@gmail.com',1,1,'2023-03-27 12:07:39.588694','',NULL),(2,'pbkdf2_sha256$390000$mEdcslJlx6rVmYHPKPDnLB$gyCGWV7pd8qWz0nq0IcLJzMWi9IVAVe8kjTtQfUQu0I=','2023-03-22 14:33:26.959317',0,'Juan_01','Juan','Perez','juan@gmail.com',0,1,'2023-03-21 00:13:07.691684','18.227.394-7',3),(3,'pbkdf2_sha256$390000$omEZWgCs1gQrxouWi0UfYj$IOPX48w+OTFjWczX2TpBJGT9Fhn8hRZDt7kb0ZQYrDc=','2023-03-21 16:17:19.004479',0,'Matias_02','Matias','Prado','matias@gmail.com',0,1,'2023-03-21 02:10:59.558340','17.238.393-0',3),(4,'pbkdf2_sha256$390000$VILMPlfmb8YkgGXWVrmRzh$r7EU+GGcPW9+Ov4FWhOVtHTKlJOf43XJ7aDS28D/eLM=',NULL,0,'Benjamin_03','Benjamim','Cornejo','benjamin@gmail.com',0,1,'2023-03-21 02:13:05.953829','20.123.456-k',4),(5,'pbkdf2_sha256$390000$hwMWLaRGlSDkVuKMqfPNC1$IvAglpISQH7ykJuX/JHD2pPvByOOiwlmtG7m4QYet+8=',NULL,0,'Tomas_04','Tomas','Gutierrez','tomas@gmail.com',0,1,'2023-03-21 02:17:11.395323','18.234.564-1',4);
 /*!40000 ALTER TABLE `app_usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -906,7 +907,7 @@ CREATE TABLE `app_viaadminstracion` (
   `id_via_administracion` int(11) NOT NULL AUTO_INCREMENT,
   `nombre_via_administracion` varchar(100) NOT NULL,
   PRIMARY KEY (`id_via_administracion`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -915,7 +916,7 @@ CREATE TABLE `app_viaadminstracion` (
 
 LOCK TABLES `app_viaadminstracion` WRITE;
 /*!40000 ALTER TABLE `app_viaadminstracion` DISABLE KEYS */;
-INSERT INTO `app_viaadminstracion` VALUES (1,'Oral');
+INSERT INTO `app_viaadminstracion` VALUES (1,'Oral'),(2,'Rectal'),(3,'Endovenoso'),(4,'Intramuscular');
 /*!40000 ALTER TABLE `app_viaadminstracion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1022,7 +1023,7 @@ CREATE TABLE `django_admin_log` (
   KEY `django_admin_log_user_id_c564eba6_fk_app_usuario_id` (`user_id`),
   CONSTRAINT `django_admin_log_content_type_id_c4bce8eb_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
   CONSTRAINT `django_admin_log_user_id_c564eba6_fk_app_usuario_id` FOREIGN KEY (`user_id`) REFERENCES `app_usuario` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1031,7 +1032,7 @@ CREATE TABLE `django_admin_log` (
 
 LOCK TABLES `django_admin_log` WRITE;
 /*!40000 ALTER TABLE `django_admin_log` DISABLE KEYS */;
-INSERT INTO `django_admin_log` VALUES (1,'2023-03-27 12:13:11.510566','3','FD',2,'[{\"changed\": {\"fields\": [\"Logo\"]}}]',1,1);
+INSERT INTO `django_admin_log` VALUES (1,'2023-03-27 12:13:11.510566','3','FD',2,'[{\"changed\": {\"fields\": [\"Logo\"]}}]',1,1),(2,'2023-03-28 16:11:45.038995','2','PacienteReceta object (2)',1,'[{\"added\": {}}]',24,1),(3,'2023-03-28 16:13:09.773929','3','PacienteReceta object (3)',1,'[{\"added\": {}}]',24,1),(4,'2023-03-28 16:14:03.920203','4','PacienteReceta object (4)',1,'[{\"added\": {}}]',24,1),(5,'2023-03-28 16:18:20.085018','3','Daniela Arido Garrido',1,'[{\"added\": {}}]',12,1),(6,'2023-03-28 16:19:52.707108','4','Elsa de las Mercedes Carmona Arzua',1,'[{\"added\": {}}]',12,1),(7,'2023-03-28 16:20:33.636365','3','Daniela Arido Garrido Barriento',2,'[{\"changed\": {\"fields\": [\"Apellidos enfermera\", \"Direccion enfermera\", \"Id comuna\"]}}]',12,1),(8,'2023-03-28 16:20:48.322860','4','Elsa de las Mercedes Carmona Arzua',2,'[{\"changed\": {\"fields\": [\"Id comuna\"]}}]',12,1),(9,'2023-03-28 16:21:02.311679','2','Maria Angela Dibu Barrientos',2,'[{\"changed\": {\"fields\": [\"Id comuna\"]}}]',12,1),(10,'2023-03-28 16:21:35.727843','3','PacienteReceta object (3)',2,'[{\"changed\": {\"fields\": [\"Id enfermera\"]}}]',24,1),(11,'2023-03-28 16:21:42.774696','1','PacienteReceta object (1)',2,'[{\"changed\": {\"fields\": [\"Id enfermera\"]}}]',24,1),(12,'2023-03-28 16:23:08.858698','2','Rectal',1,'[{\"added\": {}}]',20,1),(13,'2023-03-28 16:23:16.123975','3','Endovenoso',1,'[{\"added\": {}}]',20,1),(14,'2023-03-28 16:23:30.045672','4','Intramuscular',1,'[{\"added\": {}}]',20,1),(15,'2023-03-28 16:26:25.164654','1','https://registrosanitario.ispch.gob.cl/Ficha.aspx?RegistroISP=F-11299/21',1,'[{\"added\": {}}]',28,1),(16,'2023-03-28 16:30:09.577213','2','https://registrosanitario.ispch.gob.cl/Ficha.aspx?RegistroISP=F-17253/18',1,'[{\"added\": {}}]',28,1);
 /*!40000 ALTER TABLE `django_admin_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1109,7 +1110,7 @@ CREATE TABLE `django_session` (
 
 LOCK TABLES `django_session` WRITE;
 /*!40000 ALTER TABLE `django_session` DISABLE KEYS */;
-INSERT INTO `django_session` VALUES ('k0ynwfdu5hj0r2m2abymib2sl7dlc15c','.eJxVjMEOwiAQRP-FsyGsFQoevfcbyC67SNXQpLQn47_bJj3oZQ7z3sxbRVyXEtcmcxxZXRWo029HmJ5Sd8APrPdJp6ku80h6V_RBmx4mltftcP8OCrayrT0bIymT6YTY9RkBrJEcLsZbD-hAuDPWhi0CefDJJXEBkdHRuUdQny_qTzf1:1pgnU6:1ftz306YaSJLwSJBTB_Wd9GYZYAMyH1uIov5rZJLm8s','2023-04-10 14:06:06.799169'),('rc8majfn08qvk36s0cns3furdt4ex9kf','.eJxVjMEOwiAQRP-FsyGsFQoevfcbyC67SNXQpLQn47_bJj3oZQ7z3sxbRVyXEtcmcxxZXRWo029HmJ5Sd8APrPdJp6ku80h6V_RBmx4mltftcP8OCrayrT0bIymT6YTY9RkBrJEcLsZbD-hAuDPWhi0CefDJJXEBkdHRuUdQny_qTzf1:1pgldl:VOavzGQRwUWRea6Pw3Rsp5hfLVFJ7Ia6RA94AwXl9b0','2023-04-10 12:07:57.721322');
+INSERT INTO `django_session` VALUES ('5zoq0uh4c5h3b070zxaauw8nqamh3he1','.eJxVjMEOwiAQRP-FsyGsFQoevfcbyC67SNXQpLQn47_bJj3oZQ7z3sxbRVyXEtcmcxxZXRWo029HmJ5Sd8APrPdJp6ku80h6V_RBmx4mltftcP8OCrayrT0bIymT6YTY9RkBrJEcLsZbD-hAuDPWhi0CefDJJXEBkdHRuUdQny_qTzf1:1phBrT:Fe0Eq0CsQyVy-qkzmdDFaqB5svISVD2S5xlGcYi2k24','2023-04-11 16:07:51.086753'),('k0ynwfdu5hj0r2m2abymib2sl7dlc15c','.eJxVjMEOwiAQRP-FsyGsFQoevfcbyC67SNXQpLQn47_bJj3oZQ7z3sxbRVyXEtcmcxxZXRWo029HmJ5Sd8APrPdJp6ku80h6V_RBmx4mltftcP8OCrayrT0bIymT6YTY9RkBrJEcLsZbD-hAuDPWhi0CefDJJXEBkdHRuUdQny_qTzf1:1pgnU6:1ftz306YaSJLwSJBTB_Wd9GYZYAMyH1uIov5rZJLm8s','2023-04-10 14:06:06.799169');
 /*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -1122,4 +1123,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-03-28 15:51:29
+-- Dump completed on 2023-03-28 19:24:23
