@@ -78,7 +78,7 @@ CREATE TABLE `admin_interface_theme` (
   `show_inlines_as_tabs` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `admin_interface_theme_name_30bda70f_uniq` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -87,7 +87,7 @@ CREATE TABLE `admin_interface_theme` (
 
 LOCK TABLES `admin_interface_theme` WRITE;
 /*!40000 ALTER TABLE `admin_interface_theme` DISABLE KEYS */;
-INSERT INTO `admin_interface_theme` VALUES (1,'Django',1,'Farmacia Digital Administración',1,'admin-interface/logo/1_lmhZ1xk.png',1,'#0B0B4B','#80EEF5','#4457B7','#FFFFFF','#B2E9F0','#168FB7','#FFFFFF','#FFFFFF','#C9F0DD',1,'#0D1A3C','#D8DAE6','#0C4B33','#0C3C26','#FFFFFF','#BA2121','#A41515','#FFFFFF',1,1,'#000000',1,'#FFFFFF',1,'admin-interface/favicon/Blue_Gradient_Modern_Simple_Pharmacy_Logo_vk0NyfS.png','0.3','Administrador Farmacia Digital',1,'#E74C3C',1,1,1,'code',1,0,0,'#FFFFCC','#FFFFFF',100,400,1,'default-select',1,0,0,0);
+INSERT INTO `admin_interface_theme` VALUES (1,'Django',0,'Administración de Django',1,'',1,'#0C4B33','#F5DD5D','#44B78B','#FFFFFF','#C9F0DD','#44B78B','#FFFFFF','#FFFFFF','#C9F0DD',1,'#0C3C26','#156641','#0C4B33','#0C3C26','#FFFFFF','#BA2121','#A41515','#FFFFFF',1,1,'#000000',1,'#FFFFFF',1,'','0.3','',1,'#E74C3C',1,1,1,'code',1,0,0,'#FFFFCC','#FFFFFF',100,400,1,'default-select',1,0,0,0),(3,'FD',1,'Farmacia Digital Administración',1,'admin-interface/logo/logo_HfynCdl.png',1,'#0B0B4B','#80EEF5','#4457B7','#FFFFFF','#B2E9F0','#168FB7','#FFFFFF','#FFFFFF','#C9F0DD',1,'#0D1A3C','#D8DAE6','#0C4B33','#0C3C26','#FFFFFF','#BA2121','#A41515','#FFFFFF',1,1,'#000000',1,'#FFFFFF',1,'admin-interface/favicon/Blue_Gradient_Modern_Simple_Pharmacy_Logo_vk0NyfS.png','0.3','Administrador Farmacia Digital',1,'#E74C3C',1,1,1,'code',1,0,0,'#FFFFCC','#FFFFFF',100,400,1,'default-select',1,0,0,0);
 /*!40000 ALTER TABLE `admin_interface_theme` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -195,6 +195,39 @@ CREATE TABLE `app_diabetes` (
 LOCK TABLES `app_diabetes` WRITE;
 /*!40000 ALTER TABLE `app_diabetes` DISABLE KEYS */;
 /*!40000 ALTER TABLE `app_diabetes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `app_enfermera`
+--
+
+DROP TABLE IF EXISTS `app_enfermera`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `app_enfermera` (
+  `id_enfermera` int(11) NOT NULL AUTO_INCREMENT,
+  `nombres_enfermera` varchar(200) NOT NULL,
+  `apellidos_enfermera` varchar(200) NOT NULL,
+  `direccion_enfermera` varchar(200) NOT NULL,
+  `celular_usuario` int(11) NOT NULL,
+  `id_TipoUsuario_id` int(11) DEFAULT NULL,
+  `id_comuna_id` int(11) NOT NULL,
+  PRIMARY KEY (`id_enfermera`),
+  KEY `app_enfermera_id_TipoUsuario_id_37bdc3fd_fk_app_tipo_` (`id_TipoUsuario_id`),
+  KEY `app_enfermera_id_comuna_id_b11cc78d_fk_app_comuna_id_comuna` (`id_comuna_id`),
+  CONSTRAINT `app_enfermera_id_TipoUsuario_id_37bdc3fd_fk_app_tipo_` FOREIGN KEY (`id_TipoUsuario_id`) REFERENCES `app_tipo_usuario` (`id_TipoUsuario`),
+  CONSTRAINT `app_enfermera_id_comuna_id_b11cc78d_fk_app_comuna_id_comuna` FOREIGN KEY (`id_comuna_id`) REFERENCES `app_comuna` (`id_comuna`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `app_enfermera`
+--
+
+LOCK TABLES `app_enfermera` WRITE;
+/*!40000 ALTER TABLE `app_enfermera` DISABLE KEYS */;
+INSERT INTO `app_enfermera` VALUES (2,'Maria Angela','Dibu Barrientos','maria.db@gmail.com',964446724,7,13);
+/*!40000 ALTER TABLE `app_enfermera` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -357,7 +390,7 @@ CREATE TABLE `app_laboratorio` (
   `id_laboratorio` int(11) NOT NULL AUTO_INCREMENT,
   `nombre_laboratorio` varchar(100) NOT NULL,
   PRIMARY KEY (`id_laboratorio`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -366,7 +399,7 @@ CREATE TABLE `app_laboratorio` (
 
 LOCK TABLES `app_laboratorio` WRITE;
 /*!40000 ALTER TABLE `app_laboratorio` DISABLE KEYS */;
-INSERT INTO `app_laboratorio` VALUES (1,'Andromaco'),(2,'Roche'),(3,'MintLab');
+INSERT INTO `app_laboratorio` VALUES (1,'Andromaco'),(2,'Roche'),(3,'MintLab'),(4,'Abbott'),(5,'Lundbeck');
 /*!40000 ALTER TABLE `app_laboratorio` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -397,6 +430,31 @@ LOCK TABLES `app_medicamentofichatecnica` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `app_medicamentofraccionamiento`
+--
+
+DROP TABLE IF EXISTS `app_medicamentofraccionamiento`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `app_medicamentofraccionamiento` (
+  `id_fraccion` int(11) NOT NULL AUTO_INCREMENT,
+  `fraccion` varchar(4) NOT NULL,
+  `descripcion_fraccion` varchar(200) NOT NULL,
+  PRIMARY KEY (`id_fraccion`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `app_medicamentofraccionamiento`
+--
+
+LOCK TABLES `app_medicamentofraccionamiento` WRITE;
+/*!40000 ALTER TABLE `app_medicamentofraccionamiento` DISABLE KEYS */;
+INSERT INTO `app_medicamentofraccionamiento` VALUES (1,'1/4','Un cuarto de pastilla'),(2,'1/2','Media pastilla'),(3,'3/4','Tres cuartos de pastilla'),(4,'1','Una pastilla entera');
+/*!40000 ALTER TABLE `app_medicamentofraccionamiento` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `app_medicamentos`
 --
 
@@ -407,10 +465,8 @@ CREATE TABLE `app_medicamentos` (
   `id_medicamento` int(11) NOT NULL AUTO_INCREMENT,
   `nombre_comercial` varchar(100) NOT NULL,
   `gramaje` varchar(50) NOT NULL,
-  `cantidad` int(11) NOT NULL,
-  `presentacion` varchar(100) NOT NULL,
-  `lote` varchar(200) NOT NULL,
-  `fecha_vencimento` date NOT NULL,
+  `cantidad_stock` int(11) NOT NULL,
+  `presentacion_medicamento` varchar(100) NOT NULL,
   `id_laboratorio_id` int(11) NOT NULL,
   `id_principio_activo_id` int(11) NOT NULL,
   `id_via_administracion_id` int(11) NOT NULL,
@@ -421,7 +477,7 @@ CREATE TABLE `app_medicamentos` (
   CONSTRAINT `app_medicamentos_id_laboratorio_id_4a33a7ca_fk_app_labor` FOREIGN KEY (`id_laboratorio_id`) REFERENCES `app_laboratorio` (`id_laboratorio`),
   CONSTRAINT `app_medicamentos_id_principio_activo__14113581_fk_app_princ` FOREIGN KEY (`id_principio_activo_id`) REFERENCES `app_principioactivo` (`id_principio_activo`),
   CONSTRAINT `app_medicamentos_id_via_administracio_4ca8523e_fk_app_viaad` FOREIGN KEY (`id_via_administracion_id`) REFERENCES `app_viaadminstracion` (`id_via_administracion`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -430,7 +486,7 @@ CREATE TABLE `app_medicamentos` (
 
 LOCK TABLES `app_medicamentos` WRITE;
 /*!40000 ALTER TABLE `app_medicamentos` DISABLE KEYS */;
-INSERT INTO `app_medicamentos` VALUES (1,'Prolopa','200mg / 50mg',15,'30 comprimidos','992349567','2026-01-01',2,2,1),(2,'Citalopram','20mg',10,'30 comprimidos','112239943','2025-07-11',3,3,1),(3,'Levofamil','250mg / 25mg',15,'30 comprimidos','2345025642','2025-06-09',1,1,1);
+INSERT INTO `app_medicamentos` VALUES (1,'Levofamil','200/50 mg',13,'30 Comprimidos',1,1,1),(2,'Citalopram','20mg',20,'30 Comprimidos',3,3,1),(3,'Prolopa','200 mg/50 mg',10,'30 Comprimidos',2,2,1),(4,'Prolopa®HBS','100 mg/ 25 mg',31,'30 Cápsulas',2,2,1),(5,'Prolopa®Dispersable','100 mg/ 25 mg',20,'30 Comprimidos Dispersables',2,2,1),(6,'Cipramil®','20mg',30,'28 Comprimidos',5,3,1);
 /*!40000 ALTER TABLE `app_medicamentos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -547,18 +603,30 @@ DROP TABLE IF EXISTS `app_pacientereceta`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `app_pacientereceta` (
   `id_receta_usuario` int(11) NOT NULL AUTO_INCREMENT,
-  `timestamp` date NOT NULL,
-  `tiempo_tratamiento` varchar(100) NOT NULL,
-  `frecuencia_dosis` varchar(100) NOT NULL,
+  `fecha_receta` date NOT NULL,
+  `tiempo_tratamiento_dias` varchar(100) NOT NULL,
+  `frecuencia_dosis_diaria` varchar(100) NOT NULL,
+  `horario_1` time(6) NOT NULL,
+  `horario_2` time(6) DEFAULT NULL,
+  `horario_3` time(6) DEFAULT NULL,
+  `horario_4` time(6) DEFAULT NULL,
+  `horario_5` time(6) DEFAULT NULL,
+  `horario_6` time(6) DEFAULT NULL,
   `descripcion` longtext NOT NULL,
-  `id_medicamento_id` int(11) NOT NULL,
-  `id_usuario_id` int(11) NOT NULL,
+  `id_enfermera_id` int(11) DEFAULT NULL,
+  `nombre_comercial_id` int(11) DEFAULT NULL,
+  `nombres_paciente_id` bigint(20) DEFAULT NULL,
+  `fracionamiento_1_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_receta_usuario`),
-  KEY `app_pacientereceta_id_medicamento_id_3e3dce5f_fk_app_medic` (`id_medicamento_id`),
-  KEY `app_pacientereceta_id_usuario_id_e6e78df9_fk_app_usuar` (`id_usuario_id`),
-  CONSTRAINT `app_pacientereceta_id_medicamento_id_3e3dce5f_fk_app_medic` FOREIGN KEY (`id_medicamento_id`) REFERENCES `app_medicamentos` (`id_medicamento`),
-  CONSTRAINT `app_pacientereceta_id_usuario_id_e6e78df9_fk_app_usuar` FOREIGN KEY (`id_usuario_id`) REFERENCES `app_usuarioficha` (`id_usuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  KEY `app_pacientereceta_id_enfermera_id_3218726e_fk_app_enfer` (`id_enfermera_id`),
+  KEY `app_pacientereceta_nombre_comercial_id_7806ab36_fk_app_medic` (`nombre_comercial_id`),
+  KEY `app_pacientereceta_nombres_paciente_id_70d2bbbc_fk_app_usuar` (`nombres_paciente_id`),
+  KEY `app_pacientereceta_fracionamiento_1_id_04c7e471_fk_app_medic` (`fracionamiento_1_id`),
+  CONSTRAINT `app_pacientereceta_fracionamiento_1_id_04c7e471_fk_app_medic` FOREIGN KEY (`fracionamiento_1_id`) REFERENCES `app_medicamentofraccionamiento` (`id_fraccion`),
+  CONSTRAINT `app_pacientereceta_id_enfermera_id_3218726e_fk_app_enfer` FOREIGN KEY (`id_enfermera_id`) REFERENCES `app_enfermera` (`id_enfermera`),
+  CONSTRAINT `app_pacientereceta_nombre_comercial_id_7806ab36_fk_app_medic` FOREIGN KEY (`nombre_comercial_id`) REFERENCES `app_medicamentos` (`id_medicamento`),
+  CONSTRAINT `app_pacientereceta_nombres_paciente_id_70d2bbbc_fk_app_usuar` FOREIGN KEY (`nombres_paciente_id`) REFERENCES `app_usuario` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -567,6 +635,7 @@ CREATE TABLE `app_pacientereceta` (
 
 LOCK TABLES `app_pacientereceta` WRITE;
 /*!40000 ALTER TABLE `app_pacientereceta` DISABLE KEYS */;
+INSERT INTO `app_pacientereceta` VALUES (1,'2023-03-28','15 dias','2 comprimidos','12:05:28.000000',NULL,NULL,NULL,NULL,NULL,'Tomar este medicamento después de la primera comida del día.',2,1,2,2);
 /*!40000 ALTER TABLE `app_pacientereceta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -581,7 +650,7 @@ CREATE TABLE `app_principioactivo` (
   `id_principio_activo` int(11) NOT NULL AUTO_INCREMENT,
   `nombre_princio_activo` varchar(100) NOT NULL,
   PRIMARY KEY (`id_principio_activo`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -590,7 +659,7 @@ CREATE TABLE `app_principioactivo` (
 
 LOCK TABLES `app_principioactivo` WRITE;
 /*!40000 ALTER TABLE `app_principioactivo` DISABLE KEYS */;
-INSERT INTO `app_principioactivo` VALUES (1,'Levodopa+Carbidopa'),(2,'Levadopa+Benserazida'),(3,'Citalopram');
+INSERT INTO `app_principioactivo` VALUES (1,'Levodopa+Carbidopa'),(2,'Levadopa+Benserazida'),(3,'Citalopram'),(4,'Pramipexol');
 /*!40000 ALTER TABLE `app_principioactivo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -682,7 +751,7 @@ CREATE TABLE `app_tipo_usuario` (
   `id_TipoUsuario` int(11) NOT NULL AUTO_INCREMENT,
   `nombre_tipo_usuario` varchar(100) NOT NULL,
   PRIMARY KEY (`id_TipoUsuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -691,7 +760,7 @@ CREATE TABLE `app_tipo_usuario` (
 
 LOCK TABLES `app_tipo_usuario` WRITE;
 /*!40000 ALTER TABLE `app_tipo_usuario` DISABLE KEYS */;
-INSERT INTO `app_tipo_usuario` VALUES (1,'Admin'),(2,'Laboratorio'),(3,'Paciente'),(4,'Familiar'),(5,'QuimicoFarmaceutico'),(6,'CESFAM');
+INSERT INTO `app_tipo_usuario` VALUES (2,'Laboratorio'),(3,'Paciente'),(4,'Familiar'),(5,'QuimicoFarmaceutico'),(6,'CESFAM'),(7,'Enfermera');
 /*!40000 ALTER TABLE `app_tipo_usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -729,7 +798,7 @@ CREATE TABLE `app_usuario` (
 
 LOCK TABLES `app_usuario` WRITE;
 /*!40000 ALTER TABLE `app_usuario` DISABLE KEYS */;
-INSERT INTO `app_usuario` VALUES (1,'pbkdf2_sha256$390000$hxuVZh1xhY7tvodJ45vveP$sP+j4g42v1mZrIUQtYhvMKBFcnwHa438dl//3MhvJyo=','2023-03-22 14:33:32.653074',1,'adminmedi','','','josee.cornejo@gmail.com',1,1,'2023-03-16 05:56:42.038695','19.226.261-5',1),(2,'pbkdf2_sha256$390000$mEdcslJlx6rVmYHPKPDnLB$gyCGWV7pd8qWz0nq0IcLJzMWi9IVAVe8kjTtQfUQu0I=','2023-03-22 14:33:26.959317',0,'Juan_01','Juan','Perez','juan@gmail.com',0,1,'2023-03-21 00:13:07.691684','18.227.394-7',3),(3,'pbkdf2_sha256$390000$omEZWgCs1gQrxouWi0UfYj$IOPX48w+OTFjWczX2TpBJGT9Fhn8hRZDt7kb0ZQYrDc=','2023-03-21 16:17:19.004479',0,'Matias_02','Matias','Prado','matias@gmail.com',0,1,'2023-03-21 02:10:59.558340','17.238.393-0',3),(4,'pbkdf2_sha256$390000$VILMPlfmb8YkgGXWVrmRzh$r7EU+GGcPW9+Ov4FWhOVtHTKlJOf43XJ7aDS28D/eLM=',NULL,0,'Benjamin_03','Benjamim','Cornejo','benjamin@gmail.com',0,1,'2023-03-21 02:13:05.953829','20.123.456-k',4),(5,'pbkdf2_sha256$390000$hwMWLaRGlSDkVuKMqfPNC1$IvAglpISQH7ykJuX/JHD2pPvByOOiwlmtG7m4QYet+8=',NULL,0,'Tomas_04','Tomas','Gutierrez','tomas@gmail.com',0,1,'2023-03-21 02:17:11.395323','18.234.564-1',4);
+INSERT INTO `app_usuario` VALUES (1,'pbkdf2_sha256$390000$omXzft2G7YimBuUU8MDqOc$z0MXB6Kl0kBU1B4f/xeLP8MZ1j5iBQI+GBYhDs2U1/8=','2023-03-27 14:06:06.790643',1,'adminmedi','','','josee.cornejo@gmail.com',1,1,'2023-03-27 12:07:39.588694','',NULL),(2,'pbkdf2_sha256$390000$mEdcslJlx6rVmYHPKPDnLB$gyCGWV7pd8qWz0nq0IcLJzMWi9IVAVe8kjTtQfUQu0I=','2023-03-22 14:33:26.959317',0,'Juan_01','Juan','Perez','juan@gmail.com',0,1,'2023-03-21 00:13:07.691684','18.227.394-7',3),(3,'pbkdf2_sha256$390000$omEZWgCs1gQrxouWi0UfYj$IOPX48w+OTFjWczX2TpBJGT9Fhn8hRZDt7kb0ZQYrDc=','2023-03-21 16:17:19.004479',0,'Matias_02','Matias','Prado','matias@gmail.com',0,1,'2023-03-21 02:10:59.558340','17.238.393-0',3),(4,'pbkdf2_sha256$390000$VILMPlfmb8YkgGXWVrmRzh$r7EU+GGcPW9+Ov4FWhOVtHTKlJOf43XJ7aDS28D/eLM=',NULL,0,'Benjamin_03','Benjamim','Cornejo','benjamin@gmail.com',0,1,'2023-03-21 02:13:05.953829','20.123.456-k',4),(5,'pbkdf2_sha256$390000$hwMWLaRGlSDkVuKMqfPNC1$IvAglpISQH7ykJuX/JHD2pPvByOOiwlmtG7m4QYet+8=',NULL,0,'Tomas_04','Tomas','Gutierrez','tomas@gmail.com',0,1,'2023-03-21 02:17:11.395323','18.234.564-1',4);
 /*!40000 ALTER TABLE `app_usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -749,7 +818,7 @@ CREATE TABLE `app_usuario_groups` (
   KEY `app_usuario_groups_group_id_b38b0d6e_fk_auth_group_id` (`group_id`),
   CONSTRAINT `app_usuario_groups_group_id_b38b0d6e_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`),
   CONSTRAINT `app_usuario_groups_usuario_id_691971dd_fk_app_usuario_id` FOREIGN KEY (`usuario_id`) REFERENCES `app_usuario` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -758,7 +827,6 @@ CREATE TABLE `app_usuario_groups` (
 
 LOCK TABLES `app_usuario_groups` WRITE;
 /*!40000 ALTER TABLE `app_usuario_groups` DISABLE KEYS */;
-INSERT INTO `app_usuario_groups` VALUES (1,2,1),(2,3,1),(3,4,1),(4,5,1);
 /*!40000 ALTER TABLE `app_usuario_groups` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -920,7 +988,7 @@ CREATE TABLE `auth_permission` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `auth_permission_content_type_id_codename_01ab375a_uniq` (`content_type_id`,`codename`),
   CONSTRAINT `auth_permission_content_type_id_2f476e4b_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=121 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=129 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -929,7 +997,7 @@ CREATE TABLE `auth_permission` (
 
 LOCK TABLES `auth_permission` WRITE;
 /*!40000 ALTER TABLE `auth_permission` DISABLE KEYS */;
-INSERT INTO `auth_permission` VALUES (1,'Can add Theme',1,'add_theme'),(2,'Can change Theme',1,'change_theme'),(3,'Can delete Theme',1,'delete_theme'),(4,'Can view Theme',1,'view_theme'),(5,'Can add log entry',2,'add_logentry'),(6,'Can change log entry',2,'change_logentry'),(7,'Can delete log entry',2,'delete_logentry'),(8,'Can view log entry',2,'view_logentry'),(9,'Can add permission',3,'add_permission'),(10,'Can change permission',3,'change_permission'),(11,'Can delete permission',3,'delete_permission'),(12,'Can view permission',3,'view_permission'),(13,'Can add group',4,'add_group'),(14,'Can change group',4,'change_group'),(15,'Can delete group',4,'delete_group'),(16,'Can view group',4,'view_group'),(17,'Can add content type',5,'add_contenttype'),(18,'Can change content type',5,'change_contenttype'),(19,'Can delete content type',5,'delete_contenttype'),(20,'Can view content type',5,'view_contenttype'),(21,'Can add session',6,'add_session'),(22,'Can change session',6,'change_session'),(23,'Can delete session',6,'delete_session'),(24,'Can view session',6,'view_session'),(25,'Can add cesfam',7,'add_cesfam'),(26,'Can change cesfam',7,'change_cesfam'),(27,'Can delete cesfam',7,'delete_cesfam'),(28,'Can view cesfam',7,'view_cesfam'),(29,'Can add comuna',8,'add_comuna'),(30,'Can change comuna',8,'change_comuna'),(31,'Can delete comuna',8,'delete_comuna'),(32,'Can view comuna',8,'view_comuna'),(33,'Can add contacto',9,'add_contacto'),(34,'Can change contacto',9,'change_contacto'),(35,'Can delete contacto',9,'delete_contacto'),(36,'Can view contacto',9,'view_contacto'),(37,'Can add diabetes',10,'add_diabetes'),(38,'Can change diabetes',10,'change_diabetes'),(39,'Can delete diabetes',10,'delete_diabetes'),(40,'Can view diabetes',10,'view_diabetes'),(41,'Can add farmacia',11,'add_farmacia'),(42,'Can change farmacia',11,'change_farmacia'),(43,'Can delete farmacia',11,'delete_farmacia'),(44,'Can view farmacia',11,'view_farmacia'),(45,'Can add hipertension',12,'add_hipertension'),(46,'Can change hipertension',12,'change_hipertension'),(47,'Can delete hipertension',12,'delete_hipertension'),(48,'Can view hipertension',12,'view_hipertension'),(49,'Can add laboratorio',13,'add_laboratorio'),(50,'Can change laboratorio',13,'change_laboratorio'),(51,'Can delete laboratorio',13,'delete_laboratorio'),(52,'Can view laboratorio',13,'view_laboratorio'),(53,'Can add medicamentos',14,'add_medicamentos'),(54,'Can change medicamentos',14,'change_medicamentos'),(55,'Can delete medicamentos',14,'delete_medicamentos'),(56,'Can view medicamentos',14,'view_medicamentos'),(57,'Can add principio activo',15,'add_principioactivo'),(58,'Can change principio activo',15,'change_principioactivo'),(59,'Can delete principio activo',15,'delete_principioactivo'),(60,'Can view principio activo',15,'view_principioactivo'),(61,'Can add region',16,'add_region'),(62,'Can change region',16,'change_region'),(63,'Can delete region',16,'delete_region'),(64,'Can view region',16,'view_region'),(65,'Can add tipo_usuario',17,'add_tipo_usuario'),(66,'Can change tipo_usuario',17,'change_tipo_usuario'),(67,'Can delete tipo_usuario',17,'delete_tipo_usuario'),(68,'Can view tipo_usuario',17,'view_tipo_usuario'),(69,'Can add via adminstracion',18,'add_viaadminstracion'),(70,'Can change via adminstracion',18,'change_viaadminstracion'),(71,'Can delete via adminstracion',18,'delete_viaadminstracion'),(72,'Can view via adminstracion',18,'view_viaadminstracion'),(73,'Can add usuario ficha',19,'add_usuarioficha'),(74,'Can change usuario ficha',19,'change_usuarioficha'),(75,'Can delete usuario ficha',19,'delete_usuarioficha'),(76,'Can view usuario ficha',19,'view_usuarioficha'),(77,'Can add quimico farmaceutico encargado',20,'add_quimicofarmaceuticoencargado'),(78,'Can change quimico farmaceutico encargado',20,'change_quimicofarmaceuticoencargado'),(79,'Can delete quimico farmaceutico encargado',20,'delete_quimicofarmaceuticoencargado'),(80,'Can view quimico farmaceutico encargado',20,'view_quimicofarmaceuticoencargado'),(81,'Can add provincia',21,'add_provincia'),(82,'Can change provincia',21,'change_provincia'),(83,'Can delete provincia',21,'delete_provincia'),(84,'Can view provincia',21,'view_provincia'),(85,'Can add paciente receta',22,'add_pacientereceta'),(86,'Can change paciente receta',22,'change_pacientereceta'),(87,'Can delete paciente receta',22,'delete_pacientereceta'),(88,'Can view paciente receta',22,'view_pacientereceta'),(89,'Can add paciente ficha clinica',23,'add_pacientefichaclinica'),(90,'Can change paciente ficha clinica',23,'change_pacientefichaclinica'),(91,'Can delete paciente ficha clinica',23,'delete_pacientefichaclinica'),(92,'Can view paciente ficha clinica',23,'view_pacientefichaclinica'),(93,'Can add paciente familiar',24,'add_pacientefamiliar'),(94,'Can change paciente familiar',24,'change_pacientefamiliar'),(95,'Can delete paciente familiar',24,'delete_pacientefamiliar'),(96,'Can view paciente familiar',24,'view_pacientefamiliar'),(97,'Can add medicamentos descuento',25,'add_medicamentosdescuento'),(98,'Can change medicamentos descuento',25,'change_medicamentosdescuento'),(99,'Can delete medicamentos descuento',25,'delete_medicamentosdescuento'),(100,'Can view medicamentos descuento',25,'view_medicamentosdescuento'),(101,'Can add medicamento ficha tecnica',26,'add_medicamentofichatecnica'),(102,'Can change medicamento ficha tecnica',26,'change_medicamentofichatecnica'),(103,'Can delete medicamento ficha tecnica',26,'delete_medicamentofichatecnica'),(104,'Can view medicamento ficha tecnica',26,'view_medicamentofichatecnica'),(105,'Can add farmacia sucursal',27,'add_farmaciasucursal'),(106,'Can change farmacia sucursal',27,'change_farmaciasucursal'),(107,'Can delete farmacia sucursal',27,'delete_farmaciasucursal'),(108,'Can view farmacia sucursal',27,'view_farmaciasucursal'),(109,'Can add farmacia cesfam',28,'add_farmaciacesfam'),(110,'Can change farmacia cesfam',28,'change_farmaciacesfam'),(111,'Can delete farmacia cesfam',28,'delete_farmaciacesfam'),(112,'Can view farmacia cesfam',28,'view_farmaciacesfam'),(113,'Can add familiar paciente usuario',29,'add_familiarpacienteusuario'),(114,'Can change familiar paciente usuario',29,'change_familiarpacienteusuario'),(115,'Can delete familiar paciente usuario',29,'delete_familiarpacienteusuario'),(116,'Can view familiar paciente usuario',29,'view_familiarpacienteusuario'),(117,'Can add user',30,'add_usuario'),(118,'Can change user',30,'change_usuario'),(119,'Can delete user',30,'delete_usuario'),(120,'Can view user',30,'view_usuario');
+INSERT INTO `auth_permission` VALUES (1,'Can add Theme',1,'add_theme'),(2,'Can change Theme',1,'change_theme'),(3,'Can delete Theme',1,'delete_theme'),(4,'Can view Theme',1,'view_theme'),(5,'Can add log entry',2,'add_logentry'),(6,'Can change log entry',2,'change_logentry'),(7,'Can delete log entry',2,'delete_logentry'),(8,'Can view log entry',2,'view_logentry'),(9,'Can add permission',3,'add_permission'),(10,'Can change permission',3,'change_permission'),(11,'Can delete permission',3,'delete_permission'),(12,'Can view permission',3,'view_permission'),(13,'Can add group',4,'add_group'),(14,'Can change group',4,'change_group'),(15,'Can delete group',4,'delete_group'),(16,'Can view group',4,'view_group'),(17,'Can add content type',5,'add_contenttype'),(18,'Can change content type',5,'change_contenttype'),(19,'Can delete content type',5,'delete_contenttype'),(20,'Can view content type',5,'view_contenttype'),(21,'Can add session',6,'add_session'),(22,'Can change session',6,'change_session'),(23,'Can delete session',6,'delete_session'),(24,'Can view session',6,'view_session'),(25,'Can add user',7,'add_usuario'),(26,'Can change user',7,'change_usuario'),(27,'Can delete user',7,'delete_usuario'),(28,'Can view user',7,'view_usuario'),(29,'Can add cesfam',8,'add_cesfam'),(30,'Can change cesfam',8,'change_cesfam'),(31,'Can delete cesfam',8,'delete_cesfam'),(32,'Can view cesfam',8,'view_cesfam'),(33,'Can add comuna',9,'add_comuna'),(34,'Can change comuna',9,'change_comuna'),(35,'Can delete comuna',9,'delete_comuna'),(36,'Can view comuna',9,'view_comuna'),(37,'Can add contacto',10,'add_contacto'),(38,'Can change contacto',10,'change_contacto'),(39,'Can delete contacto',10,'delete_contacto'),(40,'Can view contacto',10,'view_contacto'),(41,'Can add diabetes',11,'add_diabetes'),(42,'Can change diabetes',11,'change_diabetes'),(43,'Can delete diabetes',11,'delete_diabetes'),(44,'Can view diabetes',11,'view_diabetes'),(45,'Can add enfermera',12,'add_enfermera'),(46,'Can change enfermera',12,'change_enfermera'),(47,'Can delete enfermera',12,'delete_enfermera'),(48,'Can view enfermera',12,'view_enfermera'),(49,'Can add farmacia',13,'add_farmacia'),(50,'Can change farmacia',13,'change_farmacia'),(51,'Can delete farmacia',13,'delete_farmacia'),(52,'Can view farmacia',13,'view_farmacia'),(53,'Can add hipertension',14,'add_hipertension'),(54,'Can change hipertension',14,'change_hipertension'),(55,'Can delete hipertension',14,'delete_hipertension'),(56,'Can view hipertension',14,'view_hipertension'),(57,'Can add laboratorio',15,'add_laboratorio'),(58,'Can change laboratorio',15,'change_laboratorio'),(59,'Can delete laboratorio',15,'delete_laboratorio'),(60,'Can view laboratorio',15,'view_laboratorio'),(61,'Can add medicamentos',16,'add_medicamentos'),(62,'Can change medicamentos',16,'change_medicamentos'),(63,'Can delete medicamentos',16,'delete_medicamentos'),(64,'Can view medicamentos',16,'view_medicamentos'),(65,'Can add principio activo',17,'add_principioactivo'),(66,'Can change principio activo',17,'change_principioactivo'),(67,'Can delete principio activo',17,'delete_principioactivo'),(68,'Can view principio activo',17,'view_principioactivo'),(69,'Can add region',18,'add_region'),(70,'Can change region',18,'change_region'),(71,'Can delete region',18,'delete_region'),(72,'Can view region',18,'view_region'),(73,'Can add tipo_usuario',19,'add_tipo_usuario'),(74,'Can change tipo_usuario',19,'change_tipo_usuario'),(75,'Can delete tipo_usuario',19,'delete_tipo_usuario'),(76,'Can view tipo_usuario',19,'view_tipo_usuario'),(77,'Can add via adminstracion',20,'add_viaadminstracion'),(78,'Can change via adminstracion',20,'change_viaadminstracion'),(79,'Can delete via adminstracion',20,'delete_viaadminstracion'),(80,'Can view via adminstracion',20,'view_viaadminstracion'),(81,'Can add usuario ficha',21,'add_usuarioficha'),(82,'Can change usuario ficha',21,'change_usuarioficha'),(83,'Can delete usuario ficha',21,'delete_usuarioficha'),(84,'Can view usuario ficha',21,'view_usuarioficha'),(85,'Can add quimico farmaceutico encargado',22,'add_quimicofarmaceuticoencargado'),(86,'Can change quimico farmaceutico encargado',22,'change_quimicofarmaceuticoencargado'),(87,'Can delete quimico farmaceutico encargado',22,'delete_quimicofarmaceuticoencargado'),(88,'Can view quimico farmaceutico encargado',22,'view_quimicofarmaceuticoencargado'),(89,'Can add provincia',23,'add_provincia'),(90,'Can change provincia',23,'change_provincia'),(91,'Can delete provincia',23,'delete_provincia'),(92,'Can view provincia',23,'view_provincia'),(93,'Can add paciente receta',24,'add_pacientereceta'),(94,'Can change paciente receta',24,'change_pacientereceta'),(95,'Can delete paciente receta',24,'delete_pacientereceta'),(96,'Can view paciente receta',24,'view_pacientereceta'),(97,'Can add paciente ficha clinica',25,'add_pacientefichaclinica'),(98,'Can change paciente ficha clinica',25,'change_pacientefichaclinica'),(99,'Can delete paciente ficha clinica',25,'delete_pacientefichaclinica'),(100,'Can view paciente ficha clinica',25,'view_pacientefichaclinica'),(101,'Can add paciente familiar',26,'add_pacientefamiliar'),(102,'Can change paciente familiar',26,'change_pacientefamiliar'),(103,'Can delete paciente familiar',26,'delete_pacientefamiliar'),(104,'Can view paciente familiar',26,'view_pacientefamiliar'),(105,'Can add medicamentos descuento',27,'add_medicamentosdescuento'),(106,'Can change medicamentos descuento',27,'change_medicamentosdescuento'),(107,'Can delete medicamentos descuento',27,'delete_medicamentosdescuento'),(108,'Can view medicamentos descuento',27,'view_medicamentosdescuento'),(109,'Can add medicamento ficha tecnica',28,'add_medicamentofichatecnica'),(110,'Can change medicamento ficha tecnica',28,'change_medicamentofichatecnica'),(111,'Can delete medicamento ficha tecnica',28,'delete_medicamentofichatecnica'),(112,'Can view medicamento ficha tecnica',28,'view_medicamentofichatecnica'),(113,'Can add farmacia sucursal',29,'add_farmaciasucursal'),(114,'Can change farmacia sucursal',29,'change_farmaciasucursal'),(115,'Can delete farmacia sucursal',29,'delete_farmaciasucursal'),(116,'Can view farmacia sucursal',29,'view_farmaciasucursal'),(117,'Can add farmacia cesfam',30,'add_farmaciacesfam'),(118,'Can change farmacia cesfam',30,'change_farmaciacesfam'),(119,'Can delete farmacia cesfam',30,'delete_farmaciacesfam'),(120,'Can view farmacia cesfam',30,'view_farmaciacesfam'),(121,'Can add familiar paciente usuario',31,'add_familiarpacienteusuario'),(122,'Can change familiar paciente usuario',31,'change_familiarpacienteusuario'),(123,'Can delete familiar paciente usuario',31,'delete_familiarpacienteusuario'),(124,'Can view familiar paciente usuario',31,'view_familiarpacienteusuario'),(125,'Can add medicamento fraccionamiento',32,'add_medicamentofraccionamiento'),(126,'Can change medicamento fraccionamiento',32,'change_medicamentofraccionamiento'),(127,'Can delete medicamento fraccionamiento',32,'delete_medicamentofraccionamiento'),(128,'Can view medicamento fraccionamiento',32,'view_medicamentofraccionamiento');
 /*!40000 ALTER TABLE `auth_permission` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -954,7 +1022,7 @@ CREATE TABLE `django_admin_log` (
   KEY `django_admin_log_user_id_c564eba6_fk_app_usuario_id` (`user_id`),
   CONSTRAINT `django_admin_log_content_type_id_c4bce8eb_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
   CONSTRAINT `django_admin_log_user_id_c564eba6_fk_app_usuario_id` FOREIGN KEY (`user_id`) REFERENCES `app_usuario` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -963,7 +1031,7 @@ CREATE TABLE `django_admin_log` (
 
 LOCK TABLES `django_admin_log` WRITE;
 /*!40000 ALTER TABLE `django_admin_log` DISABLE KEYS */;
-INSERT INTO `django_admin_log` VALUES (1,'2023-03-16 06:01:50.876744','1','Django',2,'[{\"changed\": {\"fields\": [\"Name\", \"Logo\", \"Favicon\", \"Title\", \"Color\", \"Background color\", \"Text color\", \"Link hover color\", \"Background color\", \"Link color\", \"Link hover color\"]}}]',1,1),(2,'2023-03-21 00:11:55.556524','1','19.226.261-5',2,'[{\"changed\": {\"fields\": [\"Id TipoUsuario\", \"Rut usuario\"]}}]',30,1),(3,'2023-03-21 00:13:08.168483','2','18.227.394-7',1,'[{\"added\": {}}]',30,1),(4,'2023-03-21 00:26:56.300281','2','18.227.394-7',2,'[]',30,1),(5,'2023-03-21 00:39:03.097248','1','Lector',1,'[{\"added\": {}}]',4,1),(6,'2023-03-21 00:41:27.082025','2','18.227.394-7',2,'[{\"changed\": {\"fields\": [\"Groups\"]}}]',30,1),(7,'2023-03-21 02:10:59.808094','3','17.238.393-0',1,'[{\"added\": {}}]',30,1),(8,'2023-03-21 02:11:13.052039','3','17.238.393-0',2,'[{\"changed\": {\"fields\": [\"Groups\"]}}]',30,1),(9,'2023-03-21 02:13:06.221140','4','20.123.456-k',1,'[{\"added\": {}}]',30,1),(10,'2023-03-21 02:13:11.253632','4','20.123.456-k',2,'[{\"changed\": {\"fields\": [\"Groups\"]}}]',30,1),(11,'2023-03-21 02:17:11.666248','5','18.234.564-1',1,'[{\"added\": {}}]',30,1),(12,'2023-03-21 02:17:18.198559','5','18.234.564-1',2,'[{\"changed\": {\"fields\": [\"Groups\"]}}]',30,1);
+INSERT INTO `django_admin_log` VALUES (1,'2023-03-27 12:13:11.510566','3','FD',2,'[{\"changed\": {\"fields\": [\"Logo\"]}}]',1,1);
 /*!40000 ALTER TABLE `django_admin_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -980,7 +1048,7 @@ CREATE TABLE `django_content_type` (
   `model` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `django_content_type_app_label_model_76bd3d3b_uniq` (`app_label`,`model`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -989,7 +1057,7 @@ CREATE TABLE `django_content_type` (
 
 LOCK TABLES `django_content_type` WRITE;
 /*!40000 ALTER TABLE `django_content_type` DISABLE KEYS */;
-INSERT INTO `django_content_type` VALUES (2,'admin','logentry'),(1,'admin_interface','theme'),(7,'app','cesfam'),(8,'app','comuna'),(9,'app','contacto'),(10,'app','diabetes'),(29,'app','familiarpacienteusuario'),(11,'app','farmacia'),(28,'app','farmaciacesfam'),(27,'app','farmaciasucursal'),(12,'app','hipertension'),(13,'app','laboratorio'),(26,'app','medicamentofichatecnica'),(14,'app','medicamentos'),(25,'app','medicamentosdescuento'),(24,'app','pacientefamiliar'),(23,'app','pacientefichaclinica'),(22,'app','pacientereceta'),(15,'app','principioactivo'),(21,'app','provincia'),(20,'app','quimicofarmaceuticoencargado'),(16,'app','region'),(17,'app','tipo_usuario'),(30,'app','usuario'),(19,'app','usuarioficha'),(18,'app','viaadminstracion'),(4,'auth','group'),(3,'auth','permission'),(5,'contenttypes','contenttype'),(6,'sessions','session');
+INSERT INTO `django_content_type` VALUES (2,'admin','logentry'),(1,'admin_interface','theme'),(8,'app','cesfam'),(9,'app','comuna'),(10,'app','contacto'),(11,'app','diabetes'),(12,'app','enfermera'),(31,'app','familiarpacienteusuario'),(13,'app','farmacia'),(30,'app','farmaciacesfam'),(29,'app','farmaciasucursal'),(14,'app','hipertension'),(15,'app','laboratorio'),(28,'app','medicamentofichatecnica'),(32,'app','medicamentofraccionamiento'),(16,'app','medicamentos'),(27,'app','medicamentosdescuento'),(26,'app','pacientefamiliar'),(25,'app','pacientefichaclinica'),(24,'app','pacientereceta'),(17,'app','principioactivo'),(23,'app','provincia'),(22,'app','quimicofarmaceuticoencargado'),(18,'app','region'),(19,'app','tipo_usuario'),(7,'app','usuario'),(21,'app','usuarioficha'),(20,'app','viaadminstracion'),(4,'auth','group'),(3,'auth','permission'),(5,'contenttypes','contenttype'),(6,'sessions','session');
 /*!40000 ALTER TABLE `django_content_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1006,7 +1074,7 @@ CREATE TABLE `django_migrations` (
   `name` varchar(255) NOT NULL,
   `applied` datetime(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1015,7 +1083,7 @@ CREATE TABLE `django_migrations` (
 
 LOCK TABLES `django_migrations` WRITE;
 /*!40000 ALTER TABLE `django_migrations` DISABLE KEYS */;
-INSERT INTO `django_migrations` VALUES (1,'contenttypes','0001_initial','2023-03-16 05:55:42.867439'),(2,'contenttypes','0002_remove_content_type_name','2023-03-16 05:55:42.964313'),(3,'auth','0001_initial','2023-03-16 05:55:43.222351'),(4,'auth','0002_alter_permission_name_max_length','2023-03-16 05:55:43.277302'),(5,'auth','0003_alter_user_email_max_length','2023-03-16 05:55:43.286906'),(6,'auth','0004_alter_user_username_opts','2023-03-16 05:55:43.296692'),(7,'auth','0005_alter_user_last_login_null','2023-03-16 05:55:43.305799'),(8,'auth','0006_require_contenttypes_0002','2023-03-16 05:55:43.311423'),(9,'auth','0007_alter_validators_add_error_messages','2023-03-16 05:55:43.321100'),(10,'auth','0008_alter_user_username_max_length','2023-03-16 05:55:43.330277'),(11,'auth','0009_alter_user_last_name_max_length','2023-03-16 05:55:43.339603'),(12,'auth','0010_alter_group_name_max_length','2023-03-16 05:55:43.384502'),(13,'auth','0011_update_proxy_permissions','2023-03-16 05:55:43.394577'),(14,'auth','0012_alter_user_first_name_max_length','2023-03-16 05:55:43.404160'),(15,'app','0001_initial','2023-03-16 05:55:45.916992'),(16,'admin','0001_initial','2023-03-16 05:55:46.045369'),(17,'admin','0002_logentry_remove_auto_add','2023-03-16 05:55:46.058994'),(18,'admin','0003_logentry_add_action_flag_choices','2023-03-16 05:55:46.072267'),(19,'admin_interface','0001_initial','2023-03-16 05:55:46.101955'),(20,'admin_interface','0002_add_related_modal','2023-03-16 05:55:46.301826'),(21,'admin_interface','0003_add_logo_color','2023-03-16 05:55:46.354728'),(22,'admin_interface','0004_rename_title_color','2023-03-16 05:55:46.379658'),(23,'admin_interface','0005_add_recent_actions_visible','2023-03-16 05:55:46.438163'),(24,'admin_interface','0006_bytes_to_str','2023-03-16 05:55:46.537982'),(25,'admin_interface','0007_add_favicon','2023-03-16 05:55:46.592829'),(26,'admin_interface','0008_change_related_modal_background_opacity_type','2023-03-16 05:55:46.680099'),(27,'admin_interface','0009_add_enviroment','2023-03-16 05:55:46.775508'),(28,'admin_interface','0010_add_localization','2023-03-16 05:55:46.800418'),(29,'admin_interface','0011_add_environment_options','2023-03-16 05:55:46.937540'),(30,'admin_interface','0012_update_verbose_names','2023-03-16 05:55:46.953846'),(31,'admin_interface','0013_add_related_modal_close_button','2023-03-16 05:55:47.008506'),(32,'admin_interface','0014_name_unique','2023-03-16 05:55:47.038642'),(33,'admin_interface','0015_add_language_chooser_active','2023-03-16 05:55:47.097346'),(34,'admin_interface','0016_add_language_chooser_display','2023-03-16 05:55:47.152525'),(35,'admin_interface','0017_change_list_filter_dropdown','2023-03-16 05:55:47.161768'),(36,'admin_interface','0018_theme_list_filter_sticky','2023-03-16 05:55:47.248335'),(37,'admin_interface','0019_add_form_sticky','2023-03-16 05:55:47.358326'),(38,'admin_interface','0020_module_selected_colors','2023-03-16 05:55:47.539731'),(39,'admin_interface','0021_file_extension_validator','2023-03-16 05:55:47.553202'),(40,'admin_interface','0022_add_logo_max_width_and_height','2023-03-16 05:55:47.664538'),(41,'admin_interface','0023_theme_foldable_apps','2023-03-16 05:55:47.719485'),(42,'admin_interface','0024_remove_theme_css','2023-03-16 05:55:47.769890'),(43,'admin_interface','0025_theme_language_chooser_control','2023-03-16 05:55:47.827401'),(44,'admin_interface','0026_theme_list_filter_highlight','2023-03-16 05:55:47.883272'),(45,'admin_interface','0027_theme_list_filter_removal_links','2023-03-16 05:55:47.935237'),(46,'admin_interface','0028_theme_show_fieldsets_as_tabs_and_more','2023-03-16 05:55:48.040812'),(47,'app','0002_usuario_rut_usuario','2023-03-16 05:55:48.098763'),(48,'app','0003_usuario_id_tipo_usuario','2023-03-16 05:55:48.179484'),(49,'app','0004_rename_id_tipo_usuario_tipo_usuario_id_tipousuario_and_more','2023-03-16 05:55:49.764059'),(50,'app','0005_alter_usuario_id_tipousuario','2023-03-16 05:55:51.257706'),(51,'app','0006_remove_usuarioficha_id_tipo_usuario_and_more','2023-03-16 05:55:52.889356'),(52,'app','0007_remove_usuarioficha_id_tipousuario','2023-03-16 05:55:54.434519'),(53,'sessions','0001_initial','2023-03-16 05:55:54.491202');
+INSERT INTO `django_migrations` VALUES (1,'contenttypes','0001_initial','2023-03-27 12:01:54.859489'),(2,'contenttypes','0002_remove_content_type_name','2023-03-27 12:01:55.182759'),(3,'auth','0001_initial','2023-03-27 12:01:56.139593'),(4,'auth','0002_alter_permission_name_max_length','2023-03-27 12:01:56.270427'),(5,'auth','0003_alter_user_email_max_length','2023-03-27 12:01:56.287399'),(6,'auth','0004_alter_user_username_opts','2023-03-27 12:01:56.301965'),(7,'auth','0005_alter_user_last_login_null','2023-03-27 12:01:56.319517'),(8,'auth','0006_require_contenttypes_0002','2023-03-27 12:01:56.332095'),(9,'auth','0007_alter_validators_add_error_messages','2023-03-27 12:01:56.351435'),(10,'auth','0008_alter_user_username_max_length','2023-03-27 12:01:56.371556'),(11,'auth','0009_alter_user_last_name_max_length','2023-03-27 12:01:56.389704'),(12,'auth','0010_alter_group_name_max_length','2023-03-27 12:01:56.539455'),(13,'auth','0011_update_proxy_permissions','2023-03-27 12:01:56.574004'),(14,'auth','0012_alter_user_first_name_max_length','2023-03-27 12:01:56.591422'),(15,'app','0001_initial','2023-03-27 12:02:04.702421'),(16,'admin','0001_initial','2023-03-27 12:02:05.012968'),(17,'admin','0002_logentry_remove_auto_add','2023-03-27 12:02:05.035852'),(18,'admin','0003_logentry_add_action_flag_choices','2023-03-27 12:02:05.067339'),(19,'admin_interface','0001_initial','2023-03-27 12:02:05.107086'),(20,'admin_interface','0002_add_related_modal','2023-03-27 12:02:06.024845'),(21,'admin_interface','0003_add_logo_color','2023-03-27 12:02:06.248976'),(22,'admin_interface','0004_rename_title_color','2023-03-27 12:02:06.295697'),(23,'admin_interface','0005_add_recent_actions_visible','2023-03-27 12:02:06.576067'),(24,'admin_interface','0006_bytes_to_str','2023-03-27 12:02:06.684215'),(25,'admin_interface','0007_add_favicon','2023-03-27 12:02:06.912620'),(26,'admin_interface','0008_change_related_modal_background_opacity_type','2023-03-27 12:02:07.431939'),(27,'admin_interface','0009_add_enviroment','2023-03-27 12:02:07.967874'),(28,'admin_interface','0010_add_localization','2023-03-27 12:02:07.998002'),(29,'admin_interface','0011_add_environment_options','2023-03-27 12:02:08.611969'),(30,'admin_interface','0012_update_verbose_names','2023-03-27 12:02:08.656089'),(31,'admin_interface','0013_add_related_modal_close_button','2023-03-27 12:02:08.920209'),(32,'admin_interface','0014_name_unique','2023-03-27 12:02:09.103947'),(33,'admin_interface','0015_add_language_chooser_active','2023-03-27 12:02:09.332007'),(34,'admin_interface','0016_add_language_chooser_display','2023-03-27 12:02:09.694732'),(35,'admin_interface','0017_change_list_filter_dropdown','2023-03-27 12:02:09.715081'),(36,'admin_interface','0018_theme_list_filter_sticky','2023-03-27 12:02:09.975994'),(37,'admin_interface','0019_add_form_sticky','2023-03-27 12:02:10.517065'),(38,'admin_interface','0020_module_selected_colors','2023-03-27 12:02:11.031867'),(39,'admin_interface','0021_file_extension_validator','2023-03-27 12:02:11.058875'),(40,'admin_interface','0022_add_logo_max_width_and_height','2023-03-27 12:02:11.497027'),(41,'admin_interface','0023_theme_foldable_apps','2023-03-27 12:02:11.779914'),(42,'admin_interface','0024_remove_theme_css','2023-03-27 12:02:12.020331'),(43,'admin_interface','0025_theme_language_chooser_control','2023-03-27 12:02:12.203879'),(44,'admin_interface','0026_theme_list_filter_highlight','2023-03-27 12:02:12.391219'),(45,'admin_interface','0027_theme_list_filter_removal_links','2023-03-27 12:02:12.552267'),(46,'admin_interface','0028_theme_show_fieldsets_as_tabs_and_more','2023-03-27 12:02:13.012046'),(47,'app','0002_rename_username_pacientereceta_first_name','2023-03-27 12:02:17.573187'),(48,'sessions','0001_initial','2023-03-27 12:02:17.867967'),(49,'app','0003_rename_first_name_pacientereceta_nombres_paciente','2023-03-28 15:10:22.035610'),(50,'app','0004_medicamentofraccionamiento','2023-03-28 15:10:22.069636'),(51,'app','0005_alter_enfermera_celular_usuario','2023-03-28 15:10:22.102497'),(52,'app','0006_alter_enfermera_celular_usuario','2023-03-28 15:10:22.131855'),(53,'app','0007_pacientereceta_fracionamiento_1','2023-03-28 15:10:22.227863'),(54,'app','0008_alter_pacientereceta_horario_2_and_more','2023-03-28 15:10:22.340778'),(55,'app','0009_alter_pacientereceta_horario_2_and_more','2023-03-28 15:10:22.726208'),(56,'app','0010_alter_pacientereceta_horario_2_and_more','2023-03-28 15:10:22.869203');
 /*!40000 ALTER TABLE `django_migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1041,7 +1109,7 @@ CREATE TABLE `django_session` (
 
 LOCK TABLES `django_session` WRITE;
 /*!40000 ALTER TABLE `django_session` DISABLE KEYS */;
-INSERT INTO `django_session` VALUES ('hi2zh6pxzgfdy72g4amreswq254avzuj','.eJxVjEEOwiAQRe_C2hAmdCq4dO8ZyMAMUjWQlHbVeHdt0oVu_3vvbyrQupSwdpnDxOqiQJ1-t0jpKXUH_KB6bzq1usxT1LuiD9r1rbG8rof7d1Col2-dhgwohrJHdjY5z96jgEByQxJw3o4UCUa0NmbOmE1kRmccGOCIZ_X-APVtODw:1pex75:TZLcGVvLxRgr8jsGex6TF4WkxUt2LaKKHvg-vF1yL6Q','2023-04-05 11:58:43.393554'),('huey54mlpydn634tw4u9nkj70ts4ty5c','.eJxVjEEOwiAQRe_C2hAmdCq4dO8ZyMAMUjWQlHbVeHdt0oVu_3vvbyrQupSwdpnDxOqiQJ1-t0jpKXUH_KB6bzq1usxT1LuiD9r1rbG8rof7d1Col2-dhgwohrJHdjY5z96jgEByQxJw3o4UCUa0NmbOmE1kRmccGOCIZ_X-APVtODw:1pezWu:tCBlt_LOgHdr95gn6SsI2D-4A18WR1m9dseFsytjmNc','2023-04-05 14:33:32.662015');
+INSERT INTO `django_session` VALUES ('k0ynwfdu5hj0r2m2abymib2sl7dlc15c','.eJxVjMEOwiAQRP-FsyGsFQoevfcbyC67SNXQpLQn47_bJj3oZQ7z3sxbRVyXEtcmcxxZXRWo029HmJ5Sd8APrPdJp6ku80h6V_RBmx4mltftcP8OCrayrT0bIymT6YTY9RkBrJEcLsZbD-hAuDPWhi0CefDJJXEBkdHRuUdQny_qTzf1:1pgnU6:1ftz306YaSJLwSJBTB_Wd9GYZYAMyH1uIov5rZJLm8s','2023-04-10 14:06:06.799169'),('rc8majfn08qvk36s0cns3furdt4ex9kf','.eJxVjMEOwiAQRP-FsyGsFQoevfcbyC67SNXQpLQn47_bJj3oZQ7z3sxbRVyXEtcmcxxZXRWo029HmJ5Sd8APrPdJp6ku80h6V_RBmx4mltftcP8OCrayrT0bIymT6YTY9RkBrJEcLsZbD-hAuDPWhi0CefDJJXEBkdHRuUdQny_qTzf1:1pgldl:VOavzGQRwUWRea6Pw3Rsp5hfLVFJ7Ia6RA94AwXl9b0','2023-04-10 12:07:57.721322');
 /*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -1054,4 +1122,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-03-24  0:57:42
+-- Dump completed on 2023-03-28 15:51:29
