@@ -120,8 +120,8 @@ admin.site.register(MedicamentoFraccionamiento, MedicamentoFraccionamientoAdmin)
 #-----------------------------------------------------------------------------------------------------------------#
 #ADMIN DE USUARIO RECETA
 class PacienteRecetaAdmin(admin.ModelAdmin):
-    list_display = ('id_receta_usuario', 'fecha_receta', 'nombres_paciente','id_enfermera', 'nombre_comercial','tiempo_tratamiento_dias', 'frecuencia_dosis_diaria', 'horario_1','horario_2','horario_3','horario_4','horario_5','horario_6', 'descripcion')
-    search_fields = ['id_receta_usuario', 'fecha_receta', 'nombres_paciente','id_enfermera', 'nombre_comercial', 'tiempo_tratamiento_dias', 'frecuencia_dosis_diaria', 'horario_1','horario_2','horario_3','horario_4','horario_5','horario_6', 'descripcion']
+    list_display = ('id_receta_usuario', 'fecha_receta', 'nombres_paciente','id_enfermera', 'nombre_comercial','tiempo_tratamiento_dias', 'frecuencia_dosis_diaria','fracionamiento_1' , 'horario_1','horario_2','horario_3','horario_4','horario_5','horario_6', 'descripcion')
+    search_fields = ['id_receta_usuario', 'fecha_receta', 'nombres_paciente','id_enfermera', 'nombre_comercial', 'tiempo_tratamiento_dias', 'frecuencia_dosis_diaria', 'fracionamiento_1', 'horario_1','horario_2','horario_3','horario_4','horario_5','horario_6', 'descripcion']
 
 admin.site.register(PacienteReceta, PacienteRecetaAdmin)
 #-----------------------------------------------------------------------------------------------------------------#
