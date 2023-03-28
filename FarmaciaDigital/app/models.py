@@ -87,7 +87,7 @@ class Medicamentos(models.Model):
     #imagen = models.ImageField(upload_to="medicamentos", null=True)
 
     def __str__(self):
-        return self.nombre_comercial
+        return (self.nombre_comercial)+" "+(self.gramaje)
     
 #-----------------------------------------------------------------------------------------------------------------#
     
@@ -132,7 +132,7 @@ class Usuario(AbstractUser):
     id_TipoUsuario = models.ForeignKey(Tipo_usuario, on_delete=models.SET_NULL,null=True)
 
     def __str__(self):
-        return self.rut_usuario
+        return (self.first_name)+" "+(self.last_name)
 
 #-----------------------------------------------------------------------------------------------------------------#
 #TABLA DE ENFERMERA
@@ -146,7 +146,7 @@ class Enfermera(models.Model):
     celular_usuario = models.IntegerField()
 
     def __str__(self):
-        return self.id_enfermera
+        return (self.nombres_enfermera)+" "+(self.apellidos_enfermera)
 #-----------------------------------------------------------------------------------------------------------------#
 #TABLA USUARIO
 class UsuarioFicha (models.Model):
@@ -165,26 +165,34 @@ class UsuarioFicha (models.Model):
     #id_familiar = models.ForeignKey(Familiar, on_delete=models.PROTECT)
     def __str__(self):
         return self.nombres_usuario
-    
-
-    
+       
 #-----------------------------------------------------------------------------------------------------------------#
-    
+#TABLA DE MEDICAMENTO FRACIONAMIENTO
+class MedicamentoFraccionamiento(models.Model):
+    id_fraccion = models.AutoField(primary_key=True)
+    fraccion = models.CharField(max_length=4)
+    descripcion_fraccion = models.CharField(max_length=200)
+
+    def __str__(self):
+        return (self.fraccion)+" "+(self.descripcion_fraccion)
+
+#-----------------------------------------------------------------------------------------------------------------#
 #TABLA DE USUARIO RECETA
 class PacienteReceta(models.Model):
     id_receta_usuario = models.AutoField(primary_key=True)
     fecha_receta = models.DateField()
-    first_name = models.ForeignKey(Usuario, on_delete=models.SET_NULL,null=True)
+    nombres_paciente = models.ForeignKey(Usuario, on_delete=models.SET_NULL,null=True)
     id_enfermera = models.ForeignKey(Enfermera, on_delete=models.SET_NULL,null=True)
     nombre_comercial = models.ForeignKey(Medicamentos, on_delete=models.SET_NULL,null=True)
     tiempo_tratamiento_dias = models.CharField(max_length=100)
     frecuencia_dosis_diaria = models.CharField(max_length=100)
     horario_1 = models.TimeField()
-    horario_2 = models.TimeField()
-    horario_3 = models.TimeField()
-    horario_4 = models.TimeField()
-    horario_5 = models.TimeField()
-    horario_6 = models.TimeField()
+    fracionamiento_1 = models.ForeignKey(MedicamentoFraccionamiento, on_delete=models.SET_NULL,null=True)
+    horario_2 = models.TimeField(blank=True ,null=True)
+    horario_3 = models.TimeField(blank=True ,null=True)
+    horario_4 = models.TimeField(blank=True ,null=True)
+    horario_5 = models.TimeField(blank=True ,null=True)
+    horario_6 = models.TimeField(blank=True ,null=True)
     descripcion = models.TextField()
 
     def __date__ (self):
