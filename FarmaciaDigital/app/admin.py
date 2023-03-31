@@ -79,8 +79,8 @@ class MedicamentosAdmin(admin.ModelAdmin):
 admin.site.register(Medicamentos, MedicamentosAdmin)
 #-----------------------------------------------------------------------------------------------------------------#
 class MedicamentosDescuentoAdmin(admin.ModelAdmin):
-    list_display = ("id_descuento", "id_medicamento", "id_farmacia", "fecha_inicio_descuento",  "fecha_termino_descuento", "descuento_porcentaje")
-    search_fields = ["id_descuento", "id_medicamento", "id_farmacia", "fecha_inicio_descuento",  "fecha_termino_descuento", "descuento_porcentaje"]
+    list_display = ("id_descuento", "medicamento_desc", "id_farmacia", "fecha_inicio_descuento",  "fecha_termino_descuento", "descuento_porcentaje")
+    search_fields = ["id_descuento", "medicamento_desc", "id_farmacia", "fecha_inicio_descuento",  "fecha_termino_descuento", "descuento_porcentaje"]
 
 admin.site.register(MedicamentosDescuento, MedicamentosDescuentoAdmin)
 #-----------------------------------------------------------------------------------------------------------------#
@@ -107,8 +107,8 @@ admin.site.register(Enfermera, EnfermeraAdmin)
 #-----------------------------------------------------------------------------------------------------------------#
 #ADMIN DE USUARIO FICHA ADMIN
 class UsuarioFichaAdmin(admin.ModelAdmin):
-    list_display = ('id_usuario', 'rut_usuario', 'nombres_usuario','apellido_paterno_usuario', 'appelido_materno_usuario', 'dirreccion_usuario', 'email_usuario', 'telefono_usuario')
-    search_fields = ['id_usuario', 'rut_usuario', 'nombres_usuario','apellido_paterno_usuario', 'appelido_materno_usuario', 'dirreccion_usuario', 'email_usuario', 'telefono_usuario']
+    list_display = ('id_usuario', 'identificacion_usuario', 'dirreccion_usuario', 'email_usuario', 'telefono_usuario')
+    search_fields = ['id_usuario', 'identificacion_usuario', 'dirreccion_usuario', 'email_usuario', 'telefono_usuario']
 
 admin.site.register(UsuarioFicha, UsuarioFichaAdmin)
 #-----------------------------------------------------------------------------------------------------------------#
@@ -120,8 +120,8 @@ admin.site.register(MedicamentoFraccionamiento, MedicamentoFraccionamientoAdmin)
 #-----------------------------------------------------------------------------------------------------------------#
 #ADMIN DE USUARIO RECETA
 class PacienteRecetaAdmin(admin.ModelAdmin):
-    list_display = ('id_receta_usuario', 'fecha_receta', 'nombres_paciente','id_enfermera', 'nombre_comercial','tiempo_tratamiento_dias', 'frecuencia_dosis_diaria','fracionamiento_1' , 'horario_1','horario_2','horario_3','horario_4','horario_5','horario_6', 'descripcion')
-    search_fields = ['id_receta_usuario', 'fecha_receta', 'nombres_paciente','id_enfermera', 'nombre_comercial', 'tiempo_tratamiento_dias', 'frecuencia_dosis_diaria', 'fracionamiento_1', 'horario_1','horario_2','horario_3','horario_4','horario_5','horario_6', 'descripcion']
+    list_display = ('id_receta_usuario', 'fecha_receta', 'nombres_paciente','nombre_enfermera', 'nombre_comercial','tiempo_tratamiento_dias', 'frecuencia_dosis_diaria','fracionamiento_1' , 'horario_1','horario_2','horario_3','horario_4','horario_5','horario_6', 'descripcion')
+    search_fields = ['id_receta_usuario', 'fecha_receta', 'nombres_paciente','nombre_enfermera', 'nombre_comercial', 'tiempo_tratamiento_dias', 'frecuencia_dosis_diaria', 'fracionamiento_1', 'horario_1','horario_2','horario_3','horario_4','horario_5','horario_6', 'descripcion']
 
 admin.site.register(PacienteReceta, PacienteRecetaAdmin)
 #-----------------------------------------------------------------------------------------------------------------#
@@ -148,15 +148,15 @@ admin.site.register(CESFAM, CESFAMAdmin)
 #-----------------------------------------------------------------------------------------------------------------#
 #ADMIN DE ENCARGADO QUIMICO FARMACEUTICO
 class QuimicoFarmaceuticoEncargadoAdmin(admin.ModelAdmin):
-    list_display = ('id_quimico_farmaceutio', 'id_tipo_usuario', 'registro_sanitario_QF')
-    search_fields = ['id_quimico_farmaceutio', 'id_tipo_usuario', 'registro_sanitario_QF']
+    list_display = ('id_quimico_farmaceutio', 'tipo_usuario', 'registro_sanitario_QF')
+    search_fields = ['id_quimico_farmaceutio', 'tipo_usuario', 'registro_sanitario_QF']
 
 admin.site.register(QuimicoFarmaceuticoEncargado, QuimicoFarmaceuticoEncargadoAdmin)
 #-----------------------------------------------------------------------------------------------------------------#
 #ADMIN DE TIPO FARMACIA SUCURSAL
 class FarmaciaSucursalAdmin(admin.ModelAdmin):
-    list_display = ("id_sucursal", "id_farmacia", "id_comuna", "id_region", "id_provincia", "direccion_sucursal", "telefono_sucursal", "email")
-    search_fields = ["direccion_sucursal", "id_farmacia", "id_sucursal", "telefono_sucursal", "email"]
+    list_display = ("id_sucursal", "nombre_farmacia", "id_comuna", "id_region", "id_provincia", "direccion_sucursal", "telefono_sucursal", "email")
+    search_fields = ["direccion_sucursal", "nombre_farmacia", "id_sucursal", "telefono_sucursal", "email"]
 
 admin.site.register(FarmaciaSucursal, FarmaciaSucursalAdmin)
 #-----------------------------------------------------------------------------------------------------------------#
@@ -183,8 +183,8 @@ admin.site.register(Hipertension, HipertensionAdmin)
 #-----------------------------------------------------------------------------------------------------------------#
 #ADMIN DE USUARIO FARMACO VIGILANGIA
 class PacienteFichaClinicaAdmin(admin.ModelAdmin):
-    list_display  = ('id_usuario', 'nombre_tipo_usuario', 'tipo_diabetes', 'tipo_hipertension', 'fecha_nacimiento')
-    search_fields = ['id_usuario', 'nombre_tipo_usuario', 'tipo_diabetes', 'tipo_hipertension', 'fecha_nacimiento']
+    list_display  = ('id_paciente_ficha', 'identificacion_paciente', 'tipo_diabetes', 'tipo_hipertension', 'fecha_nacimiento')
+    search_fields = ['id_paciente_ficha', 'identificacion_paciente', 'tipo_diabetes', 'tipo_hipertension', 'fecha_nacimiento']
 
 admin.site.register(PacienteFichaClinica, PacienteFichaClinicaAdmin)
 #-----------------------------------------------------------------------------------------------------------------#

@@ -114,3 +114,8 @@ def eliminar_medicamento(request, id):
 #        data["form"] = formulario
 #
 #    return render(request, 'registration/registro.html',data)
+
+
+# VISTA DE ENFERMERA
+def enfermera(request):
+    return render(request, 'app/enfermera.html')

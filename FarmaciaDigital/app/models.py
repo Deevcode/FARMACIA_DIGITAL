@@ -94,20 +94,21 @@ class Medicamentos(models.Model):
 #TABLA DE DESCUENTOS MEDICAMENTOS
 class MedicamentosDescuento(models.Model):
     id_descuento = models.AutoField(primary_key=True)
-    id_medicamento = models.ForeignKey(Medicamentos, on_delete=models.PROTECT)
+    medicamento_desc = models.ForeignKey(Medicamentos, on_delete=models.PROTECT)
     id_farmacia = models.ForeignKey(Farmacia, on_delete=models.PROTECT)
     fecha_inicio_descuento = models.DateField()
     fecha_termino_descuento = models.DateField()
     descuento_porcentaje = models.IntegerField()
 
     def __str__(self):
-        return self.id_descuento
+        return (self.medicamento_desc)+" con un %"+(self.descuento_porcentaje)
     
 #-----------------------------------------------------------------------------------------------------------------#
 
 #TABLA DE MEDICAMENTO FICHA TECNICA
 class MedicamentoFichaTecnica(models.Model):
     id_ficha_medicamento = models.AutoField(primary_key=True)
+    laboratorio_ficha = models.ForeignKey(Laboratorio, on_delete=models.PROTECT)
     nombre_comercial = models.ForeignKey(Medicamentos, on_delete=models.PROTECT)
     url_ficha = models.CharField(max_length=700)
 
@@ -132,7 +133,7 @@ class Usuario(AbstractUser):
     id_TipoUsuario = models.ForeignKey(Tipo_usuario, on_delete=models.SET_NULL,null=True)
 
     def __str__(self):
-        return (self.first_name)+" "+(self.last_name)
+        return (self.first_name)+" "+(self.last_name)+" "+(self.rut_usuario)
 
 #-----------------------------------------------------------------------------------------------------------------#
 #TABLA DE ENFERMERA
@@ -151,10 +152,7 @@ class Enfermera(models.Model):
 #TABLA USUARIO
 class UsuarioFicha (models.Model):
     id_usuario = models.AutoField(primary_key=True)
-    rut_usuario = models.ForeignKey(Usuario, on_delete=models.SET_NULL,null=True)
-    nombres_usuario = models.CharField(max_length=100)
-    apellido_paterno_usuario = models.CharField(max_length=100)
-    appelido_materno_usuario = models.CharField(max_length=100)
+    identificacion_usuario = models.ForeignKey(Usuario, on_delete=models.SET_NULL,null=True)
     dirreccion_usuario = models.CharField(max_length=150)
     email_usuario = models.EmailField()
     telefono_usuario = models.IntegerField()
@@ -164,7 +162,7 @@ class UsuarioFicha (models.Model):
     id_comuna = models.ForeignKey(Comuna, on_delete=models.PROTECT)
     #id_familiar = models.ForeignKey(Familiar, on_delete=models.PROTECT)
     def __str__(self):
-        return self.nombres_usuario
+        return (self.identificacion_usuario)
        
 #-----------------------------------------------------------------------------------------------------------------#
 #TABLA DE MEDICAMENTO FRACIONAMIENTO
@@ -182,7 +180,7 @@ class PacienteReceta(models.Model):
     id_receta_usuario = models.AutoField(primary_key=True)
     fecha_receta = models.DateField()
     nombres_paciente = models.ForeignKey(Usuario, on_delete=models.SET_NULL,null=True)
-    id_enfermera = models.ForeignKey(Enfermera, on_delete=models.SET_NULL,null=True)
+    nombre_enfermera = models.ForeignKey(Enfermera, on_delete=models.SET_NULL,null=True)
     nombre_comercial = models.ForeignKey(Medicamentos, on_delete=models.SET_NULL,null=True)
     tiempo_tratamiento_dias = models.CharField(max_length=100)
     frecuencia_dosis_diaria = models.CharField(max_length=100)
@@ -196,7 +194,7 @@ class PacienteReceta(models.Model):
     descripcion = models.TextField()
 
     def __date__ (self):
-        return self.id_receta_usuario
+        return (self.nombre_comercial)+" "+(self.fracionamiento_1)+""
 
 
 #-----------------------------------------------------------------------------------------------------------------#
@@ -218,7 +216,7 @@ class PacienteFamiliar(models.Model):
     id_comuna = models.ForeignKey(Comuna, on_delete=models.PROTECT)
 
     def __str__ (self):
-        return self.nombre_familiar
+        return (self.parentesco)+": "+(self.nombre_familiar)+" "+(self.apellido_familiar)
 
 #-----------------------------------------------------------------------------------------------------------------#
 
@@ -252,18 +250,18 @@ class CESFAM(models.Model):
 #TABLA DE QUIMICO FARMACEUTICO
 class QuimicoFarmaceuticoEncargado(models.Model):
     id_quimico_farmaceutio = models.AutoField(primary_key=True)
-    id_tipo_usuario = models.ForeignKey(Tipo_usuario, on_delete=models.PROTECT)
+    tipo_usuario = models.ForeignKey(Tipo_usuario, on_delete=models.PROTECT)
     registro_sanitario_QF = models.CharField(max_length=200)
 
     def __str__(self):
-        return self.id_quimico_farmaceutio
+        return (self.tipo_usuario)+" "+(self.registro_sanitario_QF)
 
 #-----------------------------------------------------------------------------------------------------------------#
 
 #TABLA DE SUCURSAL FARMACIA
 class FarmaciaSucursal(models.Model):
     id_sucursal = models.AutoField(primary_key=True)
-    id_farmacia = models.ForeignKey(Farmacia, on_delete=models.PROTECT)
+    nombre_farmacia = models.ForeignKey(Farmacia, on_delete=models.PROTECT)
     id_quimico_farmaceutio = models.ForeignKey(QuimicoFarmaceuticoEncargado ,on_delete= models.PROTECT)
     id_comuna = models.ForeignKey(Comuna, on_delete=models.PROTECT)
     id_region = models.ForeignKey(Region, on_delete=models.PROTECT)
@@ -273,7 +271,7 @@ class FarmaciaSucursal(models.Model):
     email = models.EmailField()
 
     def __str__(self):
-        return self.direccion_sucursal
+        return (self.nombre_farmacia)+" "+(self.direccion_sucursal)
 
 #-----------------------------------------------------------------------------------------------------------------#
 
@@ -314,14 +312,14 @@ class Hipertension(models.Model):
 
 #TABLA DEL PACIENTE FICHA CLINICA
 class PacienteFichaClinica(models.Model):
-    id_usuario = models.ForeignKey(UsuarioFicha, on_delete=models.PROTECT)
-    nombre_tipo_usuario = models.ForeignKey(Tipo_usuario, on_delete=models.PROTECT)
+    id_paciente_ficha = models.AutoField(primary_key=True)
+    identificacion_paciente = models.ForeignKey(Usuario, on_delete=models.PROTECT)
     tipo_diabetes = models.ForeignKey(Diabetes, on_delete=models.PROTECT)
     tipo_hipertension = models.ForeignKey(Hipertension, on_delete=models.PROTECT)
     fecha_nacimiento = models.DateField()
 
     def __str__ (self):
-        return self.nombre_tipo_usuario  
+        return (self.identificacion_paciente)+": "+(self.tipo_diabetes)+" "+(self.tipo_hipertension)
 
 #-----------------------------------------------------------------------------------------------------------------#
 
