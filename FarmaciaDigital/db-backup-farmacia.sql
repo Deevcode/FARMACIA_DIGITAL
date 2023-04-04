@@ -789,7 +789,7 @@ CREATE TABLE `app_usuario` (
   UNIQUE KEY `username` (`username`),
   KEY `app_usuario_id_TipoUsuario_id_d5d9368d_fk_app_tipo_` (`id_TipoUsuario_id`),
   CONSTRAINT `app_usuario_id_TipoUsuario_id_d5d9368d_fk_app_tipo_` FOREIGN KEY (`id_TipoUsuario_id`) REFERENCES `app_tipo_usuario` (`id_TipoUsuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -798,7 +798,7 @@ CREATE TABLE `app_usuario` (
 
 LOCK TABLES `app_usuario` WRITE;
 /*!40000 ALTER TABLE `app_usuario` DISABLE KEYS */;
-INSERT INTO `app_usuario` VALUES (1,'pbkdf2_sha256$390000$mrsBzdaABE3ynJAUv8rHst$HThPNh3GL1PvojeDh19PrZhWHoiK6tznSsaO7Q6AeRM=','2023-03-31 03:21:05.436344',1,'adminmedi','','','josee.cornejo@gmail.com',1,1,'2023-03-31 03:17:58.611953','',NULL),(2,'pbkdf2_sha256$390000$mEdcslJlx6rVmYHPKPDnLB$gyCGWV7pd8qWz0nq0IcLJzMWi9IVAVe8kjTtQfUQu0I=','2023-03-22 14:33:26.959317',0,'Juan_01','Juan','Perez','juan@gmail.com',0,1,'2023-03-21 00:13:07.691684','18.227.394-7',3),(3,'pbkdf2_sha256$390000$omEZWgCs1gQrxouWi0UfYj$IOPX48w+OTFjWczX2TpBJGT9Fhn8hRZDt7kb0ZQYrDc=','2023-03-21 16:17:19.004479',0,'Matias_02','Matias','Prado','matias@gmail.com',0,1,'2023-03-21 02:10:59.558340','17.238.393-0',3),(4,'pbkdf2_sha256$390000$VILMPlfmb8YkgGXWVrmRzh$r7EU+GGcPW9+Ov4FWhOVtHTKlJOf43XJ7aDS28D/eLM=',NULL,0,'Benjamin_03','Benjamim','Cornejo','benjamin@gmail.com',0,1,'2023-03-21 02:13:05.953829','20.123.456-k',4),(5,'pbkdf2_sha256$390000$hwMWLaRGlSDkVuKMqfPNC1$IvAglpISQH7ykJuX/JHD2pPvByOOiwlmtG7m4QYet+8=',NULL,0,'Tomas_04','Tomas','Gutierrez','tomas@gmail.com',0,1,'2023-03-21 02:17:11.395323','18.234.564-1',4);
+INSERT INTO `app_usuario` VALUES (1,'pbkdf2_sha256$390000$mrsBzdaABE3ynJAUv8rHst$HThPNh3GL1PvojeDh19PrZhWHoiK6tznSsaO7Q6AeRM=','2023-04-03 13:23:35.009411',1,'adminmedi','','','josee.cornejo@gmail.com',1,1,'2023-03-31 03:17:58.611953','',NULL),(2,'pbkdf2_sha256$390000$mEdcslJlx6rVmYHPKPDnLB$gyCGWV7pd8qWz0nq0IcLJzMWi9IVAVe8kjTtQfUQu0I=','2023-03-22 14:33:26.959317',0,'Juan_01','Juan','Perez','juan@gmail.com',0,1,'2023-03-21 00:13:07.691684','18.227.394-7',3),(3,'pbkdf2_sha256$390000$omEZWgCs1gQrxouWi0UfYj$IOPX48w+OTFjWczX2TpBJGT9Fhn8hRZDt7kb0ZQYrDc=','2023-03-21 16:17:19.004479',0,'Matias_02','Matias','Prado','matias@gmail.com',0,1,'2023-03-21 02:10:59.558340','17.238.393-0',3),(4,'pbkdf2_sha256$390000$VILMPlfmb8YkgGXWVrmRzh$r7EU+GGcPW9+Ov4FWhOVtHTKlJOf43XJ7aDS28D/eLM=',NULL,0,'Benjamin_03','Benjamim','Cornejo','benjamin@gmail.com',0,1,'2023-03-21 02:13:05.953829','20.123.456-k',4),(5,'pbkdf2_sha256$390000$hwMWLaRGlSDkVuKMqfPNC1$IvAglpISQH7ykJuX/JHD2pPvByOOiwlmtG7m4QYet+8=',NULL,0,'Tomas_04','Tomas','Gutierrez','tomas@gmail.com',0,1,'2023-03-21 02:17:11.395323','18.234.564-1',4),(6,'pbkdf2_sha256$390000$7rgIUH2VF1gdfQmZAfHGhk$OIJ2P+X4kLVGXm57ug1Z3AHGEPy2BBkXMW6kEDFb1eA=',NULL,0,'mariadibu','Maria Angela','Dibu Barrientos','maria.db@gmail.com',0,1,'2023-04-03 14:03:05.401216','11111111-1',7),(7,'pbkdf2_sha256$390000$1lJsYcIMPfwqPzUlgMMRy5$pYnZA6/lZj4dRY6r4IDd8MzS7tQgFKGzADvW4DUfGp4=',NULL,0,'danigarrido','Daniela Arido','Garrido Barriento','barrientos.dani@gmail.com',0,1,'2023-04-03 14:07:24.911267','11111111-1',7),(8,'pbkdf2_sha256$390000$rDt69TQLzl5ce5nDOmxgs7$j8Wrpvuarc9MRLiHPMa/Dh6uiNT21YSQ6Opm8IYRhdU=',NULL,0,'cesfampuentealto','CESFAM','Puente Alto','cesfam@ptealto.cl',0,1,'2023-04-03 14:20:24.732317','1-1',6);
 /*!40000 ALTER TABLE `app_usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1019,7 +1019,7 @@ CREATE TABLE `django_admin_log` (
   KEY `django_admin_log_user_id_c564eba6_fk_app_usuario_id` (`user_id`),
   CONSTRAINT `django_admin_log_content_type_id_c4bce8eb_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
   CONSTRAINT `django_admin_log_user_id_c564eba6_fk_app_usuario_id` FOREIGN KEY (`user_id`) REFERENCES `app_usuario` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1028,7 +1028,7 @@ CREATE TABLE `django_admin_log` (
 
 LOCK TABLES `django_admin_log` WRITE;
 /*!40000 ALTER TABLE `django_admin_log` DISABLE KEYS */;
-INSERT INTO `django_admin_log` VALUES (1,'2023-03-31 03:22:01.883255','3','FD',2,'[{\"changed\": {\"fields\": [\"Logo\"]}}]',1,1),(2,'2023-03-31 03:22:27.759091','3','FD',2,'[{\"changed\": {\"fields\": [\"Logo\"]}}]',1,1),(3,'2023-03-31 03:22:38.621853','3','FD',2,'[{\"changed\": {\"fields\": [\"Favicon\"]}}]',1,1),(4,'2023-03-31 03:22:46.348513','3','FD',2,'[{\"changed\": {\"fields\": [\"Favicon\"]}}]',1,1),(5,'2023-03-31 03:23:19.364829','3','FD',2,'[{\"changed\": {\"fields\": [\"Logo\"]}}]',1,1),(6,'2023-03-31 03:23:40.997585','3','FD',2,'[{\"changed\": {\"fields\": [\"Favicon\"]}}]',1,1);
+INSERT INTO `django_admin_log` VALUES (1,'2023-03-31 03:22:01.883255','3','FD',2,'[{\"changed\": {\"fields\": [\"Logo\"]}}]',1,1),(2,'2023-03-31 03:22:27.759091','3','FD',2,'[{\"changed\": {\"fields\": [\"Logo\"]}}]',1,1),(3,'2023-03-31 03:22:38.621853','3','FD',2,'[{\"changed\": {\"fields\": [\"Favicon\"]}}]',1,1),(4,'2023-03-31 03:22:46.348513','3','FD',2,'[{\"changed\": {\"fields\": [\"Favicon\"]}}]',1,1),(5,'2023-03-31 03:23:19.364829','3','FD',2,'[{\"changed\": {\"fields\": [\"Logo\"]}}]',1,1),(6,'2023-03-31 03:23:40.997585','3','FD',2,'[{\"changed\": {\"fields\": [\"Favicon\"]}}]',1,1),(7,'2023-04-03 14:03:05.743522','6','Maria Angela Dibu Barrientos 11111111-1',1,'[{\"added\": {}}]',7,1),(8,'2023-04-03 14:07:25.376229','7','Daniela Arido Garrido Barriento 11111111-1',1,'[{\"added\": {}}]',7,1),(9,'2023-04-03 14:20:25.132908','8','CESFAM Puente Alto 1-1',1,'[{\"added\": {}}]',7,1);
 /*!40000 ALTER TABLE `django_admin_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1106,7 +1106,7 @@ CREATE TABLE `django_session` (
 
 LOCK TABLES `django_session` WRITE;
 /*!40000 ALTER TABLE `django_session` DISABLE KEYS */;
-INSERT INTO `django_session` VALUES ('jxmhywjb24d37r6lohsiom9wtnyc9asl','.eJxVjDsOwjAQRO_iGln-xD9K-pzBWq_XOIAcKU4qxN1JpBRQjTTvzbxZhG2tceu0xCmzK5Ps8tslwCe1A-QHtPvMcW7rMiV-KPyknY9zptftdP8OKvS6r8kUQUXoAhocoVXKFmWlVNrsgWmQiFL7koNKwYDM3jsxWK9dyl4Fwz5f4H03QA:1pi5K5:p-WIxeBNVskV8FaqU1_GJ6BFjeIOWRYQN9ZSrO4UpVg','2023-04-14 03:21:05.442076');
+INSERT INTO `django_session` VALUES ('afjceyffpafvxa3pxcga5f43ay7zt95r','.eJxVjDsOwjAQRO_iGln-xD9K-pzBWq_XOIAcKU4qxN1JpBRQjTTvzbxZhG2tceu0xCmzK5Ps8tslwCe1A-QHtPvMcW7rMiV-KPyknY9zptftdP8OKvS6r8kUQUXoAhocoVXKFmWlVNrsgWmQiFL7koNKwYDM3jsxWK9dyl4Fwz5f4H03QA:1pjK9n:TR2tCCzrWJKI27uQc3KhuRXoCKBkfpwfhMy_2vhk3Ys','2023-04-17 13:23:35.023146'),('jxmhywjb24d37r6lohsiom9wtnyc9asl','.eJxVjDsOwjAQRO_iGln-xD9K-pzBWq_XOIAcKU4qxN1JpBRQjTTvzbxZhG2tceu0xCmzK5Ps8tslwCe1A-QHtPvMcW7rMiV-KPyknY9zptftdP8OKvS6r8kUQUXoAhocoVXKFmWlVNrsgWmQiFL7koNKwYDM3jsxWK9dyl4Fwz5f4H03QA:1pi5K5:p-WIxeBNVskV8FaqU1_GJ6BFjeIOWRYQN9ZSrO4UpVg','2023-04-14 03:21:05.442076');
 /*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -1119,4 +1119,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-03-31  3:42:36
+-- Dump completed on 2023-04-04 16:07:13
