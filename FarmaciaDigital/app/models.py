@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-
+from django.db.models import CheckConstraint, Q, F
 
 #-----------------------------------------------------------------------------------------------------------------#
 #TABLA DE REGION
@@ -336,19 +336,10 @@ class Enfermera(models.Model):
         return str(self.identificacion_enfermera)
 
 #-----------------------------------------------------------------------------------------------------------------#
-#TABLA DE PROFESIONAL SALUD
-class ProfesionalSalud(models.Model):
-    id_profesional = models.AutoField(primary_key=True)
-    identificacion_profesional = models.ForeignKey(Usuario, on_delete=models.SET_NULL,null=True)
-    CEESFAM_asignado = models.ForeignKey(CESFAM, on_delete=models.SET_NULL,null=True)
-
-    def __str__(self):
-        return str(self.identificacion_profesional)+" "+str(self.CEESFAM_asignado)
-#-----------------------------------------------------------------------------------------------------------------#
 #TABLA PACIENTE PROFESIONALES
 class ProfesionalPaciente(models.Model):
-    identificacicion_usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
-    identificacion_profesional = models.ForeignKey(ProfesionalSalud, on_delete=models.CASCADE)
+    identificacicion_usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE,null=True ,related_name="Rpaciente",limit_choices_to=Q(tipo_usuario_id=3))
+    identificacion_profesional = models.ForeignKey(Usuario, on_delete=models.CASCADE,null=True, related_name="Rprofesional",limit_choices_to=Q(tipo_usuario_id=2)| Q(tipo_usuario_id=7))
     ficha_clinica_paciente = models.ForeignKey(PacienteFichaClinica, on_delete=models.SET_NULL,null=True)
     def __str__(self):
-        return str(self.identificacicion_usuario)+": PROFESIONAL="+str(self.identificacion_profesional)
+        return str(self.ficha_clinica_paciente)

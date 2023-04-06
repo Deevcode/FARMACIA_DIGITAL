@@ -189,9 +189,8 @@ class EnfermeraAdmin(admin.ModelAdmin):
     search_fields = ['id_enfermera','identificacion_enfermera']
 admin.site.register(Enfermera, EnfermeraAdmin)
 #-----------------------------------------------------------------------------------------------------------------#
-#ADMIN DE PROFESIONAL SALUD
-class ProfesionalSaludAdmin(admin.ModelAdmin):
-    list_display = ('id_profesional','identificacion_profesional' , 'CEESFAM_asignado')
-    search_fields = ['id_profesional','identificacion_profesional' , 'CEESFAM_asignado']
-admin.site.register(ProfesionalSalud, ProfesionalSaludAdmin)
-#-----------------------------------------------------------------------------------------------------------------#
+#ADMIN DE PACIENTE PROFESIONAL
+class ProfesionalPacienteAdmin(admin.ModelAdmin):
+    list_display = ('identificacicion_usuario','identificacion_profesional' , 'ficha_clinica_paciente')
+    search_fields = ['identificacicion_usuario','identificacion_profesional' , 'ficha_clinica_paciente']
+admin.site.register(ProfesionalPaciente, ProfesionalPacienteAdmin)
