@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'colorfield',
     'crispy_forms',
     'bootstrap4',
+    #'import_export',
     #'crispy_bootstrap4',
 ]
 

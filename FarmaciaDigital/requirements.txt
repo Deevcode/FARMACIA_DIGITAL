@@ -8,3 +8,7 @@ python-decouple
 mysqlclient
 django-bootstrap4
 django-environ
+django_mysql
+django-jsonfield
+django-json-field
+django-import-export
