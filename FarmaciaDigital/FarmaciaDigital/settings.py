@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-&&5xw3cy!6t$(jfx+*pp1jaq37v6y3b3i#fv)-h(_$tm8!o*4d
 DEBUG = True
 
 #ALLOWED_HOSTS = []
-ALLOWED_HOSTS = ['devcode06.pythonanywhere.com']
+ALLOWED_HOSTS = ['devcode02.pythonanywhere.com']
 
 MESSAGE_HOST = "django.contrib.messages.storage.cookie.CookieStorage"
 
@@ -106,10 +106,10 @@ WSGI_APPLICATION = 'FarmaciaDigital.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'Devcode06$farmacia',
-        'USER': 'Devcode06',
+        'NAME': 'DevCode02$farmacia',
+        'USER': 'DevCode02',
         'PASSWORD': 'Raveboy999',
-        'HOST': 'Devcode06.mysql.pythonanywhere-services.com',   # Or an IP Address that your DB is hosted on
+        'HOST': 'DevCode02.mysql.pythonanywhere-services.com',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
     }
 }
