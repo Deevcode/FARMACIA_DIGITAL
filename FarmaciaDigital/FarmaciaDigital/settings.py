@@ -106,10 +106,10 @@ WSGI_APPLICATION = 'FarmaciaDigital.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'DevCode06$farmacia',
-        'USER': 'DevCode06',
+        'NAME': 'Devcode06$farmacia',
+        'USER': 'Devcode06',
         'PASSWORD': 'Raveboy999',
-        'HOST': 'DevCode06.mysql.pythonanywhere-services.com',   # Or an IP Address that your DB is hosted on
+        'HOST': 'Devcode06.mysql.pythonanywhere-services.com',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
     }
 }
