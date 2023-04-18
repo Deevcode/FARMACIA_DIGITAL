@@ -191,6 +191,6 @@ admin.site.register(Enfermera, EnfermeraAdmin)
 #-----------------------------------------------------------------------------------------------------------------#
 #ADMIN DE PACIENTE PROFESIONAL
 class ProfesionalPacienteAdmin(admin.ModelAdmin):
-    list_display = ('identificacicion_usuario','identificacion_profesional' , 'ficha_clinica_paciente')
-    search_fields = ['identificacicion_usuario','identificacion_profesional' , 'ficha_clinica_paciente']
+    list_display = ('identificacicion_usuario','identificacion_profesional')
+    search_fields = ['identificacicion_usuario','identificacion_profesional']
 admin.site.register(ProfesionalPaciente, ProfesionalPacienteAdmin)
