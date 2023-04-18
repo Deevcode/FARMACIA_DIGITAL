@@ -341,4 +341,4 @@ class ProfesionalPaciente(models.Model):
     identificacicion_usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE,null=True ,related_name="Rpaciente",limit_choices_to=Q(tipo_usuario_id=3))
     identificacion_profesional = models.ForeignKey(Usuario, on_delete=models.CASCADE,null=True, related_name="Rprofesional",limit_choices_to=Q(tipo_usuario_id=2)| Q(tipo_usuario_id=7))
     def __str__(self):
-        return str(self.id)
+        return str(self.identificacicion_usuario)
