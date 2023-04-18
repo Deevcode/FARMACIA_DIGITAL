@@ -340,6 +340,6 @@ class Enfermera(models.Model):
 class ProfesionalPaciente(models.Model):
     identificacicion_usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE,null=True ,related_name="Rpaciente",limit_choices_to=Q(tipo_usuario_id=3))
     identificacion_profesional = models.ForeignKey(Usuario, on_delete=models.CASCADE,null=True, related_name="Rprofesional",limit_choices_to=Q(tipo_usuario_id=2)| Q(tipo_usuario_id=7))
-    ficha_clinica_paciente = models.ForeignKey(PacienteFichaClinica, on_delete=models.SET_NULL,null=True)
+    ficha_clinica_paciente = models.ForeignKey(PacienteFichaClinica, on_delete=models.SET_NULL,null=True,related_name="Fpaciente",limit_choices_to=Q(tipo_usuario_id=3))
     def __str__(self):
         return str(self.ficha_clinica_paciente)
