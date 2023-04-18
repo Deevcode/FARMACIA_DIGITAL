@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.29, for Linux (x86_64)
 --
--- Host: devcode03.mysql.pythonanywhere-services.com    Database: DevCode03$farmacia
+-- Host: devcode05.mysql.pythonanywhere-services.com    Database: DevCode05$farmacia
 -- ------------------------------------------------------
 -- Server version	5.7.41-log
 
@@ -78,7 +78,7 @@ CREATE TABLE `admin_interface_theme` (
   `show_inlines_as_tabs` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `admin_interface_theme_name_30bda70f_uniq` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -87,6 +87,7 @@ CREATE TABLE `admin_interface_theme` (
 
 LOCK TABLES `admin_interface_theme` WRITE;
 /*!40000 ALTER TABLE `admin_interface_theme` DISABLE KEYS */;
+INSERT INTO `admin_interface_theme` VALUES (1,'Django',1,'Administración de Django',1,'',1,'#0C4B33','#F5DD5D','#44B78B','#FFFFFF','#C9F0DD','#44B78B','#FFFFFF','#FFFFFF','#C9F0DD',1,'#0C3C26','#156641','#0C4B33','#0C3C26','#FFFFFF','#BA2121','#A41515','#FFFFFF',1,1,'#000000',1,'#FFFFFF',1,'','0.3','',1,'#E74C3C',1,1,1,'code',1,0,0,'#FFFFCC','#FFFFFF',100,400,1,'default-select',1,0,0,0);
 /*!40000 ALTER TABLE `admin_interface_theme` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -135,7 +136,7 @@ CREATE TABLE `app_comuna` (
   PRIMARY KEY (`id_comuna`),
   KEY `app_comuna_id_provincia_id_160794d3_fk_app_provi` (`id_provincia_id`),
   CONSTRAINT `app_comuna_id_provincia_id_160794d3_fk_app_provi` FOREIGN KEY (`id_provincia_id`) REFERENCES `app_provincia` (`id_provincia`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=346 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -144,6 +145,7 @@ CREATE TABLE `app_comuna` (
 
 LOCK TABLES `app_comuna` WRITE;
 /*!40000 ALTER TABLE `app_comuna` DISABLE KEYS */;
+INSERT INTO `app_comuna` VALUES (1,'Arica',1),(2,'Camarones',1),(3,'General Lagos',2),(4,'Putre',2),(5,'Alto Hospicio',3),(6,'Iquique',3),(7,'Camiña',4),(8,'Colchane',4),(9,'Huara',4),(10,'Pica',4),(11,'Pozo Almonte',4),(12,'Tocopilla',5),(13,'María Elena',5),(14,'Calama',6),(15,'Ollague',6),(16,'San Pedro de Atacama',6),(17,'Antofagasta',7),(18,'Mejillones',7),(19,'Sierra Gorda',7),(20,'Taltal',7),(21,'Chañaral',8),(22,'Diego de Almagro',8),(23,'Copiapó',9),(24,'Caldera',9),(25,'Tierra Amarilla',9),(26,'Vallenar',10),(27,'Alto del Carmen',10),(28,'Freirina',10),(29,'Huasco',10),(30,'La Serena',11),(31,'Coquimbo',11),(32,'Andacollo',11),(33,'La Higuera',11),(34,'Paihuano',11),(35,'Vicuña',11),(36,'Ovalle',12),(37,'Combarbalá',12),(38,'Monte Patria',12),(39,'Punitaqui',12),(40,'Río Hurtado',12),(41,'Illapel',13),(42,'Canela',13),(43,'Los Vilos',13),(44,'Salamanca',13),(45,'La Ligua',14),(46,'Cabildo',14),(47,'Zapallar',14),(48,'Papudo',14),(49,'Petorca',14),(50,'Los Andes',15),(51,'San Esteban',15),(52,'Calle Larga',15),(53,'Rinconada',15),(54,'San Felipe',16),(55,'Llaillay',16),(56,'Putaendo',16),(57,'Santa María',16),(58,'Catemu',16),(59,'Panquehue',16),(60,'Quillota',17),(61,'La Cruz',17),(62,'La Calera',17),(63,'Nogales',17),(64,'Hijuelas',17),(66,'Viña del Mar',18),(67,'Concón',18),(68,'Quintero',18),(69,'Puchuncaví',18),(70,'Casablanca',18),(71,'Juan Fernández',18),(72,'San Antonio',19),(73,'Cartagena',19),(74,'El Tabo',19),(75,'El Quisco',19),(76,'Algarrobo',19),(77,'Santo Domingo',19),(78,'Isla de Pascua',20),(79,'Quilpué',21),(80,'Limache',21),(81,'Olmué',21),(82,'Villa Alemana',21),(83,'Colina',22),(84,'Lampa',22),(85,'Tiltil',22),(86,'Santiago',23),(87,'Vitacura',23),(88,'San Ramón',23),(89,'San Miguel',23),(90,'San Joaquín',23),(91,'Renca',23),(92,'Recoleta',23),(93,'Quinta Normal',23),(94,'Quilicura',23),(95,'Pudahuel',23),(96,'Providencia',23),(97,'Peñalolén',23),(98,'Pedro Aguirre Cerda',23),(99,'Ñuñoa',23),(100,'Maipú',23),(101,'Macul',23),(102,'Lo Prado',23),(103,'Lo Espejo',23),(104,'Lo Barnechea',23),(105,'Las Condes',23),(106,'La Reina',23),(107,'La Pintana',23),(108,'La Granja',23),(109,'La Florida',23),(110,'La Cisterna',23),(111,'Independencia',23),(112,'Huechuraba',23),(113,'Estación Central',23),(114,'El Bosque',23),(115,'Conchalí',23),(116,'Cerro Navia',23),(117,'Cerrillos',23),(118,'Puente Alto',24),(119,'San José de Maipo',24),(120,'Pirque',24),(121,'San Bernardo',25),(122,'Buin',25),(123,'Paine',25),(124,'Calera de Tango',25),(125,'Melipilla',26),(126,'Alhué',26),(127,'Curacaví',26),(128,'María Pinto',26),(129,'San Pedro',26),(130,'Isla de Maipo',27),(131,'El Monte',27),(132,'Padre Hurtado',27),(133,'Peñaflor',27),(134,'Talagante',27),(135,'Codegua',28),(136,'Coínco',28),(137,'Coltauco',28),(138,'Doñihue',28),(139,'Graneros',28),(140,'Las Cabras',28),(141,'Machalí',28),(142,'Malloa',28),(143,'Mostazal',28),(144,'Olivar',28),(145,'Peumo',28),(146,'Pichidegua',28),(147,'Quinta de Tilcoco',28),(148,'Rancagua',28),(149,'Rengo',28),(150,'Requínoa',28),(151,'San Vicente de Tagua Tagua',28),(152,'Chépica',29),(153,'Chimbarongo',29),(154,'Lolol',29),(155,'Nancagua',29),(156,'Palmilla',29),(157,'Peralillo',29),(158,'Placilla',29),(159,'Pumanque',29),(160,'San Fernando',29),(161,'Santa Cruz',29),(162,'La Estrella',30),(163,'Litueche',30),(164,'Marchigüe',30),(165,'Navidad',30),(166,'Paredones',30),(167,'Pichilemu',30),(168,'Curicó',31),(169,'Hualañé',31),(170,'Licantén',31),(171,'Molina',31),(172,'Rauco',31),(173,'Romeral',31),(174,'Sagrada Familia',31),(175,'Teno',31),(176,'Vichuquén',31),(177,'Talca',32),(178,'San Clemente',32),(179,'Pelarco',32),(180,'Pencahue',32),(181,'Maule',32),(182,'San Rafael',32),(183,'Curepto',33),(184,'Constitución',32),(185,'Empedrado',32),(186,'Río Claro',32),(187,'Linares',33),(188,'San Javier',33),(189,'Parral',33),(190,'Villa Alegre',33),(191,'Longaví',33),(192,'Colbún',33),(193,'Retiro',33),(194,'Yerbas Buenas',33),(195,'Cauquenes',34),(196,'Chanco',34),(197,'Pelluhue',34),(198,'Bulnes',35),(199,'Chillán',35),(200,'Chillán Viejo',35),(201,'El Carmen',35),(202,'Pemuco',35),(203,'Pinto',35),(204,'Quillón',35),(205,'San Ignacio',35),(206,'Yungay',35),(207,'Cobquecura',36),(208,'Coelemu',36),(209,'Ninhue',36),(210,'Portezuelo',36),(211,'Quirihue',36),(212,'Ránquil',36),(213,'Treguaco',36),(214,'San Carlos',37),(215,'Coihueco',37),(216,'San Nicolás',37),(217,'Ñiquén',37),(218,'San Fabián',37),(219,'Alto Biobío',38),(220,'Antuco',38),(221,'Cabrero',38),(222,'Laja',38),(223,'Los Ángeles',38),(224,'Mulchén',38),(225,'Nacimiento',38),(226,'Negrete',38),(227,'Quilaco',38),(228,'Quilleco',38),(229,'San Rosendo',38),(230,'Santa Bárbara',38),(231,'Tucapel',38),(232,'Yumbel',38),(233,'Concepción',39),(234,'Coronel',39),(235,'Chiguayante',39),(236,'Florida',39),(237,'Hualpén',39),(238,'Hualqui',39),(239,'Lota',39),(240,'Penco',39),(241,'San Pedro de La Paz',39),(242,'Santa Juana',39),(243,'Talcahuano',39),(244,'Tomé',39),(245,'Arauco',40),(246,'Cañete',40),(247,'Contulmo',40),(248,'Curanilahue',40),(249,'Lebu',40),(250,'Los Álamos',40),(251,'Tirúa',40),(252,'Angol',41),(253,'Collipulli',41),(254,'Curacautín',41),(255,'Ercilla',41),(256,'Lonquimay',41),(257,'Los Sauces',41),(258,'Lumaco',41),(259,'Purén',41),(260,'Renaico',41),(261,'Traiguén',41),(262,'Victoria',41),(263,'Temuco',42),(264,'Carahue',42),(265,'Cholchol',42),(266,'Cunco',42),(267,'Curarrehue',42),(268,'Freire',42),(269,'Galvarino',42),(270,'Gorbea',42),(271,'Lautaro',42),(272,'Loncoche',42),(273,'Melipeuco',42),(274,'Nueva Imperial',42),(275,'Padre Las Casas',42),(276,'Perquenco',42),(277,'Pitrufquén',42),(278,'Pucón',42),(279,'Saavedra',42),(280,'Teodoro Schmidt',42),(281,'Toltén',42),(282,'Vilcún',42),(283,'Villarrica',42),(284,'Valdivia',43),(285,'Corral',43),(286,'Lanco',43),(287,'Los Lagos',43),(288,'Máfil',43),(289,'Mariquina',43),(290,'Paillaco',43),(291,'Panguipulli',43),(292,'La Unión',44),(293,'Futrono',44),(294,'Lago Ranco',44),(295,'Río Bueno',44),(296,'Osorno',45),(297,'Puerto Octay',45),(298,'Purranque',45),(299,'Puyehue',45),(300,'Río Negro',45),(301,'San Juan de la Costa',45),(302,'San Pablo',45),(303,'Calbuco',46),(304,'Cochamó',46),(305,'Fresia',46),(306,'Frutillar',46),(307,'Llanquihue',46),(308,'Los Muermos',46),(309,'Maullín',46),(310,'Puerto Montt',46),(311,'Puerto Varas',46),(312,'Ancud',47),(313,'Castro',47),(314,'Chonchi',47),(315,'Curaco de Vélez',47),(316,'Dalcahue',47),(317,'Puqueldón',47),(318,'Queilén',47),(319,'Quellón',47),(320,'Quemchi',47),(321,'Quinchao',47),(322,'Chaitén',48),(323,'Futaleufú',48),(324,'Hualaihué',48),(325,'Palena',48),(326,'Lago Verde',49),(327,'Coihaique',49),(328,'Aysén',50),(329,'Cisnes',50),(330,'Guaitecas',50),(331,'Río Ibáñez',51),(332,'Chile Chico',51),(333,'Cochrane',52),(334,'OHiggins',52),(335,'Tortel',52),(336,'Natales',53),(337,'Torres del Paine',53),(338,'Laguna Blanca',54),(339,'Punta Arenas',54),(340,'Río Verde',54),(341,'San Gregorio',54),(342,'Porvenir',55),(343,'Primavera',55),(344,'Timaukel',55),(345,'Cabo de Hornos',56);
 /*!40000 ALTER TABLE `app_comuna` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -320,7 +322,7 @@ CREATE TABLE `app_laboratorio` (
   `id_laboratorio` int(11) NOT NULL AUTO_INCREMENT,
   `nombre_laboratorio` varchar(100) NOT NULL,
   PRIMARY KEY (`id_laboratorio`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -329,6 +331,7 @@ CREATE TABLE `app_laboratorio` (
 
 LOCK TABLES `app_laboratorio` WRITE;
 /*!40000 ALTER TABLE `app_laboratorio` DISABLE KEYS */;
+INSERT INTO `app_laboratorio` VALUES (1,'Andromaco'),(2,'Roche'),(3,'MintLab'),(4,'Abbott'),(5,'Lundbeck');
 /*!40000 ALTER TABLE `app_laboratorio` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -384,7 +387,7 @@ CREATE TABLE `app_medicamentos` (
   CONSTRAINT `app_medicamentos_id_laboratorio_id_4a33a7ca_fk_app_labor` FOREIGN KEY (`id_laboratorio_id`) REFERENCES `app_laboratorio` (`id_laboratorio`),
   CONSTRAINT `app_medicamentos_id_principio_activo__14113581_fk_app_princ` FOREIGN KEY (`id_principio_activo_id`) REFERENCES `app_principioactivo` (`id_principio_activo`),
   CONSTRAINT `app_medicamentos_id_via_administracio_4ca8523e_fk_app_viaad` FOREIGN KEY (`id_via_administracion_id`) REFERENCES `app_viaadminstracion` (`id_via_administracion`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -393,6 +396,7 @@ CREATE TABLE `app_medicamentos` (
 
 LOCK TABLES `app_medicamentos` WRITE;
 /*!40000 ALTER TABLE `app_medicamentos` DISABLE KEYS */;
+INSERT INTO `app_medicamentos` VALUES (1,'Levofamil','200/50 mg',13,'30 Comprimidos',1,1,1),(2,'Citalopram','20mg',20,'30 Comprimidos',3,3,1),(3,'Prolopa','200 mg/50 mg',10,'30 Comprimidos',2,2,1),(4,'Prolopa®HBS','100 mg/ 25 mg',31,'30 Cápsulas',2,2,1),(5,'Prolopa®Dispersable','100 mg/ 25 mg',20,'30 Comprimidos Dispersables',2,2,1),(6,'Cipramil®','20mg',30,'28 Comprimidos',5,3,1);
 /*!40000 ALTER TABLE `app_medicamentos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -469,7 +473,7 @@ CREATE TABLE `app_pacientefichaclinica` (
   PRIMARY KEY (`id_paciente_ficha`),
   KEY `app_pacientefichacli_identificacion_pacie_f95dfd7b_fk_app_usuar` (`identificacion_paciente_id`),
   CONSTRAINT `app_pacientefichacli_identificacion_pacie_f95dfd7b_fk_app_usuar` FOREIGN KEY (`identificacion_paciente_id`) REFERENCES `app_usuario` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -478,6 +482,7 @@ CREATE TABLE `app_pacientefichaclinica` (
 
 LOCK TABLES `app_pacientefichaclinica` WRITE;
 /*!40000 ALTER TABLE `app_pacientefichaclinica` DISABLE KEYS */;
+INSERT INTO `app_pacientefichaclinica` VALUES (1,0,0,'2010-04-18',4);
 /*!40000 ALTER TABLE `app_pacientefichaclinica` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -536,7 +541,7 @@ CREATE TABLE `app_principioactivo` (
   `id_principio_activo` int(11) NOT NULL AUTO_INCREMENT,
   `nombre_princio_activo` varchar(100) NOT NULL,
   PRIMARY KEY (`id_principio_activo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -545,6 +550,7 @@ CREATE TABLE `app_principioactivo` (
 
 LOCK TABLES `app_principioactivo` WRITE;
 /*!40000 ALTER TABLE `app_principioactivo` DISABLE KEYS */;
+INSERT INTO `app_principioactivo` VALUES (1,'Levodopa+Carbidopa'),(2,'Levadopa+Benserazida'),(3,'Citalopram'),(4,'Pramipexol');
 /*!40000 ALTER TABLE `app_principioactivo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -557,14 +563,11 @@ DROP TABLE IF EXISTS `app_profesionalpaciente`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `app_profesionalpaciente` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `ficha_clinica_paciente_id` int(11) DEFAULT NULL,
   `identificacicion_usuario_id` bigint(20) DEFAULT NULL,
   `identificacion_profesional_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `app_profesionalpacie_ficha_clinica_pacien_ed52ab48_fk_app_pacie` (`ficha_clinica_paciente_id`),
   KEY `app_profesionalpacie_identificacicion_usu_9823bdda_fk_app_usuar` (`identificacicion_usuario_id`),
   KEY `app_profesionalpacie_identificacion_profe_65009ba3_fk_app_usuar` (`identificacion_profesional_id`),
-  CONSTRAINT `app_profesionalpacie_ficha_clinica_pacien_ed52ab48_fk_app_pacie` FOREIGN KEY (`ficha_clinica_paciente_id`) REFERENCES `app_pacientefichaclinica` (`id_paciente_ficha`),
   CONSTRAINT `app_profesionalpacie_identificacicion_usu_9823bdda_fk_app_usuar` FOREIGN KEY (`identificacicion_usuario_id`) REFERENCES `app_usuario` (`id`),
   CONSTRAINT `app_profesionalpacie_identificacion_profe_65009ba3_fk_app_usuar` FOREIGN KEY (`identificacion_profesional_id`) REFERENCES `app_usuario` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -593,7 +596,7 @@ CREATE TABLE `app_provincia` (
   PRIMARY KEY (`id_provincia`),
   KEY `app_provincia_id_region_id_82ac5e48_fk_app_region_id_region` (`id_region_id`),
   CONSTRAINT `app_provincia_id_region_id_82ac5e48_fk_app_region_id_region` FOREIGN KEY (`id_region_id`) REFERENCES `app_region` (`id_region`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -602,6 +605,7 @@ CREATE TABLE `app_provincia` (
 
 LOCK TABLES `app_provincia` WRITE;
 /*!40000 ALTER TABLE `app_provincia` DISABLE KEYS */;
+INSERT INTO `app_provincia` VALUES (1,'Arica',1),(2,'Parinacota',1),(3,'Iquique',2),(4,'El Tamarugal',2),(5,'Tocopilla',3),(6,'El Loa',3),(7,'Antofagasta',3),(8,'Chañaral',4),(9,'Copiapó',4),(10,'Huasco',4),(11,'Elqui',5),(12,'Limarí',5),(13,'Choapa',5),(14,'Petorca',6),(15,'Los Andes',6),(16,'San Felipe de Aconcagua',6),(17,'Quillota',6),(18,'Valparaiso',6),(19,'San Antonio',6),(20,'Isla de Pascua',6),(21,'Marga Marga',6),(22,'Chacabuco',7),(23,'Santiago',7),(24,'Cordillera',7),(25,'Maipo',7),(26,'Melipilla',7),(27,'Talagante',7),(28,'Cachapoal',8),(29,'Colchagua',8),(30,'Cardenal Caro',8),(31,'Curicó',9),(32,'Talca',9),(33,'Linares',9),(34,'Cauquenes',9),(35,'Diguillín',10),(36,'Itata',10),(37,'Punilla',10),(38,'Bio Bío',11),(39,'Concepción',11),(40,'Arauco',11),(41,'Malleco',12),(42,'Cautín',12),(43,'Valdivia',13),(44,'Ranco',13),(45,'Osorno',14),(46,'Llanquihue',14),(47,'Chiloé',14),(48,'Palena',14),(49,'Coyhaique',15),(50,'Aysén',15),(51,'General Carrera',15),(52,'Capitán Prat',15),(53,'Última Esperanza',16),(54,'Magallanes',16),(55,'Tierra del Fuego',16),(56,'Antártica Chilena',16);
 /*!40000 ALTER TABLE `app_provincia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -642,7 +646,7 @@ CREATE TABLE `app_region` (
   `id_region` int(11) NOT NULL AUTO_INCREMENT,
   `nombre_region` varchar(45) NOT NULL,
   PRIMARY KEY (`id_region`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -651,6 +655,7 @@ CREATE TABLE `app_region` (
 
 LOCK TABLES `app_region` WRITE;
 /*!40000 ALTER TABLE `app_region` DISABLE KEYS */;
+INSERT INTO `app_region` VALUES (1,'METROPOLITANA'),(2,'ARICA Y PARINACOTA'),(3,'TARAPACÁ'),(4,'ANTOFAGASTA'),(5,'ATACAMA'),(6,'COQUIMBO'),(7,'VALPARAÍSO'),(8,'LIBERTADOR GRAL. BERNARDO OHIGGINS'),(9,'EL MAULE'),(10,'ÑUBLE'),(11,'BIOBÍO'),(12,'LA ARAUCANÍA'),(13,'LOS RÍOS'),(14,'LOS LAGOS'),(15,'AYSÉN DEL GRAL. CARLOS IBAÑEZ DEL CAMPO'),(16,'MAGALLANES Y LA ANTÁRTICA CHILENA');
 /*!40000 ALTER TABLE `app_region` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -665,7 +670,7 @@ CREATE TABLE `app_tipo_usuario` (
   `id_TipoUsuario` int(11) NOT NULL AUTO_INCREMENT,
   `nombre_tipo_usuario` varchar(100) NOT NULL,
   PRIMARY KEY (`id_TipoUsuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -674,6 +679,7 @@ CREATE TABLE `app_tipo_usuario` (
 
 LOCK TABLES `app_tipo_usuario` WRITE;
 /*!40000 ALTER TABLE `app_tipo_usuario` DISABLE KEYS */;
+INSERT INTO `app_tipo_usuario` VALUES (2,'Laboratorio'),(3,'Paciente'),(4,'Familiar'),(5,'QuimicoFarmaceutico'),(6,'CESFAM'),(7,'Enfermera');
 /*!40000 ALTER TABLE `app_tipo_usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -702,7 +708,7 @@ CREATE TABLE `app_usuario` (
   UNIQUE KEY `username` (`username`),
   KEY `app_usuario_tipo_usuario_id_e679f3b8_fk_app_tipo_` (`tipo_usuario_id`),
   CONSTRAINT `app_usuario_tipo_usuario_id_e679f3b8_fk_app_tipo_` FOREIGN KEY (`tipo_usuario_id`) REFERENCES `app_tipo_usuario` (`id_TipoUsuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -711,7 +717,7 @@ CREATE TABLE `app_usuario` (
 
 LOCK TABLES `app_usuario` WRITE;
 /*!40000 ALTER TABLE `app_usuario` DISABLE KEYS */;
-INSERT INTO `app_usuario` VALUES (1,'pbkdf2_sha256$320000$NaG2410XtHzITy3WRKL67D$mMvrpSLGbjmYJBxfikyqBkwnRtZhVjEUVtV66taAYYM=',NULL,1,'adminmedi','','','josee.cornejo@gmail.com',1,1,'2023-04-11 03:45:37.727232','',NULL);
+INSERT INTO `app_usuario` VALUES (1,'pbkdf2_sha256$390000$zL9VMsQZNRlV4IcYFiz0Aq$EX8Sw6+2iYrN20MYQ13GKOmnRYn/e1l5xc9LjIVOiy8=','2023-04-18 06:05:42.945875',1,'adminmedi','','','josee.cornejo@gmail.com',1,1,'2023-04-11 13:09:59.592301','',NULL),(2,'pbkdf2_sha256$390000$mEdcslJlx6rVmYHPKPDnLB$gyCGWV7pd8qWz0nq0IcLJzMWi9IVAVe8kjTtQfUQu0I=','2023-03-22 14:33:26.959317',0,'Juan_01','Juan','Perez','juan@gmail.com',0,1,'2023-03-21 00:13:07.691684','18.227.394-7',3),(3,'pbkdf2_sha256$390000$omEZWgCs1gQrxouWi0UfYj$IOPX48w+OTFjWczX2TpBJGT9Fhn8hRZDt7kb0ZQYrDc=','2023-03-21 16:17:19.004479',0,'Matias_02','Matias','Prado','matias@gmail.com',0,1,'2023-03-21 02:10:59.558340','17.238.393-0',3),(4,'pbkdf2_sha256$390000$VILMPlfmb8YkgGXWVrmRzh$r7EU+GGcPW9+Ov4FWhOVtHTKlJOf43XJ7aDS28D/eLM=',NULL,0,'Benjamin_03','Benjamim','Cornejo','benjamin@gmail.com',0,1,'2023-03-21 02:13:05.953829','20.123.456-k',4),(5,'pbkdf2_sha256$390000$hwMWLaRGlSDkVuKMqfPNC1$IvAglpISQH7ykJuX/JHD2pPvByOOiwlmtG7m4QYet+8=',NULL,0,'Tomas_04','Tomas','Gutierrez','tomas@gmail.com',0,1,'2023-03-21 02:17:11.395323','18.234.564-1',4),(6,'pbkdf2_sha256$390000$7rgIUH2VF1gdfQmZAfHGhk$OIJ2P+X4kLVGXm57ug1Z3AHGEPy2BBkXMW6kEDFb1eA=',NULL,0,'mariadibu','Maria Angela','Dibu Barrientos','maria.db@gmail.com',0,1,'2023-04-03 14:03:05.401216','11111111-1',7),(7,'pbkdf2_sha256$390000$1lJsYcIMPfwqPzUlgMMRy5$pYnZA6/lZj4dRY6r4IDd8MzS7tQgFKGzADvW4DUfGp4=',NULL,0,'danigarrido','Daniela Arido','Garrido Barriento','barrientos.dani@gmail.com',0,1,'2023-04-03 14:07:24.911267','11111111-1',7),(8,'pbkdf2_sha256$390000$rDt69TQLzl5ce5nDOmxgs7$j8Wrpvuarc9MRLiHPMa/Dh6uiNT21YSQ6Opm8IYRhdU=',NULL,0,'cesfampuentealto','CESFAM','Puente Alto','cesfam@ptealto.cl',0,1,'2023-04-03 14:20:24.732317','1-1',6);
 /*!40000 ALTER TABLE `app_usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -816,7 +822,7 @@ CREATE TABLE `app_viaadminstracion` (
   `id_via_administracion` int(11) NOT NULL AUTO_INCREMENT,
   `nombre_via_administracion` varchar(100) NOT NULL,
   PRIMARY KEY (`id_via_administracion`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -825,6 +831,7 @@ CREATE TABLE `app_viaadminstracion` (
 
 LOCK TABLES `app_viaadminstracion` WRITE;
 /*!40000 ALTER TABLE `app_viaadminstracion` DISABLE KEYS */;
+INSERT INTO `app_viaadminstracion` VALUES (1,'Oral'),(2,'Rectal'),(3,'Endovenoso'),(4,'Intramuscular');
 /*!40000 ALTER TABLE `app_viaadminstracion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -840,7 +847,7 @@ CREATE TABLE `auth_group` (
   `name` varchar(150) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -849,6 +856,7 @@ CREATE TABLE `auth_group` (
 
 LOCK TABLES `auth_group` WRITE;
 /*!40000 ALTER TABLE `auth_group` DISABLE KEYS */;
+INSERT INTO `auth_group` VALUES (1,'Lector');
 /*!40000 ALTER TABLE `auth_group` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -929,7 +937,7 @@ CREATE TABLE `django_admin_log` (
   KEY `django_admin_log_user_id_c564eba6_fk_app_usuario_id` (`user_id`),
   CONSTRAINT `django_admin_log_content_type_id_c4bce8eb_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
   CONSTRAINT `django_admin_log_user_id_c564eba6_fk_app_usuario_id` FOREIGN KEY (`user_id`) REFERENCES `app_usuario` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -938,6 +946,7 @@ CREATE TABLE `django_admin_log` (
 
 LOCK TABLES `django_admin_log` WRITE;
 /*!40000 ALTER TABLE `django_admin_log` DISABLE KEYS */;
+INSERT INTO `django_admin_log` VALUES (1,'2023-04-18 05:56:48.313032','1','Benjamim Cornejo 20.123.456-k Familiar: Diabetes:0, Hipertension:0',1,'[{\"added\": {}}]',14,1);
 /*!40000 ALTER TABLE `django_admin_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -980,7 +989,7 @@ CREATE TABLE `django_migrations` (
   `name` varchar(255) NOT NULL,
   `applied` datetime(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -989,7 +998,7 @@ CREATE TABLE `django_migrations` (
 
 LOCK TABLES `django_migrations` WRITE;
 /*!40000 ALTER TABLE `django_migrations` DISABLE KEYS */;
-INSERT INTO `django_migrations` VALUES (1,'contenttypes','0001_initial','2023-04-11 03:45:00.831137'),(2,'contenttypes','0002_remove_content_type_name','2023-04-11 03:45:00.931620'),(3,'auth','0001_initial','2023-04-11 03:45:01.244747'),(4,'auth','0002_alter_permission_name_max_length','2023-04-11 03:45:01.308320'),(5,'auth','0003_alter_user_email_max_length','2023-04-11 03:45:01.320222'),(6,'auth','0004_alter_user_username_opts','2023-04-11 03:45:01.331124'),(7,'auth','0005_alter_user_last_login_null','2023-04-11 03:45:01.342126'),(8,'auth','0006_require_contenttypes_0002','2023-04-11 03:45:01.352078'),(9,'auth','0007_alter_validators_add_error_messages','2023-04-11 03:45:01.361864'),(10,'auth','0008_alter_user_username_max_length','2023-04-11 03:45:01.372992'),(11,'auth','0009_alter_user_last_name_max_length','2023-04-11 03:45:01.383646'),(12,'auth','0010_alter_group_name_max_length','2023-04-11 03:45:01.464332'),(13,'auth','0011_update_proxy_permissions','2023-04-11 03:45:01.475106'),(14,'auth','0012_alter_user_first_name_max_length','2023-04-11 03:45:01.486377'),(15,'app','0001_initial','2023-04-11 03:45:05.607741'),(16,'admin','0001_initial','2023-04-11 03:45:05.769723'),(17,'admin','0002_logentry_remove_auto_add','2023-04-11 03:45:05.800663'),(18,'admin','0003_logentry_add_action_flag_choices','2023-04-11 03:45:05.823706'),(19,'admin_interface','0001_initial','2023-04-11 03:45:05.859888'),(20,'admin_interface','0002_add_related_modal','2023-04-11 03:45:06.114443'),(21,'admin_interface','0003_add_logo_color','2023-04-11 03:45:06.173601'),(22,'admin_interface','0004_rename_title_color','2023-04-11 03:45:06.195892'),(23,'admin_interface','0005_add_recent_actions_visible','2023-04-11 03:45:06.252317'),(24,'admin_interface','0006_bytes_to_str','2023-04-11 03:45:06.342951'),(25,'admin_interface','0007_add_favicon','2023-04-11 03:45:06.397734'),(26,'admin_interface','0008_change_related_modal_background_opacity_type','2023-04-11 03:45:06.480611'),(27,'admin_interface','0009_add_enviroment','2023-04-11 03:45:06.573342'),(28,'admin_interface','0010_add_localization','2023-04-11 03:45:06.597803'),(29,'admin_interface','0011_add_environment_options','2023-04-11 03:45:06.736221'),(30,'admin_interface','0012_update_verbose_names','2023-04-11 03:45:06.751193'),(31,'admin_interface','0013_add_related_modal_close_button','2023-04-11 03:45:06.811870'),(32,'admin_interface','0014_name_unique','2023-04-11 03:45:06.845215'),(33,'admin_interface','0015_add_language_chooser_active','2023-04-11 03:45:06.905543'),(34,'admin_interface','0016_add_language_chooser_display','2023-04-11 03:45:06.962673'),(35,'admin_interface','0017_change_list_filter_dropdown','2023-04-11 03:45:06.973565'),(36,'admin_interface','0018_theme_list_filter_sticky','2023-04-11 03:45:07.033793'),(37,'admin_interface','0019_add_form_sticky','2023-04-11 03:45:07.142310'),(38,'admin_interface','0020_module_selected_colors','2023-04-11 03:45:07.302417'),(39,'admin_interface','0021_file_extension_validator','2023-04-11 03:45:07.318534'),(40,'admin_interface','0022_add_logo_max_width_and_height','2023-04-11 03:45:07.430718'),(41,'admin_interface','0023_theme_foldable_apps','2023-04-11 03:45:07.488694'),(42,'admin_interface','0024_remove_theme_css','2023-04-11 03:45:07.536028'),(43,'admin_interface','0025_theme_language_chooser_control','2023-04-11 03:45:07.590244'),(44,'admin_interface','0026_theme_list_filter_highlight','2023-04-11 03:45:07.661657'),(45,'admin_interface','0027_theme_list_filter_removal_links','2023-04-11 03:45:07.730591'),(46,'admin_interface','0028_theme_show_fieldsets_as_tabs_and_more','2023-04-11 03:45:07.842498'),(47,'sessions','0001_initial','2023-04-11 03:45:07.891789');
+INSERT INTO `django_migrations` VALUES (1,'contenttypes','0001_initial','2023-04-11 13:09:19.827222'),(2,'contenttypes','0002_remove_content_type_name','2023-04-11 13:09:20.023831'),(3,'auth','0001_initial','2023-04-11 13:09:20.415432'),(4,'auth','0002_alter_permission_name_max_length','2023-04-11 13:09:20.591388'),(5,'auth','0003_alter_user_email_max_length','2023-04-11 13:09:20.615674'),(6,'auth','0004_alter_user_username_opts','2023-04-11 13:09:20.633606'),(7,'auth','0005_alter_user_last_login_null','2023-04-11 13:09:20.651102'),(8,'auth','0006_require_contenttypes_0002','2023-04-11 13:09:20.671101'),(9,'auth','0007_alter_validators_add_error_messages','2023-04-11 13:09:20.699188'),(10,'auth','0008_alter_user_username_max_length','2023-04-11 13:09:20.727409'),(11,'auth','0009_alter_user_last_name_max_length','2023-04-11 13:09:20.750830'),(12,'auth','0010_alter_group_name_max_length','2023-04-11 13:09:20.846641'),(13,'auth','0011_update_proxy_permissions','2023-04-11 13:09:20.861428'),(14,'auth','0012_alter_user_first_name_max_length','2023-04-11 13:09:20.871813'),(15,'app','0001_initial','2023-04-11 13:09:24.566237'),(16,'admin','0001_initial','2023-04-11 13:09:24.767826'),(17,'admin','0002_logentry_remove_auto_add','2023-04-11 13:09:24.802500'),(18,'admin','0003_logentry_add_action_flag_choices','2023-04-11 13:09:24.831037'),(19,'admin_interface','0001_initial','2023-04-11 13:09:24.874724'),(20,'admin_interface','0002_add_related_modal','2023-04-11 13:09:25.151904'),(21,'admin_interface','0003_add_logo_color','2023-04-11 13:09:25.219444'),(22,'admin_interface','0004_rename_title_color','2023-04-11 13:09:25.259597'),(23,'admin_interface','0005_add_recent_actions_visible','2023-04-11 13:09:25.356573'),(24,'admin_interface','0006_bytes_to_str','2023-04-11 13:09:25.452469'),(25,'admin_interface','0007_add_favicon','2023-04-11 13:09:25.532394'),(26,'admin_interface','0008_change_related_modal_background_opacity_type','2023-04-11 13:09:25.671456'),(27,'admin_interface','0009_add_enviroment','2023-04-11 13:09:25.792686'),(28,'admin_interface','0010_add_localization','2023-04-11 13:09:25.821045'),(29,'admin_interface','0011_add_environment_options','2023-04-11 13:09:26.051785'),(30,'admin_interface','0012_update_verbose_names','2023-04-11 13:09:26.080001'),(31,'admin_interface','0013_add_related_modal_close_button','2023-04-11 13:09:26.240030'),(32,'admin_interface','0014_name_unique','2023-04-11 13:09:26.332230'),(33,'admin_interface','0015_add_language_chooser_active','2023-04-11 13:09:26.491684'),(34,'admin_interface','0016_add_language_chooser_display','2023-04-11 13:09:26.667811'),(35,'admin_interface','0017_change_list_filter_dropdown','2023-04-11 13:09:26.691588'),(36,'admin_interface','0018_theme_list_filter_sticky','2023-04-11 13:09:26.852068'),(37,'admin_interface','0019_add_form_sticky','2023-04-11 13:09:26.987648'),(38,'admin_interface','0020_module_selected_colors','2023-04-11 13:09:27.183228'),(39,'admin_interface','0021_file_extension_validator','2023-04-11 13:09:27.207166'),(40,'admin_interface','0022_add_logo_max_width_and_height','2023-04-11 13:09:27.373197'),(41,'admin_interface','0023_theme_foldable_apps','2023-04-11 13:09:27.495635'),(42,'admin_interface','0024_remove_theme_css','2023-04-11 13:09:27.597022'),(43,'admin_interface','0025_theme_language_chooser_control','2023-04-11 13:09:27.686663'),(44,'admin_interface','0026_theme_list_filter_highlight','2023-04-11 13:09:27.829352'),(45,'admin_interface','0027_theme_list_filter_removal_links','2023-04-11 13:09:27.941965'),(46,'admin_interface','0028_theme_show_fieldsets_as_tabs_and_more','2023-04-11 13:09:28.109506'),(47,'sessions','0001_initial','2023-04-11 13:09:28.201276'),(48,'app','0002_alter_profesionalpaciente_ficha_clinica_paciente','2023-04-18 06:00:09.351669'),(49,'app','0003_alter_profesionalpaciente_ficha_clinica_paciente','2023-04-18 06:02:49.207500'),(50,'app','0004_remove_profesionalpaciente_ficha_clinica_paciente','2023-04-18 06:05:00.918623');
 /*!40000 ALTER TABLE `django_migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1015,6 +1024,7 @@ CREATE TABLE `django_session` (
 
 LOCK TABLES `django_session` WRITE;
 /*!40000 ALTER TABLE `django_session` DISABLE KEYS */;
+INSERT INTO `django_session` VALUES ('7b1h5xakwgnj9zx049tghso7ayulg0tf','.eJxVjEEOwiAURO_C2hAoUMCle89AgP-_VA0kpV0Z764kXehuMu_NvFiI-1bC3nENC7Azk-z026WYH1gHgHust8Zzq9u6JD4UftDOrw3weTncv4MSe_muMTkSNKH2GYwzRGrEeYKoyQmZNEk120RG2kyKhPCAjmyWwpOmlNn7AwWlONY:1poeTG:0ffQKilJkDBM0bkeURgQAJcJwia6tCBpRaqOhryoF1Q','2023-05-02 06:05:42.954708');
 /*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -1027,4 +1037,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-04-11 13:13:50
+-- Dump completed on 2023-04-18  6:07:19
