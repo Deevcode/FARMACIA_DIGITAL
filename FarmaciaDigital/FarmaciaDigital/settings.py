@@ -103,28 +103,28 @@ WSGI_APPLICATION = 'FarmaciaDigital.wsgi.application'
 #}
 
 #ESTA CONFIGURACION ES PARA UTILIZAR LA BASE DE DATOS DE MYSQL PA
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'DevCode05$farmacia',
-        'USER': 'DevCode05',
-        'PASSWORD': 'Raveboy999',
-        'HOST': 'DevCode05.mysql.pythonanywhere-services.com',   # Or an IP Address that your DB is hosted on
-        'PORT': '3306',
-    }
-}
-
-#ESTA CONFIGURACION ES PARA UTILIZAR LA BASE DE DATOS DE MYSQL
 #DATABASES = {
 #    'default': {
 #        'ENGINE': 'django.db.backends.mysql',
-#        'NAME': config("NAME"),
-#        'USER': config("USER"),
-#        'PASSWORD': config("PASSWORD"),
-#        'HOST': config("HOST"),
-#        'PORT': config("PORT")
+#        'NAME': 'DevCode05$farmacia',
+#        'USER': 'DevCode05',
+#        'PASSWORD': 'Raveboy999',
+#        'HOST': 'DevCode05.mysql.pythonanywhere-services.com',   # Or an IP Address that your DB is hosted on
+#        'PORT': '3306',
 #    }
 #}
+
+#ESTA CONFIGURACION ES PARA UTILIZAR LA BASE DE DATOS DE MYSQL
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': config("NAME"),
+        'USER': config("USER"),
+        'PASSWORD': config("PASSWORD"),
+        'HOST': config("HOST"),
+        'PORT': config("PORT")
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
