@@ -78,7 +78,7 @@ CREATE TABLE `admin_interface_theme` (
   `show_inlines_as_tabs` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `admin_interface_theme_name_30bda70f_uniq` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -87,7 +87,7 @@ CREATE TABLE `admin_interface_theme` (
 
 LOCK TABLES `admin_interface_theme` WRITE;
 /*!40000 ALTER TABLE `admin_interface_theme` DISABLE KEYS */;
-INSERT INTO `admin_interface_theme` VALUES (3,'FD',1,'Farmacia Digital Administración',1,'admin-interface/logo/1.png',1,'#0B0B4B','#80EEF5','#4457B7','#FFFFFF','#B2E9F0','#168FB7','#FFFFFF','#FFFFFF','#C9F0DD',1,'#0D1A3C','#D8DAE6','#0C4B33','#0C3C26','#FFFFFF','#BA2121','#A41515','#FFFFFF',1,1,'#000000',1,'#FFFFFF',1,'admin-interface/favicon/2.png','0.3','Administrador Farmacia Digital',1,'#E74C3C',1,1,1,'code',1,0,0,'#FFFFCC','#FFFFFF',100,400,1,'default-select',1,0,0,0),(4,'Django',0,'Administración de Django',1,'',1,'#0C4B33','#F5DD5D','#44B78B','#FFFFFF','#C9F0DD','#44B78B','#FFFFFF','#FFFFFF','#C9F0DD',1,'#0C3C26','#156641','#0C4B33','#0C3C26','#FFFFFF','#BA2121','#A41515','#FFFFFF',1,1,'#000000',1,'#FFFFFF',1,'','0.3','',1,'#E74C3C',1,1,1,'code',1,0,0,'#FFFFCC','#FFFFFF',100,400,1,'default-select',1,0,0,0);
+INSERT INTO `admin_interface_theme` VALUES (1,'Django',1,'Administración de Django',1,'',1,'#0C4B33','#F5DD5D','#44B78B','#FFFFFF','#C9F0DD','#44B78B','#FFFFFF','#FFFFFF','#C9F0DD',1,'#0C3C26','#156641','#0C4B33','#0C3C26','#FFFFFF','#BA2121','#A41515','#FFFFFF',1,1,'#000000',1,'#FFFFFF',1,'','0.3','',1,'#E74C3C',1,1,1,'code',1,0,0,'#FFFFCC','#FFFFFF',100,400,1,'default-select',1,0,0,0);
 /*!40000 ALTER TABLE `admin_interface_theme` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -564,15 +564,12 @@ CREATE TABLE `app_profesionalpaciente` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `identificacicion_usuario_id` bigint(20) DEFAULT NULL,
   `identificacion_profesional_id` bigint(20) DEFAULT NULL,
-  `ficha_clinica_paciente_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `app_profesionalpacie_identificacicion_usu_9823bdda_fk_app_usuar` (`identificacicion_usuario_id`),
   KEY `app_profesionalpacie_identificacion_profe_65009ba3_fk_app_usuar` (`identificacion_profesional_id`),
-  KEY `app_profesionalpacie_ficha_clinica_pacien_ed52ab48_fk_app_pacie` (`ficha_clinica_paciente_id`),
-  CONSTRAINT `app_profesionalpacie_ficha_clinica_pacien_ed52ab48_fk_app_pacie` FOREIGN KEY (`ficha_clinica_paciente_id`) REFERENCES `app_pacientefichaclinica` (`id_paciente_ficha`),
   CONSTRAINT `app_profesionalpacie_identificacicion_usu_9823bdda_fk_app_usuar` FOREIGN KEY (`identificacicion_usuario_id`) REFERENCES `app_usuario` (`id`),
   CONSTRAINT `app_profesionalpacie_identificacion_profe_65009ba3_fk_app_usuar` FOREIGN KEY (`identificacion_profesional_id`) REFERENCES `app_usuario` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -581,6 +578,7 @@ CREATE TABLE `app_profesionalpaciente` (
 
 LOCK TABLES `app_profesionalpaciente` WRITE;
 /*!40000 ALTER TABLE `app_profesionalpaciente` DISABLE KEYS */;
+INSERT INTO `app_profesionalpaciente` VALUES (1,2,7),(2,3,6);
 /*!40000 ALTER TABLE `app_profesionalpaciente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -719,7 +717,7 @@ CREATE TABLE `app_usuario` (
 
 LOCK TABLES `app_usuario` WRITE;
 /*!40000 ALTER TABLE `app_usuario` DISABLE KEYS */;
-INSERT INTO `app_usuario` VALUES (1,'pbkdf2_sha256$390000$00jDtBs5iTIa2u2dWyhuOm$p6R5yI3E37ULKMlWJ36opoN4R05JJWdA+26ASTZU/LE=','2023-04-19 03:49:18.020830',1,'adminmedi','','','josee.cornejo@gmail.com',1,1,'2023-04-18 06:13:28.087421','',NULL),(2,'pbkdf2_sha256$390000$mEdcslJlx6rVmYHPKPDnLB$gyCGWV7pd8qWz0nq0IcLJzMWi9IVAVe8kjTtQfUQu0I=','2023-03-22 14:33:26.959317',0,'Juan_01','Juan','Perez','juan@gmail.com',0,1,'2023-03-21 00:13:07.691684','18.227.394-7',3),(3,'pbkdf2_sha256$390000$omEZWgCs1gQrxouWi0UfYj$IOPX48w+OTFjWczX2TpBJGT9Fhn8hRZDt7kb0ZQYrDc=','2023-03-21 16:17:19.004479',0,'Matias_02','Matias','Prado','matias@gmail.com',0,1,'2023-03-21 02:10:59.558340','17.238.393-0',3),(4,'pbkdf2_sha256$390000$VILMPlfmb8YkgGXWVrmRzh$r7EU+GGcPW9+Ov4FWhOVtHTKlJOf43XJ7aDS28D/eLM=',NULL,0,'Benjamin_03','Benjamim','Cornejo','benjamin@gmail.com',0,1,'2023-03-21 02:13:05.953829','20.123.456-k',4),(5,'pbkdf2_sha256$390000$hwMWLaRGlSDkVuKMqfPNC1$IvAglpISQH7ykJuX/JHD2pPvByOOiwlmtG7m4QYet+8=',NULL,0,'Tomas_04','Tomas','Gutierrez','tomas@gmail.com',0,1,'2023-03-21 02:17:11.395323','18.234.564-1',4),(6,'pbkdf2_sha256$390000$7rgIUH2VF1gdfQmZAfHGhk$OIJ2P+X4kLVGXm57ug1Z3AHGEPy2BBkXMW6kEDFb1eA=',NULL,0,'mariadibu','Maria Angela','Dibu Barrientos','maria.db@gmail.com',0,1,'2023-04-03 14:03:05.401216','11111111-1',7),(7,'pbkdf2_sha256$390000$1lJsYcIMPfwqPzUlgMMRy5$pYnZA6/lZj4dRY6r4IDd8MzS7tQgFKGzADvW4DUfGp4=',NULL,0,'danigarrido','Daniela Arido','Garrido Barriento','barrientos.dani@gmail.com',0,1,'2023-04-03 14:07:24.911267','11111111-1',7),(8,'pbkdf2_sha256$390000$rDt69TQLzl5ce5nDOmxgs7$j8Wrpvuarc9MRLiHPMa/Dh6uiNT21YSQ6Opm8IYRhdU=',NULL,0,'cesfampuentealto','CESFAM','Puente Alto','cesfam@ptealto.cl',0,1,'2023-04-03 14:20:24.732317','1-1',6);
+INSERT INTO `app_usuario` VALUES (1,'pbkdf2_sha256$390000$bZuoM3m1TARryrsIKkT9CL$RkqJxWd9qrA42RTJ6l3zjgtbtMqddNwrxvCWr/A1yho=','2023-04-20 22:48:53.476359',1,'adminmedi','','','josee.cornejo@gmail.com',1,1,'2023-04-20 22:48:17.448551','',NULL),(2,'pbkdf2_sha256$390000$mEdcslJlx6rVmYHPKPDnLB$gyCGWV7pd8qWz0nq0IcLJzMWi9IVAVe8kjTtQfUQu0I=','2023-03-22 14:33:26.959317',0,'Juan_01','Juan','Perez','juan@gmail.com',0,1,'2023-03-21 00:13:07.691684','18.227.394-7',3),(3,'pbkdf2_sha256$390000$omEZWgCs1gQrxouWi0UfYj$IOPX48w+OTFjWczX2TpBJGT9Fhn8hRZDt7kb0ZQYrDc=','2023-03-21 16:17:19.004479',0,'Matias_02','Matias','Prado','matias@gmail.com',0,1,'2023-03-21 02:10:59.558340','17.238.393-0',3),(4,'pbkdf2_sha256$390000$VILMPlfmb8YkgGXWVrmRzh$r7EU+GGcPW9+Ov4FWhOVtHTKlJOf43XJ7aDS28D/eLM=',NULL,0,'Benjamin_03','Benjamim','Cornejo','benjamin@gmail.com',0,1,'2023-03-21 02:13:05.953829','20.123.456-k',4),(5,'pbkdf2_sha256$390000$hwMWLaRGlSDkVuKMqfPNC1$IvAglpISQH7ykJuX/JHD2pPvByOOiwlmtG7m4QYet+8=',NULL,0,'Tomas_04','Tomas','Gutierrez','tomas@gmail.com',0,1,'2023-03-21 02:17:11.395323','18.234.564-1',4),(6,'pbkdf2_sha256$390000$7rgIUH2VF1gdfQmZAfHGhk$OIJ2P+X4kLVGXm57ug1Z3AHGEPy2BBkXMW6kEDFb1eA=',NULL,0,'mariadibu','Maria Angela','Dibu Barrientos','maria.db@gmail.com',0,1,'2023-04-03 14:03:05.401216','11111111-1',7),(7,'pbkdf2_sha256$390000$1lJsYcIMPfwqPzUlgMMRy5$pYnZA6/lZj4dRY6r4IDd8MzS7tQgFKGzADvW4DUfGp4=',NULL,0,'danigarrido','Daniela Arido','Garrido Barriento','barrientos.dani@gmail.com',0,1,'2023-04-03 14:07:24.911267','11111111-1',7),(8,'pbkdf2_sha256$390000$rDt69TQLzl5ce5nDOmxgs7$j8Wrpvuarc9MRLiHPMa/Dh6uiNT21YSQ6Opm8IYRhdU=',NULL,0,'cesfampuentealto','CESFAM','Puente Alto','cesfam@ptealto.cl',0,1,'2023-04-03 14:20:24.732317','1-1',6);
 /*!40000 ALTER TABLE `app_usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -939,7 +937,7 @@ CREATE TABLE `django_admin_log` (
   KEY `django_admin_log_user_id_c564eba6_fk_app_usuario_id` (`user_id`),
   CONSTRAINT `django_admin_log_content_type_id_c4bce8eb_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
   CONSTRAINT `django_admin_log_user_id_c564eba6_fk_app_usuario_id` FOREIGN KEY (`user_id`) REFERENCES `app_usuario` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -948,7 +946,7 @@ CREATE TABLE `django_admin_log` (
 
 LOCK TABLES `django_admin_log` WRITE;
 /*!40000 ALTER TABLE `django_admin_log` DISABLE KEYS */;
-INSERT INTO `django_admin_log` VALUES (1,'2023-04-18 06:15:36.297468','3','FD',2,'[]',1,1),(2,'2023-04-18 06:15:56.637824','3','FD',2,'[{\"changed\": {\"fields\": [\"Logo\"]}}]',1,1),(3,'2023-04-18 06:16:59.310092','3','FD',2,'[{\"changed\": {\"fields\": [\"Logo\"]}}]',1,1),(4,'2023-04-18 06:17:49.813953','3','FD',2,'[{\"changed\": {\"fields\": [\"Logo\", \"Favicon\"]}}]',1,1),(5,'2023-04-18 06:18:04.632074','3','FD',2,'[{\"changed\": {\"fields\": [\"Favicon\"]}}]',1,1);
+INSERT INTO `django_admin_log` VALUES (1,'2023-04-21 02:56:24.653954','1','1',1,'[{\"added\": {}}]',21,1),(2,'2023-04-21 02:56:37.748213','2','2',1,'[{\"added\": {}}]',21,1);
 /*!40000 ALTER TABLE `django_admin_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -991,7 +989,7 @@ CREATE TABLE `django_migrations` (
   `name` varchar(255) NOT NULL,
   `applied` datetime(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1000,7 +998,7 @@ CREATE TABLE `django_migrations` (
 
 LOCK TABLES `django_migrations` WRITE;
 /*!40000 ALTER TABLE `django_migrations` DISABLE KEYS */;
-INSERT INTO `django_migrations` VALUES (1,'contenttypes','0001_initial','2023-04-18 06:12:46.187612'),(2,'contenttypes','0002_remove_content_type_name','2023-04-18 06:12:46.295521'),(3,'auth','0001_initial','2023-04-18 06:12:46.563403'),(4,'auth','0002_alter_permission_name_max_length','2023-04-18 06:12:46.626458'),(5,'auth','0003_alter_user_email_max_length','2023-04-18 06:12:46.640361'),(6,'auth','0004_alter_user_username_opts','2023-04-18 06:12:46.656423'),(7,'auth','0005_alter_user_last_login_null','2023-04-18 06:12:46.675782'),(8,'auth','0006_require_contenttypes_0002','2023-04-18 06:12:46.688364'),(9,'auth','0007_alter_validators_add_error_messages','2023-04-18 06:12:46.698710'),(10,'auth','0008_alter_user_username_max_length','2023-04-18 06:12:46.712611'),(11,'auth','0009_alter_user_last_name_max_length','2023-04-18 06:12:46.728406'),(12,'auth','0010_alter_group_name_max_length','2023-04-18 06:12:46.820484'),(13,'auth','0011_update_proxy_permissions','2023-04-18 06:12:46.852446'),(14,'auth','0012_alter_user_first_name_max_length','2023-04-18 06:12:46.876522'),(15,'app','0001_initial','2023-04-18 06:12:49.923525'),(16,'admin','0001_initial','2023-04-18 06:12:50.081433'),(17,'admin','0002_logentry_remove_auto_add','2023-04-18 06:12:50.104242'),(18,'admin','0003_logentry_add_action_flag_choices','2023-04-18 06:12:50.129752'),(19,'admin_interface','0001_initial','2023-04-18 06:12:50.174589'),(20,'admin_interface','0002_add_related_modal','2023-04-18 06:12:50.553623'),(21,'admin_interface','0003_add_logo_color','2023-04-18 06:12:50.657015'),(22,'admin_interface','0004_rename_title_color','2023-04-18 06:12:50.693040'),(23,'admin_interface','0005_add_recent_actions_visible','2023-04-18 06:12:50.796927'),(24,'admin_interface','0006_bytes_to_str','2023-04-18 06:12:50.919669'),(25,'admin_interface','0007_add_favicon','2023-04-18 06:12:51.004463'),(26,'admin_interface','0008_change_related_modal_background_opacity_type','2023-04-18 06:12:51.125119'),(27,'admin_interface','0009_add_enviroment','2023-04-18 06:12:51.231926'),(28,'admin_interface','0010_add_localization','2023-04-18 06:12:51.278606'),(29,'admin_interface','0011_add_environment_options','2023-04-18 06:12:51.433034'),(30,'admin_interface','0012_update_verbose_names','2023-04-18 06:12:51.457017'),(31,'admin_interface','0013_add_related_modal_close_button','2023-04-18 06:12:51.533182'),(32,'admin_interface','0014_name_unique','2023-04-18 06:12:51.581051'),(33,'admin_interface','0015_add_language_chooser_active','2023-04-18 06:12:51.665099'),(34,'admin_interface','0016_add_language_chooser_display','2023-04-18 06:12:51.750244'),(35,'admin_interface','0017_change_list_filter_dropdown','2023-04-18 06:12:51.769230'),(36,'admin_interface','0018_theme_list_filter_sticky','2023-04-18 06:12:51.854361'),(37,'admin_interface','0019_add_form_sticky','2023-04-18 06:12:51.993095'),(38,'admin_interface','0020_module_selected_colors','2023-04-18 06:12:52.250302'),(39,'admin_interface','0021_file_extension_validator','2023-04-18 06:12:52.273096'),(40,'admin_interface','0022_add_logo_max_width_and_height','2023-04-18 06:12:52.401372'),(41,'admin_interface','0023_theme_foldable_apps','2023-04-18 06:12:52.458320'),(42,'admin_interface','0024_remove_theme_css','2023-04-18 06:12:52.504250'),(43,'admin_interface','0025_theme_language_chooser_control','2023-04-18 06:12:52.566524'),(44,'admin_interface','0026_theme_list_filter_highlight','2023-04-18 06:12:52.632759'),(45,'admin_interface','0027_theme_list_filter_removal_links','2023-04-18 06:12:52.685503'),(46,'admin_interface','0028_theme_show_fieldsets_as_tabs_and_more','2023-04-18 06:12:52.785551'),(47,'sessions','0001_initial','2023-04-18 06:12:52.843446'),(48,'app','0002_profesionalpaciente_ficha_clinica_paciente','2023-04-18 06:24:11.961199');
+INSERT INTO `django_migrations` VALUES (1,'contenttypes','0001_initial','2023-04-20 22:47:38.115163'),(2,'contenttypes','0002_remove_content_type_name','2023-04-20 22:47:38.264535'),(3,'auth','0001_initial','2023-04-20 22:47:38.557574'),(4,'auth','0002_alter_permission_name_max_length','2023-04-20 22:47:38.606861'),(5,'auth','0003_alter_user_email_max_length','2023-04-20 22:47:38.617275'),(6,'auth','0004_alter_user_username_opts','2023-04-20 22:47:38.629451'),(7,'auth','0005_alter_user_last_login_null','2023-04-20 22:47:38.639665'),(8,'auth','0006_require_contenttypes_0002','2023-04-20 22:47:38.646240'),(9,'auth','0007_alter_validators_add_error_messages','2023-04-20 22:47:38.656590'),(10,'auth','0008_alter_user_username_max_length','2023-04-20 22:47:38.668348'),(11,'auth','0009_alter_user_last_name_max_length','2023-04-20 22:47:38.692412'),(12,'auth','0010_alter_group_name_max_length','2023-04-20 22:47:38.812489'),(13,'auth','0011_update_proxy_permissions','2023-04-20 22:47:38.832868'),(14,'auth','0012_alter_user_first_name_max_length','2023-04-20 22:47:38.842326'),(15,'app','0001_initial','2023-04-20 22:47:41.411209'),(16,'admin','0001_initial','2023-04-20 22:47:41.559606'),(17,'admin','0002_logentry_remove_auto_add','2023-04-20 22:47:41.587901'),(18,'admin','0003_logentry_add_action_flag_choices','2023-04-20 22:47:41.616694'),(19,'admin_interface','0001_initial','2023-04-20 22:47:41.646833'),(20,'admin_interface','0002_add_related_modal','2023-04-20 22:47:41.837383'),(21,'admin_interface','0003_add_logo_color','2023-04-20 22:47:41.904361'),(22,'admin_interface','0004_rename_title_color','2023-04-20 22:47:41.923048'),(23,'admin_interface','0005_add_recent_actions_visible','2023-04-20 22:47:41.970910'),(24,'admin_interface','0006_bytes_to_str','2023-04-20 22:47:42.057924'),(25,'admin_interface','0007_add_favicon','2023-04-20 22:47:42.106521'),(26,'admin_interface','0008_change_related_modal_background_opacity_type','2023-04-20 22:47:42.186543'),(27,'admin_interface','0009_add_enviroment','2023-04-20 22:47:42.272935'),(28,'admin_interface','0010_add_localization','2023-04-20 22:47:42.298624'),(29,'admin_interface','0011_add_environment_options','2023-04-20 22:47:42.420038'),(30,'admin_interface','0012_update_verbose_names','2023-04-20 22:47:42.433812'),(31,'admin_interface','0013_add_related_modal_close_button','2023-04-20 22:47:42.478182'),(32,'admin_interface','0014_name_unique','2023-04-20 22:47:42.502435'),(33,'admin_interface','0015_add_language_chooser_active','2023-04-20 22:47:42.564520'),(34,'admin_interface','0016_add_language_chooser_display','2023-04-20 22:47:42.636355'),(35,'admin_interface','0017_change_list_filter_dropdown','2023-04-20 22:47:42.645786'),(36,'admin_interface','0018_theme_list_filter_sticky','2023-04-20 22:47:42.698212'),(37,'admin_interface','0019_add_form_sticky','2023-04-20 22:47:42.792343'),(38,'admin_interface','0020_module_selected_colors','2023-04-20 22:47:42.927337'),(39,'admin_interface','0021_file_extension_validator','2023-04-20 22:47:42.940214'),(40,'admin_interface','0022_add_logo_max_width_and_height','2023-04-20 22:47:43.037986'),(41,'admin_interface','0023_theme_foldable_apps','2023-04-20 22:47:43.089388'),(42,'admin_interface','0024_remove_theme_css','2023-04-20 22:47:43.145356'),(43,'admin_interface','0025_theme_language_chooser_control','2023-04-20 22:47:43.200598'),(44,'admin_interface','0026_theme_list_filter_highlight','2023-04-20 22:47:43.247031'),(45,'admin_interface','0027_theme_list_filter_removal_links','2023-04-20 22:47:43.295704'),(46,'admin_interface','0028_theme_show_fieldsets_as_tabs_and_more','2023-04-20 22:47:43.388287'),(47,'sessions','0001_initial','2023-04-20 22:47:43.431618');
 /*!40000 ALTER TABLE `django_migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1026,7 +1024,7 @@ CREATE TABLE `django_session` (
 
 LOCK TABLES `django_session` WRITE;
 /*!40000 ALTER TABLE `django_session` DISABLE KEYS */;
-INSERT INTO `django_session` VALUES ('5fohym3sgfdbttw5th839xfayay4sh63','.eJxVjDsOwjAQRO_iGln-Zm1K-pzBWn8WB5AjxUmFuDuJlAK60bw382YBt7WGrZclTJldmWSX3y5iepZ2gPzAdp95mtu6TJEfCj9p5-Ocy-t2un8HFXvd1zYJLBqMB6mdSjaBQCd81tpl6QYCQeQBECgaZZ1DgYRqMJn0nqJlny_JyTer:1pokFq:t-xuZb0C2bLSxFp8sayYoTyuzauP2H4TfyQyilZRWtU','2023-05-02 12:16:14.070819'),('9iuh6omhbvcn3f16jpxg7yt9fy4xp46y','.eJxVjDsOwjAQRO_iGln-Zm1K-pzBWn8WB5AjxUmFuDuJlAK60bw382YBt7WGrZclTJldmWSX3y5iepZ2gPzAdp95mtu6TJEfCj9p5-Ocy-t2un8HFXvd1zYJLBqMB6mdSjaBQCd81tpl6QYCQeQBECgaZZ1DgYRqMJn0nqJlny_JyTer:1poyoo:eknf2ajFSp96WCeF2wE43g09HNRQ1AosimB887Qr3GI','2023-05-03 03:49:18.029084');
+INSERT INTO `django_session` VALUES ('9ctehok2chvqlrrcniv6q8szzxuoa57r','.eJxVjDsOwjAQBe_iGlnrf0xJzxkse3eDA8iR4qRC3B0ipYD2zcx7iZS3taat85ImEmehxOl3Kxkf3HZA99xus8S5rctU5K7Ig3Z5nYmfl8P9O6i5128dRmt0RFJRjZayBo1GFTSWNQ7snUG0BcB4z4GCAxcQaAghRgWaIYr3B9UiNww:1ppd5B:OEw3s9eIMXYyUeDM_ci5ut5L8vEwcnrtcYlvbX6jrzc','2023-05-04 22:48:53.481983');
 /*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -1039,4 +1037,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-04-20 21:34:48
+-- Dump completed on 2023-04-21  3:04:58
