@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Medicamentos, PacienteReceta
+from .models import *
 from .forms import ContactoForm, MedicamentoForm, CustomUserCreationForm, PacienteRecetaForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required
@@ -130,7 +130,13 @@ def enfermera(request):
             data["form"] = formulario    
     return render(request, 'app/enfermera.html', data)
 
-
+#VISTA DE PROFESIONAL
+def profesional(request):
+    profesional = ProfesionalPaciente.objects.all()
+    data = {
+        'profesional' :  profesional
+    }
+    return render(request, 'app/profesional.html', data)
 
 
 

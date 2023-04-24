@@ -1,0 +1,36 @@
+{% extends 'app/base.html'  %}
+
+{% load static %}
+
+{% block js %}
+
+{% endblock %}
+
+
+{% block css %}
+
+{% endblock %}
+
+{% block contenido %}
+<h2> PROFESIONALES </h2>
+<div class="medicamento" >
+
+    <div class="profesional">
+        <div class="table table-striped table-hover table-responsive-sm">
+            <table border="1" class="table">
+                <tr>
+                  <th>Identificacion Usuario Paciente</th>
+                  <th>Identificacion Profesional</th>
+                </tr>
+                {% for p in profesional %}
+                <tr>
+                  <td>{{ p.identificacicion_usuario | capfirst  }}</td>
+                  <td>{{ p.identificacion_profesional | capfirst  }}</td>
+                </tr>
+                {% endfor %}
+              </table>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
