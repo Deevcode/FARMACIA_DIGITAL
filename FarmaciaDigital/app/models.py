@@ -139,7 +139,7 @@ class Usuario(AbstractUser):
 
 #-----------------------------------------------------------------------------------------------------------------#
 
-#TABLA USUARIO
+#TABLA DE FICHA TODOS LOS USUARIOS
 
 class UsuarioFicha (models.Model):
     id_usuario = models.AutoField(primary_key=True)
@@ -181,7 +181,7 @@ opciones_fraccionamiento = [
 class PacienteReceta(models.Model):
     id_receta_usuario = models.AutoField(primary_key=True)
     fecha_receta = models.DateField()
-    nombres_paciente = models.ForeignKey(Usuario, on_delete=models.SET_NULL,null=True)
+    nombres_paciente = models.ForeignKey(Usuario, on_delete=models.SET_NULL,null=True,related_name="RRPaciente",limit_choices_to=Q(tipo_usuario_id=2))
     nombre_comercial = models.ForeignKey(Medicamentos, on_delete=models.SET_NULL,null=True)
     tiempo_tratamiento_dias = models.CharField(max_length=100)
     frecuencia_dosis_diaria = models.CharField(max_length=100)
@@ -207,7 +207,7 @@ class PacienteReceta(models.Model):
 #TABLA DE FAMILIAR
 class PacienteFamiliar(models.Model):
     id_usuario_familiar = models.AutoField(primary_key=True)
-    identificacion_familiar = models.ForeignKey(UsuarioFicha, on_delete=models.SET_NULL, null=True)
+    identificacion_familiar = models.ForeignKey(Usuario, on_delete=models.SET_NULL, null=True,related_name="PacienteFamiliar",limit_choices_to=Q(tipo_usuario_id=3))
     parentesco = models.CharField(max_length=100)
 
     def __str__ (self):
@@ -229,7 +229,7 @@ class FamiliarPacienteUsuario(models.Model):
 #TABLA DE CESFAM
 class CESFAM(models.Model):
     id_cesfam = models.AutoField(primary_key=True)
-    identificacion_cesfam = models.ForeignKey(Usuario, on_delete=models.SET_NULL, null=True)
+    identificacion_cesfam = models.ForeignKey(Usuario, on_delete=models.SET_NULL, null=True, related_name="CESFAM",limit_choices_to=Q(tipo_usuario_id=5))
     email_CESFAM = models.CharField(max_length=200)
     telefono_CESFAM = models.CharField(max_length=200)
     direccion_CESFAM = models.CharField(max_length=200)
@@ -243,7 +243,7 @@ class CESFAM(models.Model):
 #TABLA DE QUIMICO FARMACEUTICO
 class QuimicoFarmaceuticoEncargado(models.Model):
     id_quimico_farmaceutio = models.AutoField(primary_key=True)
-    identificacion_QF = models.ForeignKey(Usuario, on_delete=models.SET_NULL,null=True)
+    identificacion_QF = models.ForeignKey(Usuario, on_delete=models.SET_NULL,null=True,related_name="QUIMICO",limit_choices_to=Q(tipo_usuario_id=4))
     registro_sanitario_QF = models.CharField(max_length=200)
 
     def __str__(self):
@@ -295,7 +295,7 @@ opciones_hipertension = [
 #TABLA DEL PACIENTE FICHA CLINICA
 class PacienteFichaClinica(models.Model):
     id_paciente_ficha = models.AutoField(primary_key=True)
-    identificacion_paciente = models.ForeignKey(Usuario, on_delete=models.PROTECT)
+    identificacion_paciente = models.ForeignKey(Usuario, on_delete=models.PROTECT,related_name="FCPaciente",limit_choices_to=Q(tipo_usuario_id=2))
     tipo_diabetes = models.IntegerField(choices=opciones_diabetes, null=True)
     tipo_hipertension = models.IntegerField(choices=opciones_hipertension, null=True)
     fecha_nacimiento = models.DateField()
@@ -327,18 +327,10 @@ class Contacto(models.Model):
         return str(self.nombre)
 
 #-----------------------------------------------------------------------------------------------------------------#
-#TABLA DE ENFERMERA
-class Enfermera(models.Model):
-    id_enfermera = models.AutoField(primary_key=True)
-    identificacion_enfermera = models.ForeignKey(Usuario, on_delete=models.SET_NULL,null=True)
-
-    def __str__(self):
-        return str(self.identificacion_enfermera)
-
 #-----------------------------------------------------------------------------------------------------------------#
 #TABLA PACIENTE PROFESIONALES
 class ProfesionalPaciente(models.Model):
-    identificacicion_usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE,null=True ,related_name="Rpaciente",limit_choices_to=Q(tipo_usuario_id=3))
-    identificacion_profesional = models.ForeignKey(Usuario, on_delete=models.CASCADE,null=True, related_name="Rprofesional",limit_choices_to=Q(tipo_usuario_id=2)| Q(tipo_usuario_id=7))
+    identificacicion_usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE,null=True ,related_name="Rpaciente",limit_choices_to=Q(tipo_usuario_id=2))
+    identificacion_profesional = models.ForeignKey(Usuario, on_delete=models.CASCADE,null=True, related_name="Rprofesional",limit_choices_to=Q(tipo_usuario_id=4)| Q(tipo_usuario_id=6))
     def __str__(self):
-        return str(self.id)
+        return str(self.identificacicion_usuario)

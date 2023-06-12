@@ -1,8 +1,14 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.conf import settings
 from .models import *
-from .forms import ContactoForm, MedicamentoForm, CustomUserCreationForm, PacienteRecetaForm
+from .forms import *
 from django.contrib import messages
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import get_template
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.decorators import user_passes_test
+
 
 
 from django.contrib.auth import authenticate, login
@@ -139,7 +145,21 @@ def profesional(request):
     return render(request, 'app/profesional.html', data)
 
 
+def send_email(mail):
 
+    context = {'mail': mail}
+
+    template = get_template('app/correo.html')
+    content = template.render(context)
+
+    email = EmailMultiAlternatives(
+        'Notificacion de Receta',
+        'CodigoFacilito',
+        settings.EMAIL_HOST_USER,
+        [mail]
+    )  
+    email.attach_alternative (content, 'text/html')
+    email.send()
 
 
 
@@ -150,6 +170,8 @@ def agregar_receta(request):
         'form' : PacienteRecetaForm()
     }
     if request.method == 'POST':
+        mail = request.POST.get('mail')
+        send_email(mail)
         formulario = PacienteRecetaForm(data=request.POST, files=request.FILES)
         if formulario.is_valid():
             formulario.save()
@@ -159,13 +181,26 @@ def agregar_receta(request):
     return render(request, 'app/recetas/agregar_receta.html', data) 
 
 #VISTA DE LISTAR
-@permission_required('app.view_producto')
+#@permission_required('app.view_recetas')
+@login_required
 def listar_receta(request):
-    medicamentos = PacienteReceta.objects.all()
+    medicamentos = PacienteReceta.objects.filter(nombres_paciente=request.user)
     data = {
         'medicamentos' :  medicamentos
     }
     return render(request, 'app/recetas/listar_receta.html', data) 
+
+def is_admin(user):
+    return user.is_superuser
+
+@login_required
+@user_passes_test(is_admin)
+def listar_receta_emitida(request):
+    medicamentos = PacienteReceta.objects.all()
+    data = {
+        'medicamentos': medicamentos
+    }
+    return render(request, 'app/recetas/listar_recetas_emitidas.html', data)
 
 #VISTA DE MODIFICAR
 @permission_required('app.change_producto')
@@ -189,8 +224,9 @@ def modificar_receta(request, id):
 
 #VISTA DE ELIMINAR
 @permission_required('app.delete_producto')
-def eliminar_receta(request, id):
-    messages.success(request, "Eliminado Correctamente")
-    medicamentos = get_object_or_404(PacienteReceta, id_receta_usuario=id)
+def eliminar_receta(request, id_receta_usuario):
+    medicamentos = get_object_or_404(PacienteReceta, id_receta_usuario=id_receta_usuario)
     medicamentos.delete()
-    return redirect(to="eliminar_receta")
+    messages.success(request, "Receta eliminada correctamente.")
+    return redirect('eliminar_receta')
+

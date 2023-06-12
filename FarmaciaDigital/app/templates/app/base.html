@@ -49,26 +49,32 @@
 				<!-- Nav -->
 					<nav id="nav">
 						<ul>
-							<li class="current"><a href="#">{{user.username}}</a></li>
-							<li><a href="{% url 'contacto'%}">Contacto</a></li>
+							<li class="current"><a href="#">{{ user.username }}</a></li>
+							<li><a href="{% url 'contacto' %}">Contacto</a></li>
 							{% if user.is_authenticated %}
-							<li><a href="{% url 'listar_medicamento'%}">Stock Bodega</a></li>
-							<li><a href="{% url 'listar_receta'%}">Listado Recetas</a></li>
-							{% if perms.app.add_producto %}
-							<li><a href="{% url 'agregar_medicamento'%}">Ingreso Medicamentos</a></li>
-							<li><a href="{% url 'agregar_receta'%}">Ingreso Recetas</a></li>
-							<li><a href="{% url 'profesional'%}">Profesional Paciente</a></li>
-							{% endif %}
-							
-                            <li><a href="{% url 'reportes'%}">Reportes</a></li>
-							<li><a href="http://devcode05.pythonanywhere.com/admin/">Administrador</a></li>
-                            <li><a href="{% url 'logout'%}">Cerrar Sección</a></li>
+								<li><a href="{% url 'listar_medicamento' %}">Stock Bodega</a></li>
+								{% if not user.is_superuser and user.tipo_usuario == 'Paciente' %}
+									<li><a href="{% url 'listar_receta' %}">Listado Recetas</a></li>
+								{% endif %}
+								{% if user.is_superuser %}
+									<li><a href="{% url 'listar_receta_emitida' %}">Listado Recetas Emitida</a></li>
+								{% endif %}
+								{% if perms.app.add_producto %}
+									<li><a href="{% url 'agregar_medicamento' %}">Ingreso Medicamentos</a></li>
+									<li><a href="{% url 'agregar_receta' %}">Ingreso Recetas</a></li>
+									<li><a href="{% url 'profesional' %}">Profesional Paciente</a></li>
+								{% endif %}
+								<li><a href="{% url 'reportes' %}">Reportes</a></li>
+								<li><a href="{% url 'admin:index' %}">Administrador</a></li>
+								<li><a href="{% url 'logout' %}">Cerrar Sección</a></li>
 							{% else %}
-							<li><a href="{% url 'login'%}">Login</a></li>
+								<li><a href="{% url 'login' %}">Login</a></li>
 							{% endif %}
-							
-
 						</ul>
+						
+						
+						
+						
 					</nav>
 
 				<!-- Search -->

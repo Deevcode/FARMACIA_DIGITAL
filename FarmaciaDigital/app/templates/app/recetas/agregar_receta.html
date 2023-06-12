@@ -16,12 +16,14 @@
 
         <div class="card">
             <div class="card-body">
-                <h2>aGREGAR RECETAS A PACIENTES</h2>
+                <h2>Agregar Recetas a Pacientes</h2>
                 <br>
                 <form action="" method="post">
                         
                     {% csrf_token %}
                     {{ form }}
+                    <h3>Enivar confirmacion de Receta(*obligatorio):</h3>
+                    <input type="text" name="mail" placeholder="Familiar@gmail.com">
                     <br>
                     <div class="d-flex justify-content-center">
                         <input type="reset" value="Cancelar" class= "btn btn-secondary">

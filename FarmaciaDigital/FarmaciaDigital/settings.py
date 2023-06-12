@@ -10,7 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 from pathlib import Path
+import os
+from dotenv import load_dotenv
 from decouple import config
+
+load_dotenv()
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -27,7 +31,7 @@ SECRET_KEY = 'django-insecure-&&5xw3cy!6t$(jfx+*pp1jaq37v6y3b3i#fv)-h(_$tm8!o*4d
 DEBUG = True
 
 #ALLOWED_HOSTS = []
-ALLOWED_HOSTS = ['devcode05.pythonanywhere.com']
+ALLOWED_HOSTS = []
 
 MESSAGE_HOST = "django.contrib.messages.storage.cookie.CookieStorage"
 
@@ -103,14 +107,29 @@ WSGI_APPLICATION = 'FarmaciaDigital.wsgi.application'
 #}
 
 #ESTA CONFIGURACION ES PARA UTILIZAR LA BASE DE DATOS DE MYSQL
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.mysql',
+#        'NAME': config("NAME"),
+#        'USER': config("USER"),
+#        'PASSWORD': config("PASSWORD"),
+#        'HOST': config("HOST"),
+#        'PORT': config("PORT")
+#    }
+#}
+
+#BASE DE DATOS ORACLE
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': config("NAME"),
-        'USER': config("USER"),
-        'PASSWORD': config("PASSWORD"),
-        'HOST': config("HOST"),
-        'PORT': config("PORT")
+        'ENGINE': os.environ.get('ENGINE'),
+        'NAME': os.environ.get('NAME'),
+        'USER': os.environ.get('USER'),
+        'PASSWORD': os.environ.get('PASSWORD'),
+        'TEST': {
+            'USER': 'default_test',
+            'TBLSPACE': 'default_test_tbls',
+            'TBLSPACE_TEMP': 'default_test_tbls_temp',
+        }
     }
 }
 
@@ -136,7 +155,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-LANGUAGE_CODE = 'es-es'
+LANGUAGE_CODE = 'en'
 
 TIME_ZONE = 'America/Santiago'
 
@@ -161,3 +180,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'app.Usuario'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'josee.cornejo@gmail.com'  # Tu dirección de correo electrónico
+EMAIL_HOST_PASSWORD = 'qrwufgcjmuqbpmgv'  # Tu contraseña de correo electrónico
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'josee.cornejo@gmail.com'  # Dirección de correo electrónico para enviar los correos

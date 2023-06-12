@@ -1,5 +1,6 @@
 from django.urls import path
 from .views import *
+from django.contrib import admin
 
 urlpatterns = [
     path('', home, name="home"),
@@ -15,8 +16,10 @@ urlpatterns = [
     #path('registro/', registro, name="registro"),
     path('agregar-receta/', agregar_receta, name="agregar_receta"),
     path('listar-receta/', listar_receta, name="listar_receta"),
+    path('listar-receta-emitida/', listar_receta_emitida, name="listar_receta_emitida"),
     path('modificar-receta/<id>/', modificar_receta, name="modificar_receta"),
-    path('eliminar-receta/<id>/', eliminar_receta, name="eliminar_receta"),
+    path('eliminar-receta/<id_receta_usuario>/', eliminar_receta, name="eliminar_receta"),
     path('profesional/', profesional, name="profesional"),
+    path('admin/', admin.site.urls),
 
 ]

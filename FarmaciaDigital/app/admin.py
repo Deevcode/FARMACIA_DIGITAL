@@ -5,8 +5,6 @@ from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 
 
-
-
 #-----------------------------------------------------------------------------------------------------------------#
 #ADMIN DE REGION
 class RegionAdmin(admin.ModelAdmin):
@@ -183,11 +181,6 @@ class ContactoAdmin(admin.ModelAdmin):
     search_fields = ['nombre', 'email', 'tipo_consulta', 'timestamp', 'mensaje']
 admin.site.register(Contacto, ContactoAdmin)
 #-----------------------------------------------------------------------------------------------------------------#
-#ADMIN DE ENFERMERA
-class EnfermeraAdmin(admin.ModelAdmin):
-    list_display = ('id_enfermera','identificacion_enfermera')
-    search_fields = ['id_enfermera','identificacion_enfermera']
-admin.site.register(Enfermera, EnfermeraAdmin)
 #-----------------------------------------------------------------------------------------------------------------#
 #ADMIN DE PACIENTE PROFESIONAL
 class ProfesionalPacienteAdmin(admin.ModelAdmin):

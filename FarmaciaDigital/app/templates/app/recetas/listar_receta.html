@@ -4,7 +4,7 @@
 
 {% block js %}
 <script>
-  function eliminar_receta(id) {
+  function eliminar_receta(id_receta_usuario) {
     Swal.fire({
 			"title": "¿Estas seguro?",
 			"text": "Esta accion no se puede deshacer",
@@ -17,7 +17,7 @@
 		})
     .then(function(result){
       if (result.isConfirmed) {
-        window.location.href = "/eliminar_receta/" + id + "/"
+        window.location.href = "/eliminar_receta/" + id_receta_usuario + "/"
       }
     })
   }
@@ -63,7 +63,7 @@
                   <td><a href="{% url 'modificar_receta' m.id_receta_usuario  %}" class="btn btn-info">MODIFICAR</a></td>
                   {% endif %}
                   {% if perms.app.delete_producto %}
-                  <td><a href="#" onclick="eliminar_receta({{ m.id_receta_usuario }})"  class="btn btn-danger">ELIMINAR</a></td>
+                  <td><a href="{% url 'eliminar_receta' m.id_receta_usuario  %}" onclick="eliminar_receta({{ m.id_receta_usuario }})"  class="btn btn-danger">ELIMINAR</a></td>
                   {% endif %}
                 </tr>
                 {% endfor %}
