@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.db.models import CheckConstraint, Q, F
+from django.utils import timezone
 
 #-----------------------------------------------------------------------------------------------------------------#
 #TABLA DE REGION
@@ -145,27 +146,12 @@ class UsuarioFicha (models.Model):
     id_usuario = models.AutoField(primary_key=True)
     identificacion_usuario = models.ForeignKey(Usuario, on_delete=models.SET_NULL,null=True)
     dirreccion_usuario = models.CharField(max_length=150)
-    email_usuario = models.EmailField()
     telefono_usuario = models.IntegerField()
     celular_usuario = models.IntegerField()
-    whatsapp_usuario = models.IntegerField()
-    telegram_usuario = models.IntegerField()
     id_comuna = models.ForeignKey(Comuna, on_delete=models.SET_NULL,null=True)
-    #id_familiar = models.ForeignKey(Familiar, on_delete=models.PROTECT)
     def __str__(self):
-        return str(self.identificacion_usuario)+" "+str(self.email_usuario)+" "+str(self.telefono_usuario)
+        return str(self.identificacion_usuario)+" "+str(self.telefono_usuario)
        
-#-----------------------------------------------------------------------------------------------------------------#
-
-#-----------------------------------------------------------------------------------------------------------------#
-#TABLA DE MEDICINA FRACCIONAMIENTO
-#class MedicinaFraccionamiento(models.Model):
-#    fraccion = models.CharField(max_length=10)
-#    descripcion_fraccion = models.CharField(max_length=100)
-#
-#    def __str__(self):
-#        return (self.fraccion)+" "+(self.descripcion_fraccion) 
-
 #-----------------------------------------------------------------------------------------------------------------#
 
 opciones_fraccionamiento = [
@@ -207,22 +193,12 @@ class PacienteReceta(models.Model):
 #TABLA DE FAMILIAR
 class PacienteFamiliar(models.Model):
     id_usuario_familiar = models.AutoField(primary_key=True)
+    identificacion_usuario = models.ForeignKey(Usuario, on_delete=models.SET_NULL, null=True,related_name="PacienteUser",limit_choices_to=Q(tipo_usuario_id=2))
     identificacion_familiar = models.ForeignKey(Usuario, on_delete=models.SET_NULL, null=True,related_name="PacienteFamiliar",limit_choices_to=Q(tipo_usuario_id=3))
     parentesco = models.CharField(max_length=100)
 
     def __str__ (self):
         return  str(self.identificacion_familiar)+": "+str(self.parentesco)
-#-----------------------------------------------------------------------------------------------------------------#
-
-#TABLA DE USARIO FAMILAR PACIENTE
-class FamiliarPacienteUsuario(models.Model):
-    id_familiar_paciente = models.AutoField(primary_key=True)
-    identificacion_familiar_paciente = models.ForeignKey(PacienteFamiliar, on_delete=models.SET_NULL, null=True)
-    nombres_usuario = models.ForeignKey(UsuarioFicha, on_delete=models.PROTECT)
-
-    def __str__(self):
-        return str(self.id_familiar_paciente)+" "+str(self.identificacion_familiar_paciente)
-
 
 #-----------------------------------------------------------------------------------------------------------------#
 
@@ -316,21 +292,31 @@ opciones_consulta = [
 
 #TABLA DE CONTACTO
 class Contacto(models.Model):
+    repetir_email = models.EmailField()
     nombre = models.CharField(max_length=100)
-    email = models.EmailField()
     tipo_consulta = models.IntegerField(choices=opciones_consulta, null=True)
-    timestamp = models.CharField(max_length=100)
+    telefono = models.IntegerField()
     mensaje = models.TextField()
-    #registro_mensaje = models.DateTimeField(auto_now=True)
+    timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return str(self.nombre)
+        return str(self.nombre)+" email: "+str(self.repetir_email)
 
 #-----------------------------------------------------------------------------------------------------------------#
 #-----------------------------------------------------------------------------------------------------------------#
+
+#OPCIONES DE CONSULTA EN CONTACTO
+opciones_horario = [
+    [0,"Mañana"],
+    [1,"Tarde"],
+    [2,"Madrugada"],
+    [3,"24 Horas"]
+]
+
 #TABLA PACIENTE PROFESIONALES
 class ProfesionalPaciente(models.Model):
     identificacicion_usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE,null=True ,related_name="Rpaciente",limit_choices_to=Q(tipo_usuario_id=2))
-    identificacion_profesional = models.ForeignKey(Usuario, on_delete=models.CASCADE,null=True, related_name="Rprofesional",limit_choices_to=Q(tipo_usuario_id=4)| Q(tipo_usuario_id=6))
+    identificacion_profesional = models.ForeignKey(Usuario, on_delete=models.CASCADE,null=True, related_name="Rprofesional",limit_choices_to=Q(tipo_usuario_id=6))#| Q(tipo_usuario_id=6))
+    horario_turno = models.IntegerField(choices=opciones_horario, null=True)
     def __str__(self):
-        return str(self.identificacicion_usuario)
+        return str(self.identificacion_profesional)+ ": Horario:"+str(self.horario_turno)

@@ -104,8 +104,8 @@ admin.site.register(Usuario, UserAdmin)
 #-----------------------------------------------------------------------------------------------------------------#
 #ADMIN DE USUARIO FICHA ADMIN
 class UsuarioFichaAdmin(admin.ModelAdmin):
-    list_display = ('id_usuario', 'identificacion_usuario', 'dirreccion_usuario', 'email_usuario', 'telefono_usuario', 'celular_usuario', 'whatsapp_usuario','telegram_usuario','id_comuna')
-    search_fields = ['id_usuario', 'identificacion_usuario', 'dirreccion_usuario', 'email_usuario', 'telefono_usuario', 'celular_usuario', 'whatsapp_usuario','telegram_usuario','id_comuna']
+    list_display = ('id_usuario', 'identificacion_usuario', 'dirreccion_usuario', 'telefono_usuario', 'celular_usuario','id_comuna')
+    search_fields = ['id_usuario', 'identificacion_usuario', 'dirreccion_usuario', 'telefono_usuario', 'celular_usuario','id_comuna']
 
 admin.site.register(UsuarioFicha, UsuarioFichaAdmin)
 #-----------------------------------------------------------------------------------------------------------------#
@@ -128,17 +128,17 @@ admin.site.register(PacienteReceta, PacienteRecetaAdmin)
 #-----------------------------------------------------------------------------------------------------------------#
 #TABLA DE USUARIO FAMILIAR
 class PacienteFamiliarAdmin(admin.ModelAdmin):
-    list_display  = ('id_usuario_familiar','identificacion_familiar','parentesco')
-    search_fields = ['id_usuario_familiar','identificacion_familiar','parentesco']
+    list_display  = ('id_usuario_familiar','identificacion_usuario' ,'identificacion_familiar','parentesco')
+    search_fields = ['id_usuario_familiar','identificacion_usuario' ,'identificacion_familiar','parentesco']
 
 admin.site.register(PacienteFamiliar, PacienteFamiliarAdmin)
 #-----------------------------------------------------------------------------------------------------------------#
 #ADMIN DE USUARIO FARMACO VIGILANGIA
-class FamiliarPacienteUsuarioAdmin(admin.ModelAdmin):
-    list_display  = ('id_familiar_paciente', 'identificacion_familiar_paciente', 'nombres_usuario')
-    search_fields = ['id_familiar_paciente', 'identificacion_familiar_paciente', 'nombres_usuario']
+#class FamiliarPacienteUsuarioAdmin(admin.ModelAdmin):
+#    list_display  = ('id_familiar_paciente', 'identificacion_familiar_paciente', 'nombres_usuario')
+#    search_fields = ['id_familiar_paciente', 'identificacion_familiar_paciente', 'nombres_usuario']
 
-admin.site.register(FamiliarPacienteUsuario, FamiliarPacienteUsuarioAdmin)
+#admin.site.register(FamiliarPacienteUsuario, FamiliarPacienteUsuarioAdmin)
 #-----------------------------------------------------------------------------------------------------------------#
 #ADMIN DE CESFAM
 class CESFAMAdmin(admin.ModelAdmin):
@@ -176,14 +176,14 @@ class PacienteFichaClinicaAdmin(admin.ModelAdmin):
 admin.site.register(PacienteFichaClinica, PacienteFichaClinicaAdmin)
 #-----------------------------------------------------------------------------------------------------------------#
 #ADMIN DE CONTACTO
-class ContactoAdmin(admin.ModelAdmin):
-    list_display = ('nombre', 'email', 'tipo_consulta', 'timestamp', 'mensaje')
-    search_fields = ['nombre', 'email', 'tipo_consulta', 'timestamp', 'mensaje']
-admin.site.register(Contacto, ContactoAdmin)
+class ContactosAdmin(admin.ModelAdmin):
+    list_display = ('repetir_email','nombre', 'tipo_consulta', 'telefono', 'mensaje','timestamp')
+    search_fields = ['repetir_email','nombre', 'tipo_consulta', 'telefono', 'mensaje','timestamp']
+admin.site.register(Contacto, ContactosAdmin)
 #-----------------------------------------------------------------------------------------------------------------#
 #-----------------------------------------------------------------------------------------------------------------#
 #ADMIN DE PACIENTE PROFESIONAL
 class ProfesionalPacienteAdmin(admin.ModelAdmin):
-    list_display = ('identificacicion_usuario','identificacion_profesional')
-    search_fields = ['identificacicion_usuario','identificacion_profesional']
+    list_display = ('identificacicion_usuario','identificacion_profesional','horario_turno')
+    search_fields = ['identificacicion_usuario','identificacion_profesional','horario_turno']
 admin.site.register(ProfesionalPaciente, ProfesionalPacienteAdmin)

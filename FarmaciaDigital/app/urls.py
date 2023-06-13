@@ -1,6 +1,10 @@
-from django.urls import path
+from django.urls import path, include
 from .views import *
 from django.contrib import admin
+from rest_framework import routers
+
+router = routers.DefaultRouter()
+router.register('medicamentos',MedicamentoViewset)
 
 urlpatterns = [
     path('', home, name="home"),
@@ -21,5 +25,7 @@ urlpatterns = [
     path('eliminar-receta/<id_receta_usuario>/', eliminar_receta, name="eliminar_receta"),
     path('profesional/', profesional, name="profesional"),
     path('admin/', admin.site.urls),
+    path('api/', include(router.urls)),
+
 
 ]

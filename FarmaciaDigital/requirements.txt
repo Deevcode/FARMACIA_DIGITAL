@@ -13,3 +13,5 @@ python-decouple
 django-bootstrap4
 django-environ
 cx-oracle
+django-rest-framework
+requests

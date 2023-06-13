@@ -59,7 +59,7 @@
 								{% if user.is_superuser %}
 									<li><a href="{% url 'listar_receta_emitida' %}">Listado Recetas Emitida</a></li>
 								{% endif %}
-								{% if perms.app.add_producto %}
+								{% if user.groups.all.0.name == 'PROFESIONAL' %}
 									<li><a href="{% url 'agregar_medicamento' %}">Ingreso Medicamentos</a></li>
 									<li><a href="{% url 'agregar_receta' %}">Ingreso Recetas</a></li>
 									<li><a href="{% url 'profesional' %}">Profesional Paciente</a></li>

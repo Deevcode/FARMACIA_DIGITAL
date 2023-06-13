@@ -18,8 +18,9 @@
 <form action="" class="formulario_contacto" method="post">
     <!--TOKEN DE SEGURIDAD, DEBE ESTAR PRESENTE PARA RESCATAR LOS DATOS-->
     {% csrf_token %}
-
-    {{ form }}          
+    <H3>Email:</H3>
+    <input type="text" name="mail" placeholder="tu.correo@gmail.com"> 
+    {{ form }}        
     <br>
     <div class="d-flex justify-content-end">
         <input type="reset" value="Cancelar" class= "btn btn-secondary">

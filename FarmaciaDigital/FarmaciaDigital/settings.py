@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'colorfield',
     'crispy_forms',
     'bootstrap4',
+    'rest_framework',
     #'import_export',
     #'crispy_bootstrap4',
 ]
@@ -155,7 +156,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-LANGUAGE_CODE = 'en'
+LANGUAGE_CODE = 'es-es'
 
 TIME_ZONE = 'America/Santiago'
 

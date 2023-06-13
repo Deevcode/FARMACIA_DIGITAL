@@ -8,14 +8,34 @@ from django.template.loader import get_template
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.decorators import user_passes_test
-
-
-
 from django.contrib.auth import authenticate, login
+from rest_framework import viewsets
+from .serializers import MedicamentoSerializer
+
+#VISTA DE LAS VIEWSETS
+class MedicamentoViewset(viewsets.ModelViewSet):
+    queryset = Medicamentos.objects.all()
+    serializer_class = MedicamentoSerializer
 
 #VISTA DEL HOME
 def home(request):
     return render(request, 'app/home.html')
+
+def send_correo(mail):
+
+    context = {'mail': mail}
+
+    template = get_template('app/correo_contacto.html')
+    content = template.render(context)
+
+    email = EmailMultiAlternatives(
+        'Notificacion de Contacto',
+        'CONTACTO',
+        settings.EMAIL_HOST_USER,
+        [mail]
+    )  
+    email.attach_alternative (content, 'text/html')
+    email.send()
 
 #VISTA DEL CONTACTO
 def contacto(request):
@@ -23,6 +43,8 @@ def contacto(request):
         'form': ContactoForm()
     }
     if request.method == 'POST':
+        mail = request.POST.get('mail')
+        send_correo(mail)
         formulario = ContactoForm(data=request.POST)
         if formulario.is_valid():
             formulario.save()
