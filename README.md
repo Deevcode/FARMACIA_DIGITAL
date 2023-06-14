@@ -10,10 +10,11 @@ La aplicación se ha desarrollado utilizando el framework Django y está program
 
 Para poder ejecutar la aplicación, es necesario tener instalados Django 4.1, Python 3.10 y Oracle 19c. Es importante destacar que se deben utilizar estas versiones específicas. Se recomienda trabajar en un entorno de desarrollo virtual, ya que el archivo requirements.txt contiene la versión de Django que se utilizará. A continuación, se proporcionarán los enlaces necesarios para realizar las instalaciones.
 
-PYTHON: https://www.python.org/downloads/
-DJANGO: https://www.djangoproject.com/download/
-VIRTUAL-ENV: https://docs.python.org/es/3/tutorial/venv.html
-ORACLE: https://www.oracle.com/cl/database/technologies/oracle19c-windows-downloads.html
+        PYTHON: https://www.python.org/downloads/
+        DJANGO: https://www.djangoproject.com/download/
+        VIRTUAL-ENV: https://docs.python.org/es/3/tutorial/venv.html
+        ORACLE: https://www.oracle.com/cl/database/technologies/oracle19c-windows-downloads.html
+        SQLDEVELOPER: https://www.oracle.com/database/sqldeveloper/technologies/download/
 
 Una vez que hayamos descargado todo, procederemos a clonar el repositorio en GitHub. Para ello, abre la consola bash en el directorio en el que deseas clonar el repositorio y ejecuta el siguiente comando en la consola:
 
