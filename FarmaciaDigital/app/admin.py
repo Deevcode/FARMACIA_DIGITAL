@@ -57,8 +57,8 @@ admin.site.register(Farmacia, FarmaciaAdmin)
 #-----------------------------------------------------------------------------------------------------------------#
 #ADMIN DE TIPO MEDICAMENTOS
 class MedicamentosAdmin(admin.ModelAdmin):
-    list_display = ("id_medicamento", "id_laboratorio", "id_principio_activo", "nombre_comercial",  "gramaje", "cantidad_stock", "presentacion_medicamento", "id_via_administracion")
-    search_fields = ["nombre_comercial", "id_medicamento", "id_laboratorio"]
+    list_display = ("id_medicamento", "id_laboratorio", "id_principio_activo", "nombre_comercial",  "gramaje", "cantidad_stock","precio" , "presentacion_medicamento", "id_via_administracion")
+    search_fields = ["nombre_comercial", "id_medicamento", "id_laboratorio","precio" ]
 
 admin.site.register(Medicamentos, MedicamentosAdmin)
 #-----------------------------------------------------------------------------------------------------------------#

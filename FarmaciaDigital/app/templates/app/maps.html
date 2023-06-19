@@ -1,53 +1,43 @@
 {% extends 'app/base.html' %}
 
-{% load static %}
-
-{% block js %}
-    <script src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}&callback=initMap" async defer></script>
-    <script src="{% static 'js/maps.js' %}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>  <!-- Agrega esta línea para incluir SweetAlert2 -->
-    <style>
-        #map {
-            height: 400px;
-            width: 100%;
-        }
-    </style>
-{% endblock %}
-
-{% block css %}
-
-{% endblock %}
-
 {% block contenido %}
-    <h1>Mapa</h1>
+  <h1>Mapa</h1>
+  <form method="post" action="{% url 'map_view' %}">
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit">Buscar</button>
+  </form>
+
+  {% if error %}
+    <p>{{ error }}</p>
+  {% endif %}
+
+  {% if lat and lng %}
     <div id="map"></div>
-    <form id="addressForm">
-        <input type="text" id="addressInput">
-        <button type="submit">Buscar</button>
-    </form>
-    <p id="lat" style="display: none;">{{ lat }}</p>
-    <p id="lng" style="display: none;">{{ lng }}</p>
     <script>
-        initMap();
-        var addressForm = document.getElementById('addressForm');
-        var addressInput = document.getElementById('addressInput');
+      var lat = {{ lat }};
+      var lng = {{ lng }};
 
-        addressForm.addEventListener('submit', function (event) {
-            event.preventDefault();
-            var address = addressInput.value;
-            geocodeAddress(address);
-            searchAddress(address);
+      function initMap() {
+        var lat = parseFloat(document.getElementById('lat').textContent);
+        var lng = parseFloat(document.getElementById('lng').textContent);
+      
+        var myLatLng = { lat: lat, lng: lng };
+      
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: myLatLng,
+          zoom: 15
         });
-
-        function searchAddress(address) {
-            var userAddress = "{{ usuario_ficha.dirreccion_usuario }}";  // Obtener la dirección del usuario desde el modelo
-            if (userAddress === address) {
-                Swal.fire('¡Dirección encontrada!', 'La dirección coincide con la dirección del usuario', 'success');
-                // Realizar las acciones adicionales que desees si la dirección coincide
-            } else {
-                Swal.fire('¡Dirección no encontrada!', 'La dirección no coincide con la dirección del usuario', 'error');
-                // Realizar las acciones adicionales que desees si la dirección no coincide
-            }
+      
+        var marker = new google.maps.Marker({
+          position: myLatLng,
+          map: map,
+          title: 'Ubicación'
+        });
         }
+      
+
+      initMap();
     </script>
+  {% endif %}
 {% endblock %}

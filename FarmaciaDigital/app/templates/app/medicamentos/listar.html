@@ -90,6 +90,7 @@
       <p>Laboratorio: {{ m.id_laboratorio | capfirst }}</p>
       <p>Principio Activo: {{ m.id_principio_activo | capfirst }}</p>
       <p>Gramaje: {{ m.gramaje | capfirst }}</p>
+      <p>Precio: ${{ m.precio }}</p>
       <p>Cantidad de cajas: {{ m.cantidad_stock }}</p>
       <p>Presentacion del medicamento: {{ m.presentacion_medicamento | capfirst }}</p>
       <p>Via Administración: {{ m.id_via_administracion | capfirst }}</p>
@@ -97,7 +98,7 @@
         {% if perms.app.change_producto %}
         <a href="{% url 'modificar_medicamento' m.id_medicamento %}" class="btn btn-info">MODIFICAR</a>
         {% endif %}
-        <a href="#" class="btn btn-success">VENTA</a>
+        <a href="#" class="btn btn-success" onclick="agregarAlCarrito({{ m.id_medicamento }})">AGREGAR AL CARRITO</a>
       </div>
     </div>
     {% endfor %}

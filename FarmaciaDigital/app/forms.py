@@ -2,6 +2,8 @@ from django import forms
 from .models import *
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit
 
 class ContactoForm(forms.ModelForm):
 
@@ -29,3 +31,6 @@ class PacienteRecetaForm(forms.ModelForm):
     class Meta:
         model = PacienteReceta
         fields = '__all__'
+
+class AddressForm(forms.Form):
+    address = forms.CharField(label='Dirección', widget=forms.TextInput(attrs={'id': 'address-input', 'placeholder': 'Ingrese una dirección'}))

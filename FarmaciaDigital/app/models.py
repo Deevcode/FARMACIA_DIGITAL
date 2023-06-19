@@ -87,6 +87,7 @@ class Medicamentos(models.Model):
     presentacion_medicamento =models.CharField(max_length=100,null=False, blank=False)
     id_via_administracion = models.ForeignKey(ViaAdminstracion, on_delete=models.PROTECT)
     imagen = models.ImageField(upload_to="medicamentos", null=True)
+    precio = models.IntegerField(default=0)
 
     def __str__(self):
         return str(self.nombre_comercial)+" "+str(self.gramaje)
@@ -320,3 +321,6 @@ class ProfesionalPaciente(models.Model):
     horario_turno = models.IntegerField(choices=opciones_horario, null=True)
     def __str__(self):
         return str(self.identificacion_profesional)+ ": Horario:"+str(self.horario_turno)
+
+
+# COMPRA DE MEDICAMENTO

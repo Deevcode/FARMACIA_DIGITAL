@@ -371,23 +371,24 @@ def generar_recetas_pdf(request):
 
 # VISTA DE GOOGLE MAPS
 
-def google_maps(request, id):
-    gmaps = googlemaps.Client(key=settings.GOOGLE_MAPS_API_KEY)
-
-    # Obtener la instancia del objeto UsuarioFicha o mostrar un error 404 si no existe
-    usuario_ficha = get_object_or_404(UsuarioFicha, id=id)
-
-    address = usuario_ficha.dirreccion_usuario
-
-    # Realizar la solicitud de geocodificación
-    geocode_result = gmaps.geocode(address)
-
-    # Obtener la latitud y longitud de la respuesta
-    if geocode_result:
-        lat = geocode_result[0]['geometry']['location']['lat']
-        lng = geocode_result[0]['geometry']['location']['lng']
+def map_view(request):
+    if request.method == 'POST':
+        form = AddressForm(request.POST)
+        if form.is_valid():
+            address = form.cleaned_data['address']
+            gmaps = googlemaps.Client(key=settings.GOOGLE_MAPS_API_KEY)
+            geocode_result = gmaps.geocode(address)
+            if geocode_result:
+                lat = geocode_result[0]['geometry']['location']['lat']
+                lng = geocode_result[0]['geometry']['location']['lng']
+                context = {'form': form, 'lat': lat, 'lng': lng}
+            else:
+                context = {'form': form, 'error': 'No se encontró la dirección'}
     else:
-        lat = None
-        lng = None
+        form = AddressForm()
+        context = {'form': form}
 
-    return render(request, 'app/maps.html', {'lat': lat, 'lng': lng})
+    return render(request, 'app/maps.html', context)
+
+
+# CARRITO DE COMPRAS

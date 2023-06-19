@@ -28,7 +28,5 @@ urlpatterns = [
     path('generar-pdf/', generar_pdf, name='generar_pdf'),
     path('generar-recetas-pdf/', generar_recetas_pdf, name='generar_recetas_pdf'),
     path('api/', include(router.urls)),
-    path('google-maps/<id>/', google_maps, name='google_maps'),
-
-
+    path('map_view/', map_view, name='map_view'),
 ]
