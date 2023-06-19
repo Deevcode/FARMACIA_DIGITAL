@@ -104,8 +104,8 @@ admin.site.register(Usuario, UserAdmin)
 #-----------------------------------------------------------------------------------------------------------------#
 #ADMIN DE USUARIO FICHA ADMIN
 class UsuarioFichaAdmin(admin.ModelAdmin):
-    list_display = ('id_usuario', 'identificacion_usuario', 'dirreccion_usuario', 'telefono_usuario', 'celular_usuario','id_comuna')
-    search_fields = ['id_usuario', 'identificacion_usuario', 'dirreccion_usuario', 'telefono_usuario', 'celular_usuario','id_comuna']
+    list_display = ('id', 'identificacion_usuario', 'dirreccion_usuario', 'telefono_usuario', 'celular_usuario','id_comuna')
+    search_fields = ['id', 'identificacion_usuario', 'dirreccion_usuario', 'telefono_usuario', 'celular_usuario','id_comuna']
 
 admin.site.register(UsuarioFicha, UsuarioFichaAdmin)
 #-----------------------------------------------------------------------------------------------------------------#

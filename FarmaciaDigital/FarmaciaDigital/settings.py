@@ -59,6 +59,8 @@ INSTALLED_APPS = [
     #'crispy_bootstrap4',
 ]
 
+GOOGLE_MAPS_API_KEY = 'AIzaSyAKz1r_PTY0xbw7UAs0NV1nxWPJpaWH5sM'
+
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"

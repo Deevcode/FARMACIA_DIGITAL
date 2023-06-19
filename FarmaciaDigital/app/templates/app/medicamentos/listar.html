@@ -1,74 +1,106 @@
-{% extends 'app/base.html'  %}
+{% extends 'app/base.html' %}
 
 {% load static %}
 
 {% block js %}
 <script>
-  function eliminar_medicamento(id) {
+  function eliminar_medicamento(id_medicamento) {
     Swal.fire({
-			"title": "¿Estas seguro?",
-			"text": "Esta accion no se puede deshacer",
-			"icon": "question",
-      "showCancelButton": true,
-      "cancelButtonText": "No, Cancelar",
-      "confirmButtonText": "Si, Eliminar",
-      "reverseButtons": true,
-      "confirmButtonColor":"dc3545"
-		})
-    .then(function(result){
-      if (result.isConfirmed) {
-        window.location.href = "/eliminar_medicamento/" + id + "/"
-      }
+      title: "¿Estás seguro?",
+      text: "Esta acción no se puede deshacer",
+      icon: "question",
+      showCancelButton: true,
+      cancelButtonText: "No, Cancelar",
+      confirmButtonText: "Sí, Eliminar",
+      reverseButtons: true,
+      confirmButtonColor: "dc3545"
     })
+    .then(function(result) {
+      if (result.isConfirmed) {
+        window.location.href = "/eliminar_medicamento/" + id_medicamento + "/";
+      }
+    });
   }
 </script>
 {% endblock %}
 
-
 {% block css %}
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+<style>
+  .medicamento {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .medicamento .medicamentos {
+    margin: 20px;
+  }
+
+  .medicamento .medicamento-card {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  .medicamento .medicamento-card h3 {
+    margin-top: 0;
+  }
+
+  .medicamento .medicamento-card p {
+    margin-bottom: 10px;
+  }
+
+  .medicamento .medicamento-card .opciones {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+  }
+
+  .medicamento .medicamento-card .opciones .btn {
+    margin-right: 5px;
+  }
+
+  .medicamento .medicamento-card .imagen {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .medicamento .medicamento-card .imagen img {
+    max-width: 200px;
+    max-height: 200px;
+  }
+</style>
 {% endblock %}
 
 {% block contenido %}
-<h2> LISTADO DE MEDICAMENTOS </h2>
-<div class="medicamento" >
-
-    <div class="medicamentos">
-        <div class="table table-striped table-hover table-responsive-sm">
-            <table border="1" class="table">
-                <tr>
-                  <th>Laboratorio</th>
-                  <th>Pincipio Activo</th>
-                  <th>Nombre Comercial</th>
-                  <th>Gramaje</th>
-                  <th>Cantidad de cajas</th>
-                  <th>Presentacion del medicamento</th>
-                  <th>Via Administración</th>
-                  <th>OPCIONES</th>
-                </tr>
-                {% for m in medicamentos %}
-                <tr>
-                  <td>{{ m.id_laboratorio | capfirst  }}</td>
-                  <td>{{ m.id_principio_activo | capfirst  }}</td>
-                  <td>{{ m.nombre_comercial  | capfirst }}</td>
-                  <td>{{ m.gramaje  | capfirst }}</td>
-                  <td>{{ m.cantidad_stock }}</td>
-                  <td>{{ m.presentacion_medicamento  | capfirst }}</td>
-                  <td>{{ m.id_via_administracion  | capfirst }}</td>
-                  {% if perms.app.change_producto %}
-                  <td><a href="{% url 'modificar_medicamento' m.id_medicamento  %}" class="btn btn-info">MODIFICAR</a></td>
-                  {% endif %}
-                  {% if perms.app.delete_producto %}
-                  <td><a href="#" onclick="eliminar_medicamento({{ m.id_medicamento }})"  class="btn btn-danger">ELIMINAR</a></td>
-                  {% endif %}
-                </tr>
-                {% endfor %}
-              </table>
-        </div>
+<h2>LISTADO DE MEDICAMENTOS</h2>
+<div class="medicamento">
+  <div class="medicamentos">
+    {% for m in medicamentos %}
+    <div class="medicamento-card">
+      <h3>{{ m.nombre_comercial | capfirst }}</h3>
+      <div class="imagen">
+        {% if m.imagen %}
+        <img src="{{ m.imagen.url }}" alt="Imagen del medicamento">
+        {% else %}
+        <p>No hay imagen disponible</p>
+        {% endif %}
+      </div>
+      <p>Laboratorio: {{ m.id_laboratorio | capfirst }}</p>
+      <p>Principio Activo: {{ m.id_principio_activo | capfirst }}</p>
+      <p>Gramaje: {{ m.gramaje | capfirst }}</p>
+      <p>Cantidad de cajas: {{ m.cantidad_stock }}</p>
+      <p>Presentacion del medicamento: {{ m.presentacion_medicamento | capfirst }}</p>
+      <p>Via Administración: {{ m.id_via_administracion | capfirst }}</p>
+      <div class="opciones">
+        {% if perms.app.change_producto %}
+        <a href="{% url 'modificar_medicamento' m.id_medicamento %}" class="btn btn-info">MODIFICAR</a>
+        {% endif %}
+        <a href="#" class="btn btn-success">VENTA</a>
+      </div>
     </div>
-
+    {% endfor %}
+  </div>
 </div>
-
-
-
 {% endblock %}

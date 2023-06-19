@@ -25,7 +25,10 @@ urlpatterns = [
     path('eliminar-receta/<id_receta_usuario>/', eliminar_receta, name="eliminar_receta"),
     path('profesional/', profesional, name="profesional"),
     path('admin/', admin.site.urls),
+    path('generar-pdf/', generar_pdf, name='generar_pdf'),
+    path('generar-recetas-pdf/', generar_recetas_pdf, name='generar_recetas_pdf'),
     path('api/', include(router.urls)),
+    path('google-maps/<id>/', google_maps, name='google_maps'),
 
 
 ]

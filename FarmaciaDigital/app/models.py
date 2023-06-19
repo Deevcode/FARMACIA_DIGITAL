@@ -86,7 +86,7 @@ class Medicamentos(models.Model):
     cantidad_stock =models.IntegerField(null=False, blank=False)
     presentacion_medicamento =models.CharField(max_length=100,null=False, blank=False)
     id_via_administracion = models.ForeignKey(ViaAdminstracion, on_delete=models.PROTECT)
-    #imagen = models.ImageField(upload_to="medicamentos", null=True)
+    imagen = models.ImageField(upload_to="medicamentos", null=True)
 
     def __str__(self):
         return str(self.nombre_comercial)+" "+str(self.gramaje)
@@ -143,7 +143,7 @@ class Usuario(AbstractUser):
 #TABLA DE FICHA TODOS LOS USUARIOS
 
 class UsuarioFicha (models.Model):
-    id_usuario = models.AutoField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     identificacion_usuario = models.ForeignKey(Usuario, on_delete=models.SET_NULL,null=True)
     dirreccion_usuario = models.CharField(max_length=150,null=False, blank=False)
     telefono_usuario = models.IntegerField(null=False)

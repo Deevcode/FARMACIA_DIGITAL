@@ -15,3 +15,5 @@ django-environ
 cx-oracle
 django-rest-framework
 requests
+reportlab
+googlemaps
