@@ -138,21 +138,6 @@ class Usuario(AbstractUser):
     def __str__(self):
         return str(self.first_name)+" "+str(self.last_name)+" "+str(self.rut_usuario)+" "+str(self.tipo_usuario)
 
-
-#-----------------------------------------------------------------------------------------------------------------#
-
-#TABLA DE FICHA TODOS LOS USUARIOS
-
-class UsuarioFicha (models.Model):
-    id = models.AutoField(primary_key=True)
-    identificacion_usuario = models.ForeignKey(Usuario, on_delete=models.SET_NULL,null=True)
-    dirreccion_usuario = models.CharField(max_length=150,null=False, blank=False)
-    telefono_usuario = models.IntegerField(null=False)
-    celular_usuario = models.IntegerField(null=False)
-    id_comuna = models.ForeignKey(Comuna, on_delete=models.SET_NULL,null=True)
-    def __str__(self):
-        return str(self.identificacion_usuario)+" "+str(self.telefono_usuario)
-       
 #-----------------------------------------------------------------------------------------------------------------#
 
 opciones_fraccionamiento = [
@@ -324,3 +309,20 @@ class ProfesionalPaciente(models.Model):
 
 
 # COMPRA DE MEDICAMENTO
+#-----------------------------------------------------------------------------------------------------------------#
+
+#TABLA DE FICHA TODOS LOS USUARIOS
+
+class UsuarioFicha (models.Model):
+    id = models.AutoField(primary_key=True)
+    identificacion_usuario = models.ForeignKey(Usuario, on_delete=models.SET_NULL,null=True)
+    dirreccion_usuario = models.CharField(max_length=150,null=False, blank=False)
+    telefono_usuario = models.IntegerField(null=False)
+    celular_usuario = models.IntegerField(null=False)
+    id_comuna = models.ForeignKey(Comuna, on_delete=models.SET_NULL,null=True)
+    imagen = models.ImageField(upload_to="perfil_usuario", null=True)
+    ficha_clinica = models.OneToOneField(PacienteFichaClinica, on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return str(self.identificacion_usuario)+" "+str(self.telefono_usuario)
+       

@@ -98,7 +98,7 @@
         {% if perms.app.change_producto %}
         <a href="{% url 'modificar_medicamento' m.id_medicamento %}" class="btn btn-info">MODIFICAR</a>
         {% endif %}
-        <a href="#" class="btn btn-success" onclick="agregarAlCarrito({{ m.id_medicamento }})">AGREGAR AL CARRITO</a>
+        <a href="#" class="btn btn-success" >DISPONIBILIDAD</a>
       </div>
     </div>
     {% endfor %}

@@ -59,7 +59,7 @@ INSTALLED_APPS = [
     #'crispy_bootstrap4',
 ]
 
-GOOGLE_MAPS_API_KEY = 'AIzaSyAKz1r_PTY0xbw7UAs0NV1nxWPJpaWH5sM'
+GOOGLE_MAPS_API_KEY =os.environ.get('GOOGLE_MAPS_API_KEY') 
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 
@@ -187,7 +187,7 @@ AUTH_USER_MODEL = 'app.Usuario'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'josee.cornejo@gmail.com'  # Tu dirección de correo electrónico
-EMAIL_HOST_PASSWORD = 'qrwufgcjmuqbpmgv'  # Tu contraseña de correo electrónico
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')   # Tu dirección de correo electrónico
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')  # Tu contraseña de correo electrónico
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'josee.cornejo@gmail.com'  # Dirección de correo electrónico para enviar los correos
+DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL')  # Dirección de correo electrónico para enviar los correos

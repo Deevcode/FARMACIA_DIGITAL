@@ -1,0 +1,49 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block js %}
+
+{% endblock %}
+
+
+{% block css %}
+<style>
+  .profile-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+</style>
+{% endblock %}
+
+
+{% block contenido %}
+
+
+<div class="text-center">
+  <img src="{% static 'app/img/fichaclinica.png' %}" alt="Imagen" class="img-fluid">
+</div>
+
+<br>
+
+{% for ficha in fichas %}
+<div class="card mb-3">
+  <div class="card-body">
+    <h5 class="card-title">Ficha Clínica</h5>
+    <div class="row">
+      <div class="col-md-6">
+        <p><strong>Identificación Paciente:</strong> {{ ficha.identificacion_paciente }}</p>
+        <p><strong>Tipo Diabetes:</strong> {{ ficha.get_tipo_diabetes_display }}</p>
+        <p><strong>Tipo Hipertensión:</strong> {{ ficha.get_tipo_hipertension_display }}</p>
+        <p><strong>Fecha Nacimiento:</strong> {{ ficha.fecha_nacimiento }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+{% endblock %}
+
+
+

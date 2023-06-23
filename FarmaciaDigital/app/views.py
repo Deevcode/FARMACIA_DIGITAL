@@ -391,4 +391,24 @@ def map_view(request):
     return render(request, 'app/maps.html', context)
 
 
-# CARRITO DE COMPRAS
+# VISTA DE PERFIL DE USUARIO
+
+@login_required
+def perfil_usuario(request):
+    usuario_ficha = UsuarioFicha.objects.get(identificacion_usuario=request.user)
+    context = {
+        'usuario_ficha': usuario_ficha
+    }
+    return render(request, 'app/perfil_usuario.html', context)
+
+
+# VISTA DE LA FICHA CLINICA
+@login_required
+def paciente_ficha_clinica_list(request):
+    # Obtener el usuario autenticado actualmente
+    usuario = request.user
+
+    # Filtrar las fichas clínicas del usuario actual
+    fichas = PacienteFichaClinica.objects.filter(identificacion_paciente=usuario)
+
+    return render(request, 'app/paciente_ficha_clinica_list.html', {'fichas': fichas})

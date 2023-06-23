@@ -29,4 +29,6 @@ urlpatterns = [
     path('generar-recetas-pdf/', generar_recetas_pdf, name='generar_recetas_pdf'),
     path('api/', include(router.urls)),
     path('map_view/', map_view, name='map_view'),
+    path('perfil/', perfil_usuario, name='perfil'),
+    path('paciente-fichaclinica/', paciente_ficha_clinica_list, name='paciente_ficha_clinica_list'),
 ]
