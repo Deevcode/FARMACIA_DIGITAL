@@ -310,9 +310,11 @@ def render_to_pdf(data):
 @user_passes_test(group_check1)
 @login_required
 def generar_pdf(request):
-    pdf = render_to_pdf(None)
-    return pdf
-
+    if request.method == 'POST':
+        pdf = render_to_pdf(request)
+        return pdf
+    else:
+        return redirect('generar_pdf')
 
 # TABLA DE PDF PARA RECETAS
 @user_passes_test(group_check1)
@@ -366,8 +368,11 @@ def render_recetas_to_pdf(data):
 @user_passes_test(group_check1)
 @login_required
 def generar_recetas_pdf(request):
-    pdf = render_recetas_to_pdf(None)
-    return pdf
+    if request.method == 'POST':
+        pdf = render_recetas_to_pdf(request)
+        return pdf
+    else:
+        return redirect('generar_recetas_pdf')
 
 # VISTA DE GOOGLE MAPS
 
@@ -412,3 +417,14 @@ def paciente_ficha_clinica_list(request):
     fichas = PacienteFichaClinica.objects.filter(identificacion_paciente=usuario)
 
     return render(request, 'app/paciente_ficha_clinica_list.html', {'fichas': fichas})
+
+# VISTA DEL STOCK DE LA FARMACIA
+def stock_farmacia(request):
+    nombre_comercial = request.GET.get('nombre_comercial')
+    stocks = StockFarmacia.objects.filter(medicamento__nombre_comercial=nombre_comercial)
+    return render(request, 'app/stock_farmacia.html', {'stocks': stocks})
+
+# VISTA DE LA FARMACIA
+def farmacia_sucursal(request):
+    sucursales = FarmaciaSucursal.objects.all()
+    return render(request, 'app/farmacia_sucursal.html', {'sucursales': sucursales})

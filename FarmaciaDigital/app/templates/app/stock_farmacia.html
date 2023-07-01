@@ -1,0 +1,46 @@
+{% extends 'app/base.html'  %}
+
+{% load static %}
+
+{% block js %}
+
+{% endblock %}
+
+
+{% block css %}
+
+{% endblock %}
+
+{% block contenido %}
+<h2>Stock de Farmacia</h2>
+{% if stocks %}
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Medicamento</th>
+        <th>Farmacia</th>
+        <th>Fecha de Vencimiento</th>
+        <th>Cantidad</th>
+        <th>Precio</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for stock in stocks %}
+      <tr>
+        <td>{{ stock.id_stock }}</td>
+        <td>{{ stock.medicamento }}</td>
+        <td>{{ stock.farmacia }}</td>
+        <td>{{ stock.fecha_vencimiento }}</td>
+        <td>{{ stock.cantidad }}</td>
+        <td>${{ stock.precio }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <a href="{% url 'farmacia_sucursal' %}" class="btn btn-info"><input type="submit" value="Ubicaciones"></a>
+{% else %}
+  <br>
+  <h4>SIN STOCK EN FARMACIA</h4>
+{% endif %}
+{% endblock %}

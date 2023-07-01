@@ -1,0 +1,129 @@
+{% extends 'app/base.html' %}
+
+{% load static %}
+
+{% block js %}
+<script>
+  function initMap() {
+    {% for sucursal in sucursales %}
+    const map{{ forloop.counter }} = new google.maps.Map(document.getElementById("map{{ forloop.counter }}"), {
+      center: { lat: {{ sucursal.lat }}, lng: {{ sucursal.lng }} },
+      zoom: 12,
+      styles: [
+        {
+          featureType: 'all',
+          elementType: 'geometry',
+          stylers: [
+            { color: '#f2f2f2' }
+          ]
+        },
+        {
+          featureType: 'road',
+          elementType: 'labels.icon',
+          stylers: [
+            { visibility: 'off' }
+          ]
+        },
+        {
+          featureType: 'water',
+          elementType: 'geometry',
+          stylers: [
+            { color: '#e9e9e9' }
+          ]
+        },
+        {
+          featureType: 'poi',
+          elementType: 'labels.icon',
+          stylers: [
+            { visibility: 'off' }
+          ]
+        },
+        {
+          featureType: 'poi',
+          elementType: 'labels.text',
+          stylers: [
+            { visibility: 'off' }
+          ]
+        },
+        {
+          featureType: 'transit',
+          elementType: 'labels.icon',
+          stylers: [
+            { visibility: 'off' }
+          ]
+        },
+        {
+          featureType: 'transit',
+          elementType: 'labels.text',
+          stylers: [
+            { visibility: 'off' }
+          ]
+        }
+      ]
+    });
+
+    new google.maps.Marker({
+      position: { lat: {{ sucursal.lat }}, lng: {{ sucursal.lng }} },
+      map: map{{ forloop.counter }},
+      title: "{{ sucursal.nombre_farmacia }}"
+    });
+    {% endfor %}
+  }
+</script>
+{% endblock %}
+
+{% block css %}
+<style>
+  .sucursal-card {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .sucursal-card-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .sucursal-card-header h3 {
+    margin: 0;
+    margin-left: 10px;
+  }
+
+  .sucursal-card-map {
+    width: 100%;
+    height: 300px;
+    margin-bottom: 10px;
+  }
+</style>
+{% endblock %}
+
+{% block contenido %}
+<h2>Sucursales de Farmacia</h2>
+<div id="map-container">
+  {% if sucursales %}
+  {% for sucursal in sucursales %}
+  <div class="sucursal-card">
+    <div class="sucursal-card-header">
+      <img src="{% static 'app/img/map_icon.png' %}" alt="Map Icon" width="32" height="32">
+      <h3>{{ sucursal.nombre_farmacia }}</h3>
+    </div>
+    <div class="sucursal-card-map" id="map{{ forloop.counter }}"></div>
+    <p><strong>Químico Farmacéutico Encargado:</strong> {{ sucursal.id_quimico_farmaceutio }}</p>
+    <p><strong>Comuna:</strong> {{ sucursal.nombre_comuna }}</p>
+    <p><strong>Dirección:</strong> {{ sucursal.direccion_sucursal }}</p>
+    <p><strong>Teléfono:</strong> {{ sucursal.telefono_sucursal }}</p>
+    <p><strong>Email:</strong> {{ sucursal.email }}</p>
+    <p><strong>Latitud:</strong> {{ sucursal.lat }}</p>
+    <p><strong>Longitud:</strong> {{ sucursal.lng }}</p>
+  </div>
+  {% endfor %}
+  {% else %}
+  <p>No hay sucursales de farmacia registradas</p>
+  {% endif %}
+</div>
+{% endblock %}

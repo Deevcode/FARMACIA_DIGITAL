@@ -57,8 +57,8 @@ admin.site.register(Farmacia, FarmaciaAdmin)
 #-----------------------------------------------------------------------------------------------------------------#
 #ADMIN DE TIPO MEDICAMENTOS
 class MedicamentosAdmin(admin.ModelAdmin):
-    list_display = ("id_medicamento", "id_laboratorio", "id_principio_activo", "nombre_comercial",  "gramaje", "cantidad_stock","precio" , "presentacion_medicamento", "id_via_administracion")
-    search_fields = ["nombre_comercial", "id_medicamento", "id_laboratorio","precio" ]
+    list_display = ("id_medicamento", "id_laboratorio", "id_principio_activo", "nombre_comercial",  "gramaje", "presentacion_medicamento", "id_via_administracion")
+    search_fields = ["nombre_comercial", "id_medicamento", "id_laboratorio" ]
 
 admin.site.register(Medicamentos, MedicamentosAdmin)
 #-----------------------------------------------------------------------------------------------------------------#
@@ -156,7 +156,7 @@ admin.site.register(QuimicoFarmaceuticoEncargado, QuimicoFarmaceuticoEncargadoAd
 #-----------------------------------------------------------------------------------------------------------------#
 #ADMIN DE TIPO FARMACIA SUCURSAL
 class FarmaciaSucursalAdmin(admin.ModelAdmin):
-    list_display = ("id_sucursal", "nombre_farmacia", "id_quimico_farmaceutio", "nombre_comuna", "direccion_sucursal", "telefono_sucursal", "email")
+    list_display = ("id_sucursal", "nombre_farmacia", "id_quimico_farmaceutio", "nombre_comuna", "direccion_sucursal", "telefono_sucursal", "email",'lat','lng')
     search_fields = ["id_sucursal", "nombre_farmacia", "id_quimico_farmaceutio", "nombre_comuna", "direccion_sucursal", "telefono_sucursal", "email"]
 
 admin.site.register(FarmaciaSucursal, FarmaciaSucursalAdmin)
@@ -167,6 +167,13 @@ class FarmaciaCESFAMAdmin(admin.ModelAdmin):
     search_fields = ['id_farmacia_CESFAM', 'identificacion_cesfam']
 
 admin.site.register(FarmaciaCESFAM, FarmaciaCESFAMAdmin)
+#-----------------------------------------------------------------------------------------------------------------#
+#ADMIN DE STOCK FARMACIA
+class StockFarmaciaAdmin(admin.ModelAdmin):
+    list_display = ('id_stock', 'medicamento','farmacia','fecha_vencimiento','cantidad','precio')
+    search_fields = ['id_farmacia_CESFAM', 'identificacion_cesfam']
+
+admin.site.register(StockFarmacia, StockFarmaciaAdmin)
 #-----------------------------------------------------------------------------------------------------------------#
 #ADMIN DE USUARIO FARMACO VIGILANGIA
 class PacienteFichaClinicaAdmin(admin.ModelAdmin):

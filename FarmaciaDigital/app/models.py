@@ -81,16 +81,14 @@ class Medicamentos(models.Model):
     id_medicamento = models.AutoField(primary_key=True)
     id_laboratorio = models.ForeignKey(Laboratorio, on_delete=models.PROTECT)
     id_principio_activo = models.ForeignKey(PrincipioActivo, on_delete=models.PROTECT)
-    nombre_comercial = models.CharField(max_length=100,null=False, blank=False)
-    gramaje = models.CharField(max_length=50,null=False, blank=False)
-    cantidad_stock =models.IntegerField(null=False, blank=False)
-    presentacion_medicamento =models.CharField(max_length=100,null=False, blank=False)
+    nombre_comercial = models.CharField(max_length=100, null=False, blank=False)
+    gramaje = models.CharField(max_length=50, null=False, blank=False)
+    presentacion_medicamento = models.CharField(max_length=100, null=False, blank=False)
     id_via_administracion = models.ForeignKey(ViaAdminstracion, on_delete=models.PROTECT)
     imagen = models.ImageField(upload_to="medicamentos", null=True)
-    precio = models.IntegerField(default=0)
 
     def __str__(self):
-        return str(self.nombre_comercial)+" "+str(self.gramaje)
+        return str(self.nombre_comercial) + " " + str(self.gramaje)
     
 #-----------------------------------------------------------------------------------------------------------------#
     
@@ -136,7 +134,7 @@ class Usuario(AbstractUser):
     tipo_usuario = models.ForeignKey(Tipo_usuario, on_delete=models.PROTECT,null=True)
 
     def __str__(self):
-        return str(self.first_name)+" "+str(self.last_name)+" "+str(self.rut_usuario)+" "+str(self.tipo_usuario)
+        return str(self.first_name)+" "+str(self.last_name)+" "+str(self.rut_usuario)+" | "+str(self.tipo_usuario)
 
 #-----------------------------------------------------------------------------------------------------------------#
 
@@ -209,7 +207,7 @@ class QuimicoFarmaceuticoEncargado(models.Model):
     registro_sanitario_QF = models.CharField(max_length=200,null=False, blank=False)
 
     def __str__(self):
-        return str(self.identificacion_QF)+" "+str(self.registro_sanitario_QF)
+        return str(self.identificacion_QF)
 
 #-----------------------------------------------------------------------------------------------------------------#
 
@@ -222,9 +220,11 @@ class FarmaciaSucursal(models.Model):
     direccion_sucursal = models.CharField(max_length=200,null=False, blank=False)
     telefono_sucursal = models.IntegerField(null=False)
     email = models.EmailField(null=False)
+    lat = models.CharField(max_length=200,default='')
+    lng = models.CharField(max_length=200,default='')
 
     def __str__(self):
-        return str(self.nombre_farmacia)+" "+str(self.direccion_sucursal)+" "+str(self.nombre_comuna)+" tel:"+str(self.telefono_sucursal)
+        return str(self.nombre_farmacia)+" | "+str(self.direccion_sucursal)
 
 #-----------------------------------------------------------------------------------------------------------------#
 
@@ -236,6 +236,21 @@ class FarmaciaCESFAM(models.Model):
 
     def __str__(self):
         return str(self.identificacion_cesfam)
+
+#-----------------------------------------------------------------------------------------------------------------#
+
+#TABLA DE STOCK FARMACIA
+
+class StockFarmacia(models.Model):
+    id_stock = models.AutoField(primary_key=True)
+    medicamento = models.ForeignKey(Medicamentos, on_delete=models.PROTECT)
+    farmacia = models.ForeignKey(FarmaciaSucursal, on_delete=models.PROTECT)
+    fecha_vencimiento = models.DateField(null=False)
+    cantidad = models.IntegerField(null=False, blank=False)
+    precio = models.IntegerField(default=0)
+
+    def __str__(self):
+        return str(self.farmacia)+": "+str(self.medicamento)+" "+str(self.precio)
 
 #-----------------------------------------------------------------------------------------------------------------#
 opciones_diabetes = [

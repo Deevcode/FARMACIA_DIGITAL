@@ -39,9 +39,12 @@
         <p><strong>Fecha Nacimiento:</strong> {{ ficha.fecha_nacimiento }}</p>
       </div>
     </div>
+    
   </div>
 </div>
 {% endfor %}
+<br>
+    <a href="{% url 'perfil' %}"><input type="submit" value="Volver"></a>
 
 {% endblock %}
 

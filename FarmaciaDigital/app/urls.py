@@ -31,4 +31,7 @@ urlpatterns = [
     path('map_view/', map_view, name='map_view'),
     path('perfil/', perfil_usuario, name='perfil'),
     path('paciente-fichaclinica/', paciente_ficha_clinica_list, name='paciente_ficha_clinica_list'),
+     path('farmacia_sucursal/', farmacia_sucursal, name='farmacia_sucursal'),
+    path('stock_farmacia/', stock_farmacia, name='stock_farmacia'),
+   
 ]

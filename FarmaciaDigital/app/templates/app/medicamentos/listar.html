@@ -89,16 +89,15 @@
       </div>
       <p>Laboratorio: {{ m.id_laboratorio | capfirst }}</p>
       <p>Principio Activo: {{ m.id_principio_activo | capfirst }}</p>
+      <p>Nombre Comercial: {{ m.nombre_comercial | capfirst }}</p>
       <p>Gramaje: {{ m.gramaje | capfirst }}</p>
-      <p>Precio: ${{ m.precio }}</p>
-      <p>Cantidad de cajas: {{ m.cantidad_stock }}</p>
       <p>Presentacion del medicamento: {{ m.presentacion_medicamento | capfirst }}</p>
       <p>Via Administración: {{ m.id_via_administracion | capfirst }}</p>
       <div class="opciones">
         {% if perms.app.change_producto %}
         <a href="{% url 'modificar_medicamento' m.id_medicamento %}" class="btn btn-info">MODIFICAR</a>
         {% endif %}
-        <a href="#" class="btn btn-success" >DISPONIBILIDAD</a>
+        <a href="{% url 'stock_farmacia' %}?nombre_comercial={{ m.nombre_comercial }}" class="btn btn-success">DISPONIBILIDAD</a>
       </div>
     </div>
     {% endfor %}
