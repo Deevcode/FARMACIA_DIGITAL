@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db.models import CheckConstraint, Q, F
 from django.utils import timezone
 
-#-----------------------------------------------------------------------------------------------------------------#
+################################################################################################################################################
 #TABLA DE REGION
 class Region(models.Model):
     id_region = models.AutoField(primary_key=True)
@@ -11,9 +11,7 @@ class Region(models.Model):
 
     def __str__(self):
         return self.nombre_region
-    
-#-----------------------------------------------------------------------------------------------------------------#
-    
+################################################################################################################################################  
 #TABLA DE PROVINCIA
 class Provincia(models.Model):
     id_provincia = models.AutoField(primary_key=True)
@@ -22,9 +20,7 @@ class Provincia(models.Model):
 
     def __str__(self):
         return self.nombre_provincia   
-
-#-----------------------------------------------------------------------------------------------------------------# 
-    
+################################################################################################################################################
 #TABLA DE COMUNA
 class Comuna(models.Model):
     id_comuna = models.AutoField(primary_key=True)
@@ -33,9 +29,7 @@ class Comuna(models.Model):
 
     def __str__(self):
         return self.nombre_comuna
-    
-#-----------------------------------------------------------------------------------------------------------------#
-
+################################################################################################################################################
 #TABLA LABORATORIO
 class Laboratorio(models.Model):
     id_laboratorio = models.AutoField(primary_key=True)
@@ -43,9 +37,7 @@ class Laboratorio(models.Model):
 
     def __str__(self):
         return self.nombre_laboratorio
-
-#-----------------------------------------------------------------------------------------------------------------#
-
+################################################################################################################################################
 #TABLA DE PRINCIPIO ACTIVO
 class PrincipioActivo(models.Model):
     id_principio_activo= models.AutoField(primary_key=True)
@@ -53,9 +45,7 @@ class PrincipioActivo(models.Model):
 
     def __str__(self):
         return self.nombre_princio_activo        
-
-#-----------------------------------------------------------------------------------------------------------------#
-
+################################################################################################################################################
 #TABLA DE ADMINISTRACION MEDICAMENTO
 class ViaAdminstracion(models.Model):
     id_via_administracion = models.AutoField(primary_key=True)
@@ -63,9 +53,7 @@ class ViaAdminstracion(models.Model):
 
     def __str__(self):
         return self.nombre_via_administracion
-
-#-----------------------------------------------------------------------------------------------------------------#
-
+################################################################################################################################################
 #TABLA DE FARMACIA
 class Farmacia(models.Model):
     id_farmacia = models.AutoField(primary_key=True)
@@ -73,9 +61,7 @@ class Farmacia(models.Model):
 
     def __str__(self):
         return self.marca_farmacia
-    
-#-----------------------------------------------------------------------------------------------------------------#
-
+################################################################################################################################################
 #TABLA DE MEDICAMENTOS
 class Medicamentos(models.Model):
     id_medicamento = models.AutoField(primary_key=True)
@@ -89,9 +75,7 @@ class Medicamentos(models.Model):
 
     def __str__(self):
         return str(self.nombre_comercial) + " " + str(self.gramaje)
-    
-#-----------------------------------------------------------------------------------------------------------------#
-    
+################################################################################################################################################  
 #TABLA DE DESCUENTOS MEDICAMENTOS
 class MedicamentosDescuento(models.Model):
     id_descuento = models.AutoField(primary_key=True)
@@ -103,9 +87,7 @@ class MedicamentosDescuento(models.Model):
 
     def __str__(self):
         return str(self.medicamento_desc)+" con un %"+str(self.descuento_porcentaje)
-    
-#-----------------------------------------------------------------------------------------------------------------#
-
+################################################################################################################################################
 #TABLA DE MEDICAMENTO FICHA TECNICA
 class MedicamentoFichaTecnica(models.Model):
     id_ficha_medicamento = models.AutoField(primary_key=True)
@@ -114,19 +96,15 @@ class MedicamentoFichaTecnica(models.Model):
     url_ficha = models.CharField(max_length=700,null=False, blank=False)
 
     def __str__(self):
-        return self.url_ficha
-    
-#-----------------------------------------------------------------------------------------------------------------#
-
+        return str(self.url_ficha)
+################################################################################################################################################
 #TABLA TIPO DE USURIO
 class Tipo_usuario(models.Model):
     id_TipoUsuario = models.AutoField(primary_key=True)
     nombre_tipo_usuario =models.CharField(max_length=100,null=False, blank=False)
     def __str__(self):
         return self.nombre_tipo_usuario  
-
-#-----------------------------------------------------------------------------------------------------------------#
-
+################################################################################################################################################
 #TABLA USUARIO
 class Usuario(AbstractUser):
 
@@ -135,9 +113,7 @@ class Usuario(AbstractUser):
 
     def __str__(self):
         return str(self.first_name)+" "+str(self.last_name)+" "+str(self.rut_usuario)+" | "+str(self.tipo_usuario)
-
-#-----------------------------------------------------------------------------------------------------------------#
-
+################################################################################################################################################
 opciones_fraccionamiento = [
     [0,"1 Una pastilla entera"],
     [1,"1/4 Un quarto de pastilla"],
@@ -145,8 +121,6 @@ opciones_fraccionamiento = [
     [3,"3/4 Tres cuartos de pastilla"],
     [4,"1/8 Un octavo de pastilla"]
 ]
-
-
 #TABLA DE USUARIO RECETA
 class PacienteReceta(models.Model):
     id_receta_usuario = models.AutoField(primary_key=True)
@@ -171,9 +145,7 @@ class PacienteReceta(models.Model):
 
     def __str__ (self):
         return str(self.nombres_paciente)+": "+str(self.nombre_comercial)+" Tratamiento por:"+str(self.tiempo_tratamiento_dias)+ "Dosis diaria"+str(self.frecuencia_dosis_diaria)
-
-#-----------------------------------------------------------------------------------------------------------------#
-
+################################################################################################################################################
 #TABLA DE FAMILIAR
 class PacienteFamiliar(models.Model):
     id_usuario_familiar = models.AutoField(primary_key=True)
@@ -183,9 +155,7 @@ class PacienteFamiliar(models.Model):
 
     def __str__ (self):
         return  str(self.identificacion_familiar)+": "+str(self.parentesco)
-
-#-----------------------------------------------------------------------------------------------------------------#
-
+################################################################################################################################################
 #TABLA DE CESFAM
 class CESFAM(models.Model):
     id_cesfam = models.AutoField(primary_key=True)
@@ -198,8 +168,7 @@ class CESFAM(models.Model):
     def __str__ (self):
         return str(self.identificacion_cesfam)+" "+str(self.direccion_CESFAM)+" "+str(self.nombre_comuna)+" tel:"+str(self.telefono_CESFAM)
 
-#-----------------------------------------------------------------------------------------------------------------#
-
+################################################################################################################################################
 #TABLA DE QUIMICO FARMACEUTICO
 class QuimicoFarmaceuticoEncargado(models.Model):
     id_quimico_farmaceutio = models.AutoField(primary_key=True)
@@ -208,9 +177,7 @@ class QuimicoFarmaceuticoEncargado(models.Model):
 
     def __str__(self):
         return str(self.identificacion_QF)
-
-#-----------------------------------------------------------------------------------------------------------------#
-
+################################################################################################################################################
 #TABLA DE SUCURSAL FARMACIA
 class FarmaciaSucursal(models.Model):
     id_sucursal = models.AutoField(primary_key=True)
@@ -225,9 +192,7 @@ class FarmaciaSucursal(models.Model):
 
     def __str__(self):
         return str(self.nombre_farmacia)+" | "+str(self.direccion_sucursal)
-
-#-----------------------------------------------------------------------------------------------------------------#
-
+################################################################################################################################################
 #TABLA DE FARMACIA CESFAM
 class FarmaciaCESFAM(models.Model):
     id_farmacia_CESFAM = models.AutoField(primary_key=True)
@@ -236,11 +201,8 @@ class FarmaciaCESFAM(models.Model):
 
     def __str__(self):
         return str(self.identificacion_cesfam)
-
-#-----------------------------------------------------------------------------------------------------------------#
-
+################################################################################################################################################
 #TABLA DE STOCK FARMACIA
-
 class StockFarmacia(models.Model):
     id_stock = models.AutoField(primary_key=True)
     medicamento = models.ForeignKey(Medicamentos, on_delete=models.PROTECT)
@@ -251,8 +213,7 @@ class StockFarmacia(models.Model):
 
     def __str__(self):
         return str(self.farmacia)+": "+str(self.medicamento)+" "+str(self.precio)
-
-#-----------------------------------------------------------------------------------------------------------------#
+################################################################################################################################################
 opciones_diabetes = [
     [0,"No padezco esta enfermedad"],
     [1,"Prediabetes"],
@@ -279,9 +240,7 @@ class PacienteFichaClinica(models.Model):
 
     def __str__ (self):
         return str(self.identificacion_paciente)+ ": Diabetes:"+str(self.tipo_diabetes)+", Hipertension:"+str(self.tipo_hipertension)
-
-#-----------------------------------------------------------------------------------------------------------------#
-
+################################################################################################################################################
 #OPCIONES DE CONSULTA EN CONTACTO
 opciones_consulta = [
     [0,"Consulta"],
@@ -290,7 +249,7 @@ opciones_consulta = [
     [3,"Felicitaciones"],
     [4,"Reclamo"]
 ]
-
+################################################################################################################################################
 #TABLA DE CONTACTO
 class Contacto(models.Model):
     repetir_email = models.EmailField(null=False, blank=False)
@@ -302,10 +261,7 @@ class Contacto(models.Model):
 
     def __str__(self):
         return str(self.nombre)+" email: "+str(self.repetir_email)
-
-#-----------------------------------------------------------------------------------------------------------------#
-#-----------------------------------------------------------------------------------------------------------------#
-
+################################################################################################################################################
 #OPCIONES DE CONSULTA EN CONTACTO
 opciones_horario = [
     [0,"Mañana"],
@@ -313,7 +269,7 @@ opciones_horario = [
     [2,"Madrugada"],
     [3,"24 Horas"]
 ]
-
+################################################################################################################################################
 #TABLA PACIENTE PROFESIONALES
 class ProfesionalPaciente(models.Model):
     identificacicion_usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE,null=True ,related_name="Rpaciente",limit_choices_to=Q(tipo_usuario_id=2))
@@ -321,13 +277,8 @@ class ProfesionalPaciente(models.Model):
     horario_turno = models.IntegerField(choices=opciones_horario, null=True)
     def __str__(self):
         return str(self.identificacion_profesional)+ ": Horario:"+str(self.horario_turno)
-
-
-# COMPRA DE MEDICAMENTO
-#-----------------------------------------------------------------------------------------------------------------#
-
+################################################################################################################################################
 #TABLA DE FICHA TODOS LOS USUARIOS
-
 class UsuarioFicha (models.Model):
     id = models.AutoField(primary_key=True)
     identificacion_usuario = models.ForeignKey(Usuario, on_delete=models.SET_NULL,null=True)

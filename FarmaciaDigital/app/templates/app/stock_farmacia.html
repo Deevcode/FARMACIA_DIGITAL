@@ -38,6 +38,7 @@
       {% endfor %}
     </tbody>
   </table>
+  <a href="{% url 'listar_medicamento' %}" class="btn btn-info"><input type="submit" value="Volver"></a>
   <a href="{% url 'farmacia_sucursal' %}" class="btn btn-info"><input type="submit" value="Ubicaciones"></a>
 {% else %}
   <br>

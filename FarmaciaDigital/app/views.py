@@ -16,11 +16,17 @@ from django.http import HttpResponse
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import landscape, letter
 from reportlab.lib import colors
-from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph
-from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Image, Spacer
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.lib.units import inch
+from datetime import datetime
 import googlemaps
+from django.db import connection
 
+
+################################################################################################################################################
 #VISTA DE LAS VIEWSETS
+
 class MedicamentoViewset(viewsets.ModelViewSet):
     queryset = Medicamentos.objects.all()
     serializer_class = MedicamentoSerializer
@@ -30,8 +36,9 @@ def group_check(user):
 
 def group_check1(user):
     return user.groups.filter(name__in=['PROFESIONAL']).exists()
-
+################################################################################################################################################
 #VISTA DEL HOME
+
 def home(request):
     return render(request, 'app/home.html')
 
@@ -50,8 +57,9 @@ def send_correo(mail):
     )  
     email.attach_alternative (content, 'text/html')
     email.send()
-
+################################################################################################################################################
 #VISTA DEL CONTACTO
+
 def contacto(request):
     data = {
         'form': ContactoForm()
@@ -66,8 +74,9 @@ def contacto(request):
         else:
             data["form"] = formulario
     return render(request, 'app/contacto.html', data)   
-
+################################################################################################################################################
 #VISTA DE MEDICAMENTOS
+@login_required
 def medicamentos(request):
     medicamentos = Medicamentos.objects.all()
     data = {
@@ -75,20 +84,9 @@ def medicamentos(request):
 
     }
     return render(request, 'app/medicamentos.html',data)    
-
-#VISTA DE BODEGA
-@login_required
-def bodega(request):
-    return render(request, 'app/bodega.html')    
-
-#VISTA DE REPORTE
-@user_passes_test(group_check1)
-@login_required
-def reportes(request):
-    return render(request, 'app/reporte.html') 
-
-
+################################################################################################################################################
 #VISTA DE AGREGAR MEDICAMENTO
+
 @user_passes_test(group_check1)
 @login_required
 def agregar_medicamento(request):
@@ -103,9 +101,8 @@ def agregar_medicamento(request):
         else:
             data["form"] = formulario    
     return render(request, 'app/medicamentos/agregar.html', data) 
-
+################################################################################################################################################
 #VISTA DE LISTAR
-
 
 @user_passes_test(group_check)
 @login_required
@@ -115,9 +112,8 @@ def listar_medicamentos(request):
         'medicamentos' :  medicamentos
     }
     return render(request, 'app/medicamentos/listar.html', data)
-    
+################################################################################################################################################
 #VISTA DE MODIFICAR
-
 
 @user_passes_test(group_check1)
 @login_required
@@ -138,8 +134,9 @@ def modificar_medicamento(request, id):
         data["form"] = formulario 
 
     return render(request, 'app/medicamentos/modificar.html', data) 
-
+################################################################################################################################################
 #VISTA DE ELIMINAR
+
 @user_passes_test(group_check1)
 @login_required
 def eliminar_medicamento(request, id):
@@ -147,28 +144,10 @@ def eliminar_medicamento(request, id):
     medicamento = get_object_or_404(Medicamentos, id=id)
     medicamento.delete()
     return redirect(to="listar_medicamento")
-
-#VISTA DE REGISTRO
-#def registro(request):
-#    data = {
-#        'form': CustomUserCreationForm()
-#    }
-#
-#    if request.method == 'POST':
-#        formulario = CustomUserCreationForm(data=request.POST)
-#        if formulario.is_valid():
-#            formulario.save()
-#            user = authenticate(username=formulario.cleaned_data["password1"])
-#            login(request, user)
-#            messages.success(request, "Te has registrado correctamente")
-#            #redirigir al home
-#            return redirect(to="home")
-#        data["form"] = formulario
-#
-#    return render(request, 'registration/registro.html',data)
-
-
+################################################################################################################################################
 # VISTA DE ENFERMERA
+
+@login_required
 def enfermera(request):
     data = {
         'form' : PacienteRecetaForm()
@@ -181,8 +160,9 @@ def enfermera(request):
         else:
             data["form"] = formulario    
     return render(request, 'app/enfermera.html', data)
-
+################################################################################################################################################
 #VISTA DE PROFESIONAL
+
 @user_passes_test(group_check1)
 @login_required
 def profesional(request):
@@ -191,7 +171,8 @@ def profesional(request):
         'profesional' :  profesional
     }
     return render(request, 'app/profesional.html', data)
-
+################################################################################################################################################
+#VISTA DE ENVIAR CORREOS
 
 def send_email(mail):
 
@@ -208,10 +189,9 @@ def send_email(mail):
     )  
     email.attach_alternative (content, 'text/html')
     email.send()
-
-
-
+################################################################################################################################################
 #VISTA DE AGREGAR MEDICAMENTO
+
 @user_passes_test(group_check1)
 @login_required
 def agregar_receta(request):
@@ -228,9 +208,9 @@ def agregar_receta(request):
         else:
             data["form"] = formulario    
     return render(request, 'app/recetas/agregar_receta.html', data) 
+################################################################################################################################################
+#VISTA DE LISTAR RECETA
 
-#VISTA DE LISTAR
-#@permission_required('app.view_recetas')
 @login_required
 def listar_receta(request):
     medicamentos = PacienteReceta.objects.filter(nombres_paciente=request.user)
@@ -242,6 +222,8 @@ def listar_receta(request):
 def is_admin(user):
     return user.is_superuser
 
+#VISTA DE LISTAR RECETA EMITIDA
+
 @login_required
 @user_passes_test(is_admin)
 def listar_receta_emitida(request):
@@ -250,8 +232,9 @@ def listar_receta_emitida(request):
         'medicamentos': medicamentos
     }
     return render(request, 'app/recetas/listar_recetas_emitidas.html', data)
-
+################################################################################################################################################
 #VISTA DE MODIFICAR
+
 @user_passes_test(group_check1)
 @login_required
 def modificar_receta(request, id):
@@ -271,8 +254,9 @@ def modificar_receta(request, id):
         data["form"] = formulario 
 
     return render(request, 'app/recetas/modificar_receta.html', data) 
-
+################################################################################################################################################
 #VISTA DE ELIMINAR
+
 @user_passes_test(group_check1)
 @login_required
 def eliminar_receta(request, id_receta_usuario):
@@ -280,32 +264,71 @@ def eliminar_receta(request, id_receta_usuario):
     medicamentos.delete()
     messages.success(request, "Receta eliminada correctamente.")
     return redirect('eliminar_receta')
-
+################################################################################################################################################
 # TABLA DE PDF PARA MEDICAMENTO
 @user_passes_test(group_check1)
 @login_required
 def render_to_pdf(data):
+    current_date = datetime.now().strftime("%d-%m-%Y")
+    filename = f"Medicamentos_Registrados_{current_date}.pdf"
     response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename="ingresos_medicamentos.pdf"'
-    
-    p = canvas.Canvas(response)
+    response['Content-Disposition'] = f'attachment; filename="{filename}"'
+
+    doc = SimpleDocTemplate(response, pagesize=letter)
+
+    # Estilos
+    styles = getSampleStyleSheet()
+    title_style = styles['Title']
+    content_style = styles['Normal']
+
+    elements = []
+
+    # Agregar logo del negocio en la parte superior
+    logo_path = 'app/static/app/img/123.png'  # Ruta de la imagen del logo
+    logo = Image(logo_path, width=200, height=200)
+    elements.append(logo)
 
     # Encabezado del documento
-    p.drawString(100, 750, "Ingresos de Medicamentos")
+    title = Paragraph("Listado de Medicamentos Registrados", title_style)
+    elements.append(title)
+
+    # Agregar fecha del reporte
+    current_date_formatted = datetime.now().strftime("%d de %B de %Y")
+    date_style = ParagraphStyle(content_style, fontSize=14)
+    date = Paragraph(f"Fecha del reporte: {current_date_formatted}", date_style)
+    elements.append(date)
+
+    elements.append(Spacer(1, 0.5 * inch))
 
     # Obtener los datos de ingresos de medicamentos
-    ingresos = Medicamentos.objects.all()
+    ingresos = StockFarmacia.objects.all()
 
-    # Generar contenido del PDF
-    y = 700
+    # Generar contenido del PDF en forma de tabla vertical
+    table_data = [["Medicamentos", "Farmacia", "Cantidad"]]  # Título de la tabla
     for ingreso in ingresos:
-        p.drawString(100, y, "Medicamento: {}".format(str(ingreso)))
-        y -= 20
+        medicamento = str(ingreso.medicamento)
+        farmacia = str(ingreso.farmacia)
+        cantidad = str(ingreso.cantidad)
+        table_data.append([medicamento, farmacia, cantidad])
 
-    p.showPage()
-    p.save()
+    table = Table(table_data, colWidths=[3 * inch, 3 * inch, 1 * inch])
+    table.setStyle(TableStyle([
+        ('GRID', (0, 0), (-1, -1), 1, colors.black),
+        ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
+        ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+        ('FONTSIZE', (0, 0), (-1, 0), 12),
+        ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+    ]))
+
+    elements.append(table)
+
+    doc.build(elements)
 
     return response
+################################################################################################################################################
+# VISTA DE GENERAR PDF
 
 @user_passes_test(group_check1)
 @login_required
@@ -315,28 +338,33 @@ def generar_pdf(request):
         return pdf
     else:
         return redirect('generar_pdf')
-
+################################################################################################################################################
 # TABLA DE PDF PARA RECETAS
+
 @user_passes_test(group_check1)
 @login_required
 def render_recetas_to_pdf(data):
     response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename="recetas_pacientes.pdf"'
+    response['Content-Disposition'] = f'attachment; filename="Recetas_Emitidas_{datetime.now().strftime("%d-%m-%Y")}.pdf"'
 
     doc = SimpleDocTemplate(response, pagesize=landscape(letter))
     elements = []
 
-    # Estilos
     styles = getSampleStyleSheet()
     style = styles['Title']
 
-    # Encabezado del documento
+    logo_path = 'app/static/app/img/123.png'  
+    logo = Image(logo_path, width=200, height=200)
+    elements.append(logo)
     elements.append(Paragraph("Recetas de Pacientes", style))
 
-    # Obtener las recetas de pacientes
+    current_date = datetime.now().strftime("%d-%m-%Y")
+    elements.append(Paragraph(f"Fecha de generación: {current_date}"))
+
+    elements.append(Spacer(1, 0.5 * inch))
+
     recetas = PacienteReceta.objects.all()
 
-    # Crear la tabla y establecer el estilo
     data = [['Fecha', 'Paciente', 'Medicamento', 'Tiempo de tratamiento', 'Frecuencia']]
     for receta in recetas:
         data.append([
@@ -364,6 +392,8 @@ def render_recetas_to_pdf(data):
     doc.build(elements)
 
     return response
+################################################################################################################################################
+# VISTA DE GENERAR PDF DE MEDICAMENTOS
 
 @user_passes_test(group_check1)
 @login_required
@@ -373,9 +403,9 @@ def generar_recetas_pdf(request):
         return pdf
     else:
         return redirect('generar_recetas_pdf')
-
-# VISTA DE GOOGLE MAPS
-
+################################################################################################################################################
+# VISTA DE GOOGLE MAPS UBICACIONES FARMACIAS
+@login_required
 def map_view(request):
     if request.method == 'POST':
         form = AddressForm(request.POST)
@@ -394,8 +424,7 @@ def map_view(request):
         context = {'form': form}
 
     return render(request, 'app/maps.html', context)
-
-
+################################################################################################################################################
 # VISTA DE PERFIL DE USUARIO
 
 @login_required
@@ -405,9 +434,9 @@ def perfil_usuario(request):
         'usuario_ficha': usuario_ficha
     }
     return render(request, 'app/perfil_usuario.html', context)
-
-
+################################################################################################################################################
 # VISTA DE LA FICHA CLINICA
+
 @login_required
 def paciente_ficha_clinica_list(request):
     # Obtener el usuario autenticado actualmente
@@ -417,14 +446,69 @@ def paciente_ficha_clinica_list(request):
     fichas = PacienteFichaClinica.objects.filter(identificacion_paciente=usuario)
 
     return render(request, 'app/paciente_ficha_clinica_list.html', {'fichas': fichas})
-
+################################################################################################################################################
 # VISTA DEL STOCK DE LA FARMACIA
+
+@login_required
 def stock_farmacia(request):
     nombre_comercial = request.GET.get('nombre_comercial')
     stocks = StockFarmacia.objects.filter(medicamento__nombre_comercial=nombre_comercial)
     return render(request, 'app/stock_farmacia.html', {'stocks': stocks})
-
+################################################################################################################################################
 # VISTA DE LA FARMACIA
+
+@login_required
 def farmacia_sucursal(request):
     sucursales = FarmaciaSucursal.objects.all()
     return render(request, 'app/farmacia_sucursal.html', {'sucursales': sucursales})
+################################################################################################################################################
+# VISTA DEL DASHBOARD
+
+@user_passes_test(group_check1)
+@login_required
+def dashboard(request):
+    total_medicamentos = Medicamentos.objects.count()
+    total_recetas = PacienteReceta.objects.count()
+    total_stock = StockFarmacia.objects.aggregate(total_stock=models.Sum('cantidad'))['total_stock']
+    medicamentos_recientes = Medicamentos.objects.order_by('-id_medicamento')[:5]
+    recetas_recientes = PacienteReceta.objects.order_by('-id_receta_usuario')[:5]
+    
+    nombre_medicamento = Medicamentos.objects.filter(stockfarmacia__isnull=False).values('nombre_comercial').distinct()
+
+    context = {
+        'total_medicamentos': total_medicamentos,
+        'total_recetas': total_recetas,
+        'total_stock': total_stock,
+        'medicamentos_recientes': medicamentos_recientes,
+        'recetas_recientes': recetas_recientes,
+        'nombre_medicamento': nombre_medicamento,
+    }
+
+    return render(request, 'app/dashboard.html', context)
+################################################################################################################################################
+# VISTA DEL PRODECIMIENTO ALMACENADO
+
+@user_passes_test(group_check1)
+@login_required
+def ejecutar_procedimiento(request):
+    if request.method == 'POST':
+        p_fecha_vencimiento = request.POST.get('fecha_vencimiento')
+        p_cantidad = request.POST.get('cantidad')
+        p_precio = request.POST.get('precio')
+        p_farmacia_id = request.POST.get('farmacia_id')
+        p_medicamento_id = request.POST.get('medicamento_id')
+
+        with connection.cursor() as cursor:
+            cursor.callproc('insertar_stock_farmacia', [
+                p_fecha_vencimiento,
+                p_cantidad,
+                p_precio,
+                p_farmacia_id,
+                p_medicamento_id
+            ])
+
+            cursor.execute('COMMIT')
+
+        return HttpResponse('Procedimiento ejecutado correctamente.')
+
+    return render(request, 'app/procedimiento.html')

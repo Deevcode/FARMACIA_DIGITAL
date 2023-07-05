@@ -70,6 +70,11 @@
     max-width: 200px;
     max-height: 200px;
   }
+
+  .pagination {
+    justify-content: center;
+    margin-top: 20px;
+  }
 </style>
 {% endblock %}
 
@@ -101,6 +106,15 @@
       </div>
     </div>
     {% endfor %}
+  </div>
+  <div class="pagination">
+    {% if medicamentos.has_previous %}
+      <a href="?page={{ medicamentos.previous_page_number }}" class="btn btn-primary">Anterior</a>
+    {% endif %}
+    <span class="current-page">{{ medicamentos.number }}</span>
+    {% if medicamentos.has_next %}
+      <a href="?page={{ medicamentos.next_page_number }}" class="btn btn-primary">Siguiente</a>
+    {% endif %}
   </div>
 </div>
 {% endblock %}
