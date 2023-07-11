@@ -454,6 +454,16 @@ def stock_farmacia(request):
     nombre_comercial = request.GET.get('nombre_comercial')
     stocks = StockFarmacia.objects.filter(medicamento__nombre_comercial=nombre_comercial)
     return render(request, 'app/stock_farmacia.html', {'stocks': stocks})
+
+################################################################################################################################################
+# VISTA DEL STOCK DE LA FARMACIA
+
+@login_required
+def ficha_tecnica(request):
+    nombre_comercial = request.GET.get('nombre_comercial')
+    medicamento = get_object_or_404(Medicamentos, nombre_comercial=nombre_comercial)
+    stocks = MedicamentoFichaTecnica.objects.filter(nombre_comercial=medicamento)
+    return render(request, 'app/ficha_tecnica.html', {'stocks': stocks})
 ################################################################################################################################################
 # VISTA DE LA FARMACIA
 

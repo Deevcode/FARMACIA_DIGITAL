@@ -103,6 +103,7 @@
         <a href="{% url 'modificar_medicamento' m.id_medicamento %}" class="btn btn-info">MODIFICAR</a>
         {% endif %}
         <a href="{% url 'stock_farmacia' %}?nombre_comercial={{ m.nombre_comercial }}" class="btn btn-success">DISPONIBILIDAD</a>
+        <a href="{% url 'ficha_tecnica' %}?nombre_comercial={{ m.nombre_comercial }}" class="btn btn-success">INFO</a>
       </div>
     </div>
     {% endfor %}

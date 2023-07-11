@@ -32,4 +32,5 @@ urlpatterns = [
     path('stock_farmacia/', stock_farmacia, name='stock_farmacia'),
     path('dashboard/', dashboard, name='dashboard'),
     path('ejecutar-procedimiento/', ejecutar_procedimiento, name='ejecutar_procedimiento'),
+    path('ficha_tecnica/', ficha_tecnica, name='ficha_tecnica'),
 ]
