@@ -4,23 +4,27 @@
 
 {% block js %}
 <script>
-  function eliminar_medicamento(id_medicamento) {
-    Swal.fire({
-      title: "¿Estás seguro?",
-      text: "Esta acción no se puede deshacer",
-      icon: "question",
-      showCancelButton: true,
-      cancelButtonText: "No, Cancelar",
-      confirmButtonText: "Sí, Eliminar",
-      reverseButtons: true,
-      confirmButtonColor: "dc3545"
-    })
-    .then(function(result) {
-      if (result.isConfirmed) {
-        window.location.href = "/eliminar_medicamento/" + id_medicamento + "/";
+  function buscarMedicamento() {
+    var input = document.getElementById('nombre_comercial_input');
+    var nombreComercial = input.value.trim().toLowerCase();
+
+    var medicamentos = document.getElementsByClassName('medicamento-card');
+    for (var i = 0; i < medicamentos.length; i++) {
+      var medicamento = medicamentos[i];
+      var nombre = medicamento.getElementsByClassName('medicamento-nombre')[0].innerText.toLowerCase();
+
+      if (nombre.includes(nombreComercial)) {
+        medicamento.style.display = '';
+      } else {
+        medicamento.style.display = 'none';
       }
-    });
+    }
   }
+
+  window.addEventListener('DOMContentLoaded', function() {
+    var buscarBtn = document.getElementById('buscar_btn');
+    buscarBtn.addEventListener('click', buscarMedicamento);
+  });
 </script>
 {% endblock %}
 
@@ -79,43 +83,50 @@
 {% endblock %}
 
 {% block contenido %}
-<h2>LISTADO DE MEDICAMENTOS</h2>
-<div class="medicamento">
-  <div class="medicamentos">
-    {% for m in medicamentos %}
-    <div class="medicamento-card">
-      <h3>{{ m.nombre_comercial | capfirst }}</h3>
-      <div class="imagen">
-        {% if m.imagen %}
-        <img src="{{ m.imagen.url }}" alt="Imagen del medicamento">
-        {% else %}
-        <p>No hay imagen disponible</p>
-        {% endif %}
-      </div>
-      <p>Laboratorio: {{ m.id_laboratorio | capfirst }}</p>
-      <p>Principio Activo: {{ m.id_principio_activo | capfirst }}</p>
-      <p>Nombre Comercial: {{ m.nombre_comercial | capfirst }}</p>
-      <p>Gramaje: {{ m.gramaje | capfirst }}</p>
-      <p>Presentacion del medicamento: {{ m.presentacion_medicamento | capfirst }}</p>
-      <p>Via Administración: {{ m.id_via_administracion | capfirst }}</p>
-      <div class="opciones">
-        {% if perms.app.change_producto %}
-        <a href="{% url 'modificar_medicamento' m.id_medicamento %}" class="btn btn-info">MODIFICAR</a>
-        {% endif %}
-        <a href="{% url 'stock_farmacia' %}?nombre_comercial={{ m.nombre_comercial }}" class="btn btn-success">DISPONIBILIDAD</a>
-        <a href="{% url 'ficha_tecnica' %}?nombre_comercial={{ m.nombre_comercial }}" class="btn btn-success">INFO</a>
-      </div>
-    </div>
-    {% endfor %}
+<div class="container">
+  <h2>LISTADO DE MEDICAMENTOS</h2>
+  <div class="input-group mb-3">
+    <input type="text" id="nombre_comercial_input" class="form-control" placeholder="Buscar por nombre comercial">
+    <button type="button" id="buscar_btn" class="btn btn-primary">Buscar</button>
   </div>
-  <div class="pagination">
-    {% if medicamentos.has_previous %}
-      <a href="?page={{ medicamentos.previous_page_number }}" class="btn btn-primary">Anterior</a>
-    {% endif %}
-    <span class="current-page">{{ medicamentos.number }}</span>
-    {% if medicamentos.has_next %}
-      <a href="?page={{ medicamentos.next_page_number }}" class="btn btn-primary">Siguiente</a>
-    {% endif %}
+
+  <div class="medicamento">
+    <div class="medicamentos">
+      {% for m in medicamentos %}
+      <div class="medicamento-card">
+        <h3 class="medicamento-nombre">{{ m.nombre_comercial | capfirst }}</h3>
+        <div class="imagen">
+          {% if m.imagen %}
+          <img src="{{ m.imagen.url }}" alt="Imagen del medicamento">
+          {% else %}
+          <p>No hay imagen disponible</p>
+          {% endif %}
+        </div>
+        <p>Laboratorio: {{ m.id_laboratorio | capfirst }}</p>
+        <p>Principio Activo: {{ m.id_principio_activo | capfirst }}</p>
+        <p>Nombre Comercial: {{ m.nombre_comercial | capfirst }}</p>
+        <p>Gramaje: {{ m.gramaje | capfirst }}</p>
+        <p>Presentacion del medicamento: {{ m.presentacion_medicamento | capfirst }}</p>
+        <p>Via Administración: {{ m.id_via_administracion | capfirst }}</p>
+        <div class="opciones">
+          {% if perms.app.change_producto %}
+          <a href="{% url 'modificar_medicamento' m.id_medicamento %}" class="btn btn-info">MODIFICAR</a>
+          {% endif %}
+          <a href="{% url 'stock_farmacia' %}?nombre_comercial={{ m.nombre_comercial }}" class="btn btn-success">DISPONIBILIDAD</a>
+          <a href="{% url 'ficha_tecnica' %}?nombre_comercial={{ m.nombre_comercial }}" class="btn btn-success">INFO</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="pagination">
+      {% if medicamentos.has_previous %}
+        <a href="?page={{ medicamentos.previous_page_number }}" class="btn btn-primary">Anterior</a>
+      {% endif %}
+      <span class="current-page">{{ medicamentos.number }}</span>
+      {% if medicamentos.has_next %}
+        <a href="?page={{ medicamentos.next_page_number }}" class="btn btn-primary">Siguiente</a>
+      {% endif %}
+    </div>
   </div>
 </div>
 {% endblock %}
